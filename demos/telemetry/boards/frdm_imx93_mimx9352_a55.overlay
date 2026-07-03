@@ -1,0 +1,17 @@
+/*
+ * FRDM-IMX93 Cortex-A55 overlay for the telemetry demo.
+ *
+ * The board DTS carves out only 1 MB of DRAM for Zephyr (dram: memory@d0000000),
+ * which is too small for the full net + mbedTLS stack on arm64 (hello_world
+ * alone uses ~336 KB of arm64 base + MMU). Extend the window so the IOTCONNECT
+ * telemetry app links and runs.
+ *
+ * IMPORTANT: 0xd0000000 + this size must fit the DDR region reserved for the
+ * M33/Zephyr companion in this board's Linux/U-Boot memory map. 16 MB is a
+ * common carveout; adjust to match your BSP's reserved-memory node so Zephyr's
+ * DRAM does not collide with Linux.
+ */
+
+&dram {
+	reg = <0xd0000000 DT_SIZE_M(16)>;
+};

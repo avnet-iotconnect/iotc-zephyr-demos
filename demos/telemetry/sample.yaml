@@ -1,0 +1,13 @@
+sample:
+  name: IOTCONNECT telemetry demo
+  description: >
+    Connect to /IOTCONNECT and publish periodic telemetry over MQTT/TLS. Reuses
+    the iotc-zephyr-sdk telemetry sample app; per-board bearer in boards/.
+tests:
+  sample.iotconnect.telemetry:
+    harness: net
+    platform_allow:
+      - frdm_mcxn947/mcxn947/cpu0
+    tags:
+      - iotconnect
+      - net

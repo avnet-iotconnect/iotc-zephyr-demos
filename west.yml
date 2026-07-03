@@ -1,0 +1,48 @@
+# Standalone west manifest for iotc-zephyr-demos.
+#
+# This repo is the manifest repo. It pulls Zephyr, the IOTCONNECT SDK (which is
+# itself a Zephyr module and brings the public API + transport seam), and the
+# portable iotc-c-lib core. Demos here build against the SDK module.
+#
+# Workspace after `west update`:
+#   <ws>/
+#     iotc-zephyr-demos/      (self, manifest repo == this)
+#     zephyr/                 (v4.4.1)
+#     modules/lib/iotc-zephyr-sdk/
+#     modules/lib/iotc-c-lib/ (+ cJSON submodule)
+manifest:
+  version: "1.2"
+
+  remotes:
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos
+    - name: avnet
+      url-base: https://github.com/avnet-iotconnect
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject
+      revision: v4.4.1
+      import:
+        name-allowlist:
+          - cmsis
+          - mbedtls
+          - mcuboot
+          - hal_nxp        # FRDM-MCXN947 reference target
+          # - hal_nordic
+          # - hal_st
+          # - hal_renesas
+
+    - name: iotc-zephyr-sdk
+      remote: avnet
+      revision: main        # TODO: pin to a released tag
+      path: modules/lib/iotc-zephyr-sdk
+
+    - name: iotc-c-lib
+      remote: avnet
+      revision: v3.0.0      # TODO: pin to the exact reviewed tag
+      path: modules/lib/iotc-c-lib
+      submodules: true      # checks out lib/cJSON
+
+  self:
+    path: iotc-zephyr-demos

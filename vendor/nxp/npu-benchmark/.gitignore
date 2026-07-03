@@ -1,0 +1,6 @@
+# Per-device TLS credentials -- generated, secret, never committed.
+# Same generation flow as the SDK telemetry sample (creds/gen_creds_header.py).
+src/device_credentials.h
+
+# Build output
+build/

@@ -1,0 +1,23 @@
+/*
+ * FRDM-IMX93 Cortex-A55 quickstart overlay.
+ *   - Extend the Zephyr DRAM window (the 1 MB board default is too small for
+ *     arm64 + net + TLS + keygen). Must fit the DDR region your Linux/U-Boot
+ *     reserves for the M33/Zephyr companion -- adjust per BSP.
+ *   - Enable usdhc1 (the on-SOM eMMC, disk "SD2") for the provisioned-identity
+ *     store. The board doc recommends using uSDHC1 for Zephyr storage when the
+ *     ROM boots from the uSDHC2 SD card slot -- using the boot controller
+ *     (uSDHC2) from Zephyr stalls on the first data-line transfer. The eMMC is
+ *     a separate controller the boot ROM does not touch.
+ */
+
+&dram {
+	reg = <0xd0000000 DT_SIZE_M(16)>;
+};
+
+&usdhc1 {
+	status = "okay";
+
+	sdmmc {
+		status = "okay";
+	};
+};

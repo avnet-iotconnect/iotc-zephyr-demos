@@ -1,0 +1,129 @@
+{
+    "code": "click4zep",
+    "name": "Zephyr Click Demo",
+    "authType": 2,
+    "attributes": [
+        {
+            "name": "temp_hum_14",
+            "displayName": "Temp&Hum 14 (HTU31D)",
+            "type": "OBJECT",
+            "description": "MIKROE Temp&Hum 14 @0x40",
+            "childs": [
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
+                { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "altitude_2",
+            "displayName": "Altitude 2 (MS5607)",
+            "type": "OBJECT",
+            "description": "MIKROE Altitude 2 @0x76",
+            "childs": [
+                { "name": "pressure_mbar", "displayName": "", "type": "DECIMAL", "description": "", "unit": "mbar", "attributeColor": "" },
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
+                { "name": "altitude_m", "displayName": "", "type": "DECIMAL", "description": "", "unit": "m", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "altitude_4",
+            "displayName": "Altitude 4",
+            "type": "OBJECT",
+            "description": "MIKROE Altitude 4 @0x27",
+            "childs": [
+                { "name": "pressure_hpa", "displayName": "", "type": "DECIMAL", "description": "", "unit": "hPa", "attributeColor": "" },
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
+                { "name": "altitude_m", "displayName": "", "type": "DECIMAL", "description": "", "unit": "m", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "ultra_low_press",
+            "displayName": "Ultra-Low Press",
+            "type": "OBJECT",
+            "description": "MIKROE Ultra-Low Press @0x6C",
+            "childs": [
+                { "name": "pressure_pa", "displayName": "", "type": "DECIMAL", "description": "", "unit": "Pa", "attributeColor": "" },
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "vav_press",
+            "displayName": "VAV Press",
+            "type": "OBJECT",
+            "description": "MIKROE VAV Press @0x5C",
+            "childs": [
+                { "name": "pressure_pa", "displayName": "", "type": "DECIMAL", "description": "", "unit": "Pa", "attributeColor": "" },
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "air_quality_7",
+            "displayName": "Air quality 7 (MiCS-VZ-89TE)",
+            "type": "OBJECT",
+            "description": "MIKROE Air quality 7 @0x70",
+            "childs": [
+                { "name": "co2eq_ppm", "displayName": "", "type": "DECIMAL", "description": "", "unit": "ppm", "attributeColor": "" },
+                { "name": "tvoc_ppb", "displayName": "", "type": "DECIMAL", "description": "", "unit": "ppb", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "t6713",
+            "displayName": "T6713 CO2",
+            "type": "OBJECT",
+            "description": "MIKROE CO2 Click (T6713) @0x15",
+            "childs": [
+                { "name": "co2_ppm", "displayName": "", "type": "DECIMAL", "description": "", "unit": "ppm", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "t9602",
+            "displayName": "T9602 Temp/Hum",
+            "type": "OBJECT",
+            "description": "Amphenol T9602 @0x28",
+            "childs": [
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
+                { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "pht",
+            "displayName": "PHT (MS8607)",
+            "type": "OBJECT",
+            "description": "MIKROE PHT @0x40+0x76",
+            "childs": [
+                { "name": "pressure_mbar", "displayName": "", "type": "DECIMAL", "description": "", "unit": "mbar", "attributeColor": "" },
+                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
+                { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        }
+    ],
+    "commands": [
+        { "name": "LED On", "command": "led-on", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
+        { "name": "LED Off", "command": "led-off", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
+        { "name": "LED Toggle", "command": "led-toggle", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
+        { "name": "Set Reporting Interval", "command": "set-reporting-interval", "requiredParam": true, "requiredAck": false, "isOTACommand": false },
+        { "name": "Reboot", "command": "reboot", "requiredParam": false, "requiredAck": false, "isOTACommand": false }
+    ],
+    "messageVersion": "2.1",
+    "msgCode": "XG4EPTV",
+    "capability": "0",
+    "c2dOnDemand": 0,
+    "properties": {
+        "description": null,
+        "dataFrequency": "10",
+        "fileSupport": false,
+        "certRenewalDay": 0,
+        "enableCSR": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}

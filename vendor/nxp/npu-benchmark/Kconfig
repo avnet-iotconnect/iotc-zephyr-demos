@@ -1,0 +1,53 @@
+# Application Kconfig for the IOTCONNECT NXP Neutron NPU benchmark.
+mainmenu "IOTCONNECT NXP Neutron NPU Benchmark"
+
+config APP_PUBLISH_TO_CLOUD
+	bool "Publish benchmark results to /IOTCONNECT"
+	default y
+	help
+	  When enabled, the device brings up the network bearer, syncs time, and
+	  streams each benchmark cycle to IOTCONNECT (requires device credentials).
+	  When disabled, the inference benchmark runs in a local loop that only logs
+	  results to the console -- no network, SNTP, or credentials needed. Handy
+	  for validating NPU-vs-CPU timing on the bench before wiring up the cloud.
+
+config APP_BENCH_ITERATIONS
+	int "Measured inferences per benchmark cycle"
+	default 20
+	help
+	  Number of timed MODEL_RunInference() calls averaged into one telemetry
+	  record (min / avg / max are reported).
+
+config APP_BENCH_WARMUP
+	int "Warm-up inferences (not timed) per cycle"
+	default 2
+
+config APP_BENCH_INTERVAL_SEC
+	int "Seconds between benchmark cycles / publishes"
+	default 5
+
+# ---------------------------------------------------------------------------
+# Symbols consumed by the reused model glue (iotc-mcx-zephyr-demos/src/model).
+# Defined here so this app's Kconfig is self-contained.
+# ---------------------------------------------------------------------------
+
+config MCUX_HAS_NPU
+	bool "Build the eIQ Neutron NPU model (off = CPU/reference kernels)"
+	default y
+	help
+	  Selects model_npu (the Neutron-compiled graph + Neutron runtime) versus
+	  model_sw (plain reference/CMSIS-NN kernels) at build time -- this is the
+	  switch the whole demo pivots on. The CPU build is provided by cpu.conf.
+
+config APP_TENSOR_ARENA_SIZE_KB
+	int "TFLM tensor arena size (KB)"
+	default 200
+	help
+	  Static scratch buffer for model tensors. Size to your model; the app logs
+	  actual arena bytes used at startup so you can trim this.
+
+config APP_LOG_LEVEL
+	int "Application/model log level (0=off..4=dbg)"
+	default 3
+
+source "Kconfig.zephyr"

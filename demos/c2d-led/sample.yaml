@@ -1,0 +1,14 @@
+sample:
+  name: IOTCONNECT c2d-led demo
+  description: >
+    Drive the board LED from /IOTCONNECT cloud-to-device commands and report LED
+    state as telemetry. Built on the iotc-zephyr-sdk.
+tests:
+  sample.iotconnect.c2d_led:
+    harness: net
+    platform_allow:
+      - frdm_mcxn947/mcxn947/cpu0
+    tags:
+      - iotconnect
+      - net
+      - gpio

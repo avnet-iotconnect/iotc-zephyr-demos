@@ -1,0 +1,47 @@
+/*
+ * FRDM-MCXN947 overlay for the IOTCONNECT NPU benchmark.
+ *
+ * 1) Ethernet enablement (ENET-QoS MAC + LAN8741 PHY over RMII) -- identical to
+ *    the SDK telemetry sample so the bearer comes up the same way.
+ * 2) (Optional) a `zephyr,arena` chosen region to place the TFLM tensor arena
+ *    in a specific SRAM bank. Left commented: by default the arena lands in
+ *    .bss, which is fine for the benchmark. If the Neutron NPU cannot reach the
+ *    default location (or you want deterministic placement / faster RAM),
+ *    define a region node and point zephyr,arena at it -- model.cpp honors
+ *    DT_CHOSEN(zephyr_arena) automatically.
+ */
+
+&enet {
+	pinctrl-0 = <&pinmux_enet_qos>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&enet_mac {
+	status = "okay";
+	phy-connection-type = "rmii";
+	zephyr,random-mac-address;
+	phy-handle = <&phy>;
+};
+
+&enet_mdio {
+	status = "okay";
+
+	phy: ethernet-phy@0 {
+		compatible = "ethernet-phy";
+		reg = <0>;
+		status = "okay";
+	};
+};
+
+/* --- Optional: pin the TFLM tensor arena to a named SRAM region ------------
+ * / {
+ *	chosen {
+ *		zephyr,arena = &sram_arena;
+ *	};
+ * };
+ *
+ * &sram_arena {
+ *	status = "okay";
+ * };
+ * ------------------------------------------------------------------------- */

@@ -1,0 +1,33 @@
+# --- Build output (Zephyr / west / CMake) ---
+# west build dirs are large and contain generated TF-M signing keys + binaries.
+build/
+build_*/
+twister-out*/
+
+# Compiled / binary artifacts
+*.o
+*.obj
+*.a
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+
+# --- Secrets: per-device TLS credentials ---
+# device_credentials.h is GENERATED and contains the device PRIVATE KEY -- NEVER
+# commit it. quickstart_credentials.h (public CA roots only) is safe and committed.
+device_credentials.h
+
+# Key material of any kind (safety net)
+*.pem
+*.key
+*.der
+*.p12
+*.pfx
+
+# --- Editor / OS ---
+.DS_Store
+Thumbs.db
+*.swp
+*~

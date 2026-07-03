@@ -1,0 +1,15 @@
+sample:
+  name: IOTCONNECT Click telemetry demo
+  description: >
+    Auto-detect MikroE Click sensors on a Shuttle and publish their channels to
+    /IOTCONNECT. Built on the iotc-zephyr-sdk.
+tests:
+  sample.iotconnect.click_telemetry:
+    harness: net
+    platform_allow:
+      - frdm_mcxn947/mcxn947/cpu0
+    tags:
+      - iotconnect
+      - net
+      - sensor
+      - i2c
