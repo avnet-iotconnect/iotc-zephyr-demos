@@ -18,20 +18,22 @@ Legend: ✅ verified on hardware · 🔒 verified on the **TF-M hardware-sealed-
 | Demo | `frdm_mcxn947`<br>MCXN947 | `mimxrt1170_evk`<br>RT1170-EVKB | `frdm_imx93`<br>i.MX93 (A55) | `frdm_mcxe31b`<br>MCXE31B | `frdm_mcxw72`<br>MCXW72 |
 |------|:---:|:---:|:---:|:---:|:---:|
 | **quickstart** | ✅ 🔒 sealed key⁴ | ✅ connects | ✅ A55 · eMMC persist⁵ | — | — (no IP link)² |
-| **telemetry** | ✅ connects | ✅ connects | ✅ A55 · SD boot⁵ | ⇢ UART‑source¹ | ✅ UART‑source² |
+| **telemetry** | ✅ connects | ✅ connects | ✅ A55 · SD boot⁵ | —¹ | —² |
+| **uart-telemetry-source** | — | — | — | ✅ M7¹ | ✅ M33² |
 | **c2d-led** | ✅ LED verified | 🔨 builds | 🔜⁵ | — (no IP link) | — (no IP link)² |
 | **click-telemetry** | ✅ 🔒 sealed key⁴ | ◇ adapter³ | 🔜⁵ | ⇢ separate probe¹ | — |
 | **npu-benchmark** (vendor) | 🔨 builds | — | — | — | — |
 
-¹ MCXE31B has no Ethernet/Wi‑Fi → it runs as a **UART "telemetry source"**
-(`../mcxe31b-projects/iotc_telemetry_uart`, verified on HW) feeding a gateway,
-not a direct cloud client.
-² MCXW72 is 802.15.4-only (no Eth/Wi‑Fi). It runs as a **UART "telemetry
-source"** (`../mcxw72-projects/iotc_telemetry_uart`, **verified on HW** emitting
-IOTCONNECT 2.1 JSON) feeding a gateway — same pattern as MCXE31B. A **direct** IP
-path is planned via a **cell-modem Click** bearer (the Thread → border-router
-route is the wireless alternative). Onboard debugger is **J-Link OB**, so flash
-with `--runner jlink` (LinkServer sees no probe).
+¹ MCXE31B (Cortex-M7) has no Ethernet/Wi‑Fi → it runs the in-repo
+**[uart-telemetry-source](demos/uart-telemetry-source)** demo (**hardware-verified**):
+iotc-c-lib builds IOTCONNECT 2.1 JSON on-device and emits it on the console UART
+(LPUART5) for a gateway to forward, rather than connecting directly.
+² MCXW72 (Cortex-M33) is 802.15.4-only (no Eth/Wi‑Fi) → same in-repo
+**[uart-telemetry-source](demos/uart-telemetry-source)** demo (**hardware-verified**
+emitting IOTCONNECT 2.1 JSON), feeding a gateway. A **direct** IP path is planned
+via a **cell-modem Click** bearer (the Thread → border-router route is the
+wireless alternative). Onboard debugger is **J-Link OB**, so flash with the
+`jlink` runner (LinkServer sees no probe).
 ³ RT1170-EVKB has no mikroBUS socket; click-telemetry needs an Arduino-header
 I²C overlay (`arduino_i2c` = `lpi2c5`) + a mikroBUS-to-Arduino Click adapter.
 ⁴ MCXN947 has a Cortex-M33 TrustZone/EdgeLock TF-M target
@@ -77,6 +79,7 @@ adds one under `boards/<vendor>-<board>/QUICKSTART.md`):
 |------|------|---------------|
 | **Quickstart** ⭐ | [demos/quickstart](demos/quickstart) | Flash-and-provision binary: no toolchain, no baked-in creds. Device generates its **own** key+cert on-chip (`iotcprov provision`), you register it, paste `iotcDeviceConfig.json` (`iotc config`), and it connects. Only public CAs compiled in. |
 | Telemetry (reference) | [demos/telemetry](demos/telemetry) | Connect + periodic telemetry over MQTT/TLS. Reuses the SDK sample. |
+| UART telemetry source | [demos/uart-telemetry-source](demos/uart-telemetry-source) | **Constrained tier** — for MCUs with no IP stack (MCXE31B, MCXW72). iotc-c-lib builds IOTCONNECT 2.1 JSON on-device and prints it on the console UART for a gateway to forward. Board name via `CONFIG_BOARD`; no SDK/network module. |
 | c2d-led | [demos/c2d-led](demos/c2d-led) | Cloud→device commands (`led-on/off/toggle`) drive the board LED, with ACKs. |
 | Click telemetry | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
 | NXP eIQ Neutron NPU benchmark | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
@@ -95,14 +98,21 @@ Device identity + certs come from the SDK sample's generated
 `src/device_credentials.h` (see the SDK's provisioning docs); the include is
 shared so one provisioning step covers every demo.
 
+The **uart-telemetry-source** demo is the exception: it targets MCUs with no IP
+stack, so it does **not** use the SDK module (drop `-DZEPHYR_EXTRA_MODULES`) and
+needs no creds — just `-DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib`. See its
+[README](demos/uart-telemetry-source/README.md) for the `frdm_mcxe31b` /
+`frdm_mcxw72` build + flash commands.
+
 ## Roadmap
 
 - **Telemetry/control tier** (direct IP): MCXN947 ✅ (+ 🔒 TF-M sealed key) ·
   RT1170-EVKB 🔨 · i.MX93 ✅ (Zephyr on the A55 — HW-verified connecting to AWS
   over gigabit Ethernet, booted from an SPSDK SD image; quickstart adds on-device
   keygen + provisioning with the identity persisted to the on-SOM eMMC)
-- **Constrained tier** (UART telemetry source → gateway): MCXE31B ✅ · MCXW72 ✅
-  — direct IP for MCXW72 planned via a cell-modem Click bearer
+- **Constrained tier** ([uart-telemetry-source](demos/uart-telemetry-source)
+  demo → gateway): MCXE31B ✅ · MCXW72 ✅ (both HW-verified) — direct IP for
+  MCXW72 planned via a cell-modem Click bearer
 - **Streaming tier** (KVS/WebRTC): deferred — anchored on i.MX93 under Linux
   (upstream KVS WebRTC SDK + GStreamer/VPU), reusing IOTCONNECT's STS +
   channel-ARN brokering.

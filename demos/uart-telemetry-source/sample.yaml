@@ -1,0 +1,18 @@
+sample:
+  name: IOTCONNECT UART telemetry source
+  description: >
+    Build IOTCONNECT 2.1 telemetry JSON on-device with the portable iotc-c-lib
+    core and emit it over the console UART for a gateway to forward. For
+    connectivity-less MCUs with no Ethernet/Wi-Fi/IP transport.
+tests:
+  sample.iotconnect.uart_telemetry_source:
+    harness: console
+    platform_allow:
+      - frdm_mcxe31b
+      - frdm_mcxw72
+    harness_config:
+      type: one_line
+      regex:
+        - "IOTC-TELEMETRY: .*"
+    tags:
+      - iotconnect
