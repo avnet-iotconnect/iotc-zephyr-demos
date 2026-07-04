@@ -35,7 +35,7 @@ manifest:
 
     - name: iotc-zephyr-sdk
       remote: avnet
-      revision: main        # TODO: pin to a released tag
+      revision: v0.1.0      # pinned SDK release (track a tag, not a branch)
       path: modules/lib/iotc-zephyr-sdk
 
     - name: iotc-c-lib
