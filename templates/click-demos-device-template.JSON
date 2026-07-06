@@ -103,6 +103,22 @@
                 { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
             ],
             "aggregateTypes": []
+        },
+        {
+            "name": "sys",
+            "displayName": "Device Vitals",
+            "type": "OBJECT",
+            "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
+            "childs": [
+                { "name": "cpu_pct", "displayName": "CPU load", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" },
+                { "name": "freq_mhz", "displayName": "Core clock", "type": "DECIMAL", "description": "", "unit": "MHz", "attributeColor": "" },
+                { "name": "heap_used", "displayName": "Heap used", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+                { "name": "heap_free", "displayName": "Heap free", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+                { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "unit": "s", "attributeColor": "" },
+                { "name": "reset_cause", "displayName": "Reset cause", "type": "STRING", "description": "", "unit": "", "attributeColor": "" },
+                { "name": "fw", "displayName": "Firmware", "type": "STRING", "description": "", "unit": "", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
         }
     ],
     "commands": [

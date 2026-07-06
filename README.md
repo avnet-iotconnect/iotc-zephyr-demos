@@ -84,6 +84,23 @@ adds one under `boards/<vendor>-<board>/QUICKSTART.md`):
 | Click telemetry | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
 | NXP eIQ Neutron NPU benchmark | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
 
+## Device vitals (operational telemetry)
+
+Set `CONFIG_IOTCONNECT_DEVICE_VITALS=y` and every telemetry message carries a
+nested **`sys`** object of operational metrics, so devices look fleet-managed on
+the IOTCONNECT dashboard:
+
+> `sys.cpu_pct` · `sys.freq_mhz` · `sys.heap_used`/`sys.heap_free` ·
+> `sys.uptime_s` · `sys.reset_cause` · `sys.fw` — plus `sys.temp_c` where a board
+> wires a calibrated `die-temp` devicetree alias.
+
+It rides along automatically for demos that send through the SDK, and via one
+`iotc_vitals_append(msg)` call for raw-send paths (already wired into all demos
+here). Every field degrades gracefully per board, and it's left off on the
+RAM-tight TF-M `/ns` builds. The device templates in [templates/](templates/)
+include the matching `sys` OBJECT so the dashboard charts it. HW-verified on
+FRDM-MCXE31B.
+
 ## Building a demo for a board
 
 ```sh
