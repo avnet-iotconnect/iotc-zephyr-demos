@@ -1,0 +1,8 @@
+# eIQ predictive-maintenance -- airflow dP capture (Phase 1).
+# Network-free: reads the SDP810 over I2C and prints CSV for eIQ Time Series
+# Studio. No iotc-c-lib / SDK dependency at this phase.
+cmake_minimum_required(VERSION 3.20.0)
+find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
+project(iotc_eiq_pdm_airflow_capture)
+
+target_sources(app PRIVATE src/main.c)
