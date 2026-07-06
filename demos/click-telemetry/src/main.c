@@ -47,6 +47,9 @@
 #include "iotcl_telemetry.h"
 #include "iotcl_c2d.h"
 #include "iotc_time.h"
+#if defined(CONFIG_IOTCONNECT_DEVICE_VITALS)
+#include "iotconnect_vitals.h"
+#endif
 #if defined(CONFIG_BUILD_WITH_TFM)
 /* TF-M /ns build: the device key is sealed in TF-M Protected Storage (loaded at
  * runtime via iotc_identity_load), so the binary carries only the PUBLIC CA
@@ -460,6 +463,9 @@ static void publish_clicks(void)
 		}
 	}
 	if (n > 0) {
+#if defined(CONFIG_IOTCONNECT_DEVICE_VITALS)
+		iotc_vitals_append(msg);
+#endif
 		(void)iotcl_mqtt_send_telemetry(msg, false);
 		LOG_INF("Published telemetry from %u Click(s): %s", (unsigned)n, summary);
 	}

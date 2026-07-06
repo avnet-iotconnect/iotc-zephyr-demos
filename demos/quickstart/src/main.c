@@ -34,6 +34,9 @@
 #include "iotconnect_identity.h"
 #include "iotc_time.h"
 #include "quickstart_credentials.h"
+#if defined(CONFIG_IOTCONNECT_DEVICE_VITALS)
+#include "iotconnect_vitals.h"
+#endif
 
 LOG_MODULE_REGISTER(quickstart, LOG_LEVEL_INF);
 
@@ -152,6 +155,9 @@ int main(void)
 				iotcl_telemetry_set_number(msg, "random",
 							   (double)(sys_rand32_get() % 100));
 				iotcl_telemetry_set_string(msg, "version", "1.0.0");
+#if defined(CONFIG_IOTCONNECT_DEVICE_VITALS)
+				iotc_vitals_append(msg);
+#endif
 				(void)iotcl_mqtt_send_telemetry(msg, false);
 				iotcl_telemetry_destroy(msg);
 			}

@@ -40,3 +40,23 @@ target_include_directories(app PRIVATE
   ${IOTC_C_LIB_DIR}/core/include
   ${IOTC_C_LIB_DIR}/lib/cJSON
 )
+
+# Optional: pull in the SDK's device-vitals module so the emitted JSON also
+# carries a "sys" object (CPU/heap/die-temp/uptime/reset). It only needs
+# iotc-c-lib + Zephyr (no network stack), so it links into this SDK-free demo.
+# Located like iotc-c-lib: -DZEPHYR_IOTC_SDK_MODULE_DIR, env, then workspace path.
+set(IOTC_SDK_DIR ${ZEPHYR_IOTC_SDK_MODULE_DIR})
+if(NOT IOTC_SDK_DIR)
+  set(IOTC_SDK_DIR $ENV{ZEPHYR_IOTC_SDK_MODULE_DIR})
+endif()
+if(NOT IOTC_SDK_DIR)
+  set(IOTC_SDK_DIR ${IOTC_C_LIB_DIR}/../iotc-zephyr-sdk)
+endif()
+if(EXISTS ${IOTC_SDK_DIR}/lib/zephyr-layer/iotc_device_vitals.c)
+  target_sources(app PRIVATE ${IOTC_SDK_DIR}/lib/zephyr-layer/iotc_device_vitals.c)
+  target_include_directories(app PRIVATE ${IOTC_SDK_DIR}/include)
+  target_compile_definitions(app PRIVATE HAVE_IOTC_VITALS)
+  message(STATUS "uart-telemetry-source: device vitals enabled from ${IOTC_SDK_DIR}")
+else()
+  message(STATUS "uart-telemetry-source: iotc-zephyr-sdk not found; 'sys' vitals omitted")
+endif()

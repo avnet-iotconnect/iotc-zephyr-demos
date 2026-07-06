@@ -25,6 +25,9 @@
 
 #include "iotcl.h"
 #include "iotcl_telemetry.h"
+#ifdef HAVE_IOTC_VITALS
+#include "iotconnect_vitals.h"
+#endif
 
 #define TELEMETRY_PERIOD_S 5
 
@@ -82,6 +85,9 @@ int main(void)
 		iotcl_telemetry_set_string(msg, "bearer", "uart-source");
 		iotcl_telemetry_set_string(msg, "status", "Ready");
 		iotcl_telemetry_set_bool(msg, "safe_state", true);
+#ifdef HAVE_IOTC_VITALS
+		iotc_vitals_append(msg);
+#endif
 
 		char *json = iotcl_telemetry_create_serialized_string(msg, false);
 
