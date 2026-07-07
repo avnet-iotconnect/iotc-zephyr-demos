@@ -1,0 +1,17 @@
+/*
+ * FRDM-MCXN947: enable the mikroBUS / Shuttle I2C bus and attach the MIKROE ML
+ * Vibro Sens Click (NXP FXLS8974CF 3-axis accelerometer @0x18). No Ethernet
+ * needed -- capture is network-free. Read via the Zephyr sensor API (no raw
+ * register access).
+ */
+
+&mikrobus_i2c {
+	status = "okay";
+	clock-frequency = <400000>;
+
+	fxls8974: fxls8974@18 {
+		compatible = "nxp,fxls8974";
+		reg = <0x18>;
+		status = "okay";
+	};
+};

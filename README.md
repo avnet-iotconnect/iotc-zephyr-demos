@@ -83,7 +83,7 @@ adds one under `boards/<vendor>-<board>/QUICKSTART.md`):
 | c2d-led | [demos/c2d-led](demos/c2d-led) | Cloud→device commands (`led-on/off/toggle`) drive the board LED, with ACKs. |
 | Click telemetry | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
 | NXP eIQ Neutron NPU benchmark | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
-| eIQ PdM (airflow) | [demos/eiq-pdm-airflow](demos/eiq-pdm-airflow) | Predictive maintenance: SDP810 differential pressure → eIQ Time Series Studio anomaly model → IOTCONNECT. Phase 1 (data capture) builds; Phase 2 (deploy) next. |
+| eIQ PdM (vibration) | [demos/eiq-pdm-vibration](demos/eiq-pdm-vibration) | Predictive maintenance: ML Vibro Sens Click (NXP FXLS8974) 3-axis vibration → eIQ Time Series Studio anomaly model → IOTCONNECT. NXP's reference vibration-PdM setup. Phase 1 (data capture) builds; Phase 2 (deploy) next. |
 
 ## Device vitals (operational telemetry)
 

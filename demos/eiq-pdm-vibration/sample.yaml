@@ -1,0 +1,19 @@
+sample:
+  name: eIQ PdM vibration capture
+  description: >
+    Capture 3-axis vibration from a MIKROE ML Vibro Sens Click (NXP FXLS8974CF)
+    on the FRDM-MCXN947 mikroBUS and print CSV for NXP eIQ Time Series Studio, to
+    train a machine-vibration anomaly / predictive-maintenance model.
+tests:
+  sample.iotconnect.eiq_pdm_vibration_capture:
+    harness: console
+    platform_allow:
+      - frdm_mcxn947/mcxn947/cpu0
+    harness_config:
+      type: one_line
+      regex:
+        - "VIB,\\d+,.*"
+    tags:
+      - iotconnect
+      - eiq
+      - sensor
