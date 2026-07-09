@@ -12,7 +12,7 @@ The eIQ workflow is **capture → train → deploy**, so this demo ships in phas
 | Phase | What | Status |
 |---|---|---|
 | **1 — capture** *(this build)* | Sample the FXLS8974 and print CSV for eIQ TSS training | ✅ builds |
-| **2 — deploy** | Load the TSS model, infer on-device, stream `vib.state`/`vib.anomaly_*` to /IOTCONNECT (+ device-vitals) | 🔜 needs a trained model |
+| **2 — connect** | Connect + publish `vib.*` (RMS heuristic now, eIQ model later) + cloud fault-injection commands (+ device-vitals) | ✅ builds |
 
 ## Hardware — self-contained, no external rig
 
@@ -57,22 +57,54 @@ component): idle ≈ 0.04, balanced ≈ 0.22, unbalanced ≈ 0.50 — cleanly di
 > content, raise the console baud, or use the FXLS8974 FIFO + on-device windowing
 > (a Phase-2 refinement).
 
-## Phase 2 — deploy to /IOTCONNECT (next)
+## Phase 2 — connect to /IOTCONNECT (build)
 
-Once you export the TSS model, Phase 2 wires it in: window the accel stream, run
-inference (Neutron NPU), and publish per interval to /IOTCONNECT —
+The **same demo** builds a connected monitor when `CONFIG_IOTCONNECT` is on: it
+windows the accelerometer, classifies the state, and publishes to /IOTCONNECT.
+Connect mode adds Ethernet (`connect.overlay`) + the SDK stack (`connect.conf`)
+and pulls in the `iotc-zephyr-sdk` module. Because `.conf`/`.overlay` selection
+mangles under some shells' `-D` passthrough, pass them via the environment:
 
-```json
-{ "vib": { "rms_g": 0.42, "state": "imbalance", "anomaly_score": 0.88 },
-  "sys": { ... device vitals ... } }
+```sh
+export ZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk
+export ZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
+export EXTRA_CONF_FILE=connect.conf
+export EXTRA_DTC_OVERLAY_FILE=connect.overlay
+west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/eiq_vib_connect \
+  C:/dev/zephyr/iotc-zephyr-demos/demos/eiq-pdm-vibration
+west flash -d build/eiq_vib_connect
 ```
 
-with a device template (state + anomaly chart + alerts) and C2D (reset baseline /
-set threshold). This reuses the SDK connect path from `click-telemetry`
-(Ethernet → mutual-TLS MQTT) and the `sys` device-vitals sidecar.
+Provision device identity the usual way (baked `device_credentials.h`, or the
+quickstart flow). It publishes every ~2 s:
+
+```json
+{ "vib": { "state": "fault", "anomaly_score": 0.86, "rms_g": 0.50,
+           "rms_x": 0.19, "rms_y": 0.09, "rms_z": 0.45, "motor": "unbalanced" },
+  "sys": { "cpu_pct": 3.1, "freq_mhz": 150, "heap_used": ..., "uptime_s": ... } }
+```
+
+### Cloud-driven fault injection (the demo)
+
+Because the Click drives its own motors, you inject faults **from the IOTCONNECT
+dashboard** and watch them get detected. Commands (device template:
+[`templates/eiq-pdm-vibration-template.json`](../../templates/eiq-pdm-vibration-template.json)):
+
+| Command | Effect |
+|---|---|
+| `inject-fault` | spin the **unbalanced** motor → `vib.state` goes `fault`, score spikes |
+| `inject-healthy` | spin the **balanced** motor → back to `healthy` |
+| `run-both` / `motor-stop` | both motors / idle |
+| `set-threshold <g>` | fault threshold on `vib.rms_g` |
+| `set-interval <s>` | reporting cadence |
+| `reboot` | restart |
+
+Classification today is an **RMS-threshold heuristic** (idle 0.04 / balanced 0.22
+/ unbalanced 0.50 g-rms are cleanly separable). When you export a model from eIQ
+Time Series Studio, it drops in behind the same `vib.*` telemetry.
 
 > **Note on eIQ TSS:** Time Series Studio is a desktop autoML tool (MCUXpresso /
-> VS Code deploy target). This repo's firmware is Zephyr; the TSS-generated
-> library is plain C (init + inference) and is expected to link into the Zephyr
-> app, validated in Phase 2. If it needs the MCUXpresso runtime, the fallback is
-> a MCUXpresso inference app bridged to /IOTCONNECT via the portable `iotc-c-lib`.
+> VS Code deploy target). The generated library is plain C (init + inference) and
+> is expected to link into the Zephyr app; if it needs the MCUXpresso runtime,
+> the fallback is a MCUXpresso inference app bridged to /IOTCONNECT via the
+> portable `iotc-c-lib` (same pattern as the UART telemetry source).

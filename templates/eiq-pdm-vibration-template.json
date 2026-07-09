@@ -1,0 +1,61 @@
+{
+    "code": "eiqpdmvib",
+    "name": "eIQ PdM Vibration",
+    "authType": 2,
+    "attributes": [
+        {
+            "name": "vib",
+            "displayName": "Vibration",
+            "type": "OBJECT",
+            "description": "Machine-vibration state + features from the FXLS8974 / eIQ model",
+            "childs": [
+                { "name": "state", "displayName": "State", "type": "STRING", "description": "healthy / warning / fault", "unit": "", "attributeColor": "" },
+                { "name": "anomaly_score", "displayName": "Anomaly score", "type": "DECIMAL", "description": "0-1", "unit": "", "attributeColor": "" },
+                { "name": "rms_g", "displayName": "Vibration RMS", "type": "DECIMAL", "description": "overall", "unit": "g", "attributeColor": "" },
+                { "name": "rms_x", "displayName": "RMS X", "type": "DECIMAL", "description": "", "unit": "g", "attributeColor": "" },
+                { "name": "rms_y", "displayName": "RMS Y", "type": "DECIMAL", "description": "", "unit": "g", "attributeColor": "" },
+                { "name": "rms_z", "displayName": "RMS Z", "type": "DECIMAL", "description": "", "unit": "g", "attributeColor": "" },
+                { "name": "motor", "displayName": "Driven motor", "type": "STRING", "description": "injected state", "unit": "", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "sys",
+            "displayName": "Device Vitals",
+            "type": "OBJECT",
+            "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
+            "childs": [
+                { "name": "cpu_pct", "displayName": "CPU load", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" },
+                { "name": "freq_mhz", "displayName": "Core clock", "type": "DECIMAL", "description": "", "unit": "MHz", "attributeColor": "" },
+                { "name": "heap_used", "displayName": "Heap used", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+                { "name": "heap_free", "displayName": "Heap free", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+                { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "unit": "s", "attributeColor": "" },
+                { "name": "reset_cause", "displayName": "Reset cause", "type": "STRING", "description": "", "unit": "", "attributeColor": "" },
+                { "name": "fw", "displayName": "Firmware", "type": "STRING", "description": "", "unit": "", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        }
+    ],
+    "commands": [
+        { "name": "Inject Fault", "command": "inject-fault", "requiredParam": false, "requiredAck": true, "isOTACommand": false },
+        { "name": "Inject Healthy", "command": "inject-healthy", "requiredParam": false, "requiredAck": true, "isOTACommand": false },
+        { "name": "Run Both Motors", "command": "run-both", "requiredParam": false, "requiredAck": true, "isOTACommand": false },
+        { "name": "Motor Stop", "command": "motor-stop", "requiredParam": false, "requiredAck": true, "isOTACommand": false },
+        { "name": "Set Threshold", "command": "set-threshold", "requiredParam": true, "requiredAck": true, "isOTACommand": false },
+        { "name": "Set Interval", "command": "set-interval", "requiredParam": true, "requiredAck": true, "isOTACommand": false },
+        { "name": "Reboot", "command": "reboot", "requiredParam": false, "requiredAck": true, "isOTACommand": false }
+    ],
+    "messageVersion": "2.1",
+    "capability": "0",
+    "c2dOnDemand": 0,
+    "properties": {
+        "description": null,
+        "dataFrequency": "2",
+        "fileSupport": false,
+        "certRenewalDay": 0,
+        "enableCSR": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}
