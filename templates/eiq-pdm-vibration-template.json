@@ -15,7 +15,9 @@
                 { "name": "rms_x", "displayName": "RMS X", "type": "DECIMAL", "description": "", "unit": "g", "attributeColor": "" },
                 { "name": "rms_y", "displayName": "RMS Y", "type": "DECIMAL", "description": "", "unit": "g", "attributeColor": "" },
                 { "name": "rms_z", "displayName": "RMS Z", "type": "DECIMAL", "description": "", "unit": "g", "attributeColor": "" },
-                { "name": "motor", "displayName": "Driven motor", "type": "STRING", "description": "injected state", "unit": "", "attributeColor": "" }
+                { "name": "motor", "displayName": "Driven motor", "type": "STRING", "description": "injected state", "unit": "", "attributeColor": "" },
+                { "name": "model_class", "displayName": "Model class", "type": "STRING", "description": "raw eIQ class: idle/balanced/unbalanced/both", "unit": "", "attributeColor": "" },
+                { "name": "source", "displayName": "Classifier", "type": "STRING", "description": "eiq-model or rms-heuristic", "unit": "", "attributeColor": "" }
             ],
             "aggregateTypes": []
         },

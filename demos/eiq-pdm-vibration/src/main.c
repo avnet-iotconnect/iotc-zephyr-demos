@@ -147,26 +147,92 @@ int main(void)
 #include "iotcl_telemetry.h"
 #include "iotcl_c2d.h"
 #include "iotc_time.h"
+#include "iotconnect_identity.h"   /* NVS-provisioned device identity */
 #if defined(CONFIG_IOTCONNECT_DEVICE_VITALS)
 #include "iotconnect_vitals.h"
 #endif
-#include "device_credentials.h"   /* baked device cert/key + CA roots (cpu0) */
+#include "quickstart_credentials.h" /* PUBLIC CA roots only (no device key) */
 
 LOG_MODULE_REGISTER(eiq_pdm, LOG_LEVEL_INF);
+
+static void print_guide(const char *reason)
+{
+	printk("\n");
+	printk("========================================================\n");
+	printk("  eIQ PdM VIBRATION -- device is not provisioned\n");
+	printk("  (%s)\n", reason);
+	printk("--------------------------------------------------------\n");
+	printk("  1) Generate this device's identity ON the device:\n");
+	printk("        iotcprov provision <your-duid>\n");
+	printk("  2) In IOTCONNECT: Create Device (Self-Signed) and paste\n");
+	printk("     the certificate it printed.\n");
+	printk("  3) Paste the downloaded iotcDeviceConfig.json:\n");
+	printk("        iotc config\n");
+	printk("        { ...paste the json block... }\n");
+	printk("  4) Connect:  kernel reboot cold\n");
+	printk("========================================================\n\n");
+}
 
 static volatile enum vib_state demo_state = ST_IDLE; /* driven by C2D commands */
 static int publish_interval_sec = 2;
 static double thresh_fault = 0.35;   /* overall g-rms -> "fault"   */
 static double thresh_warn  = 0.12;   /* overall g-rms -> "warning" */
 
-/* Collect a ~1 s window of accelerometer while driving the current motor state;
- * return per-axis RMS of the AC component + overall vibration magnitude (g). */
-static void vib_window(double rms[3], double *overall)
+#if defined(HAVE_EIQ_MODEL)
+/* eIQ Time Series Studio model (drop-in from ./model/, see model/README.md).
+ * It is a per-sample n-Class classifier: predict(ax,ay,az in g) -> class index
+ * (idle/balanced/unbalanced/both) + probabilities. We run it on every sample of
+ * the 1 s window and majority-vote for a stable state. */
+#include "TimeSeries.h"
+
+static const tss_cls_task_ops_t *g_cls;   /* NULL until init succeeds */
+
+/* Map a raw model class to the demo-facing health string. The trained classes
+ * mirror enum vib_state, so the index lines up 1:1. "both" = balanced+unbalanced
+ * together, which is still a fault condition. */
+static const char *class_to_health(int cls)
+{
+	switch (cls) {
+	case ST_IDLE:       return "healthy";   /* motor off, no vibration */
+	case ST_BALANCED:   return "healthy";
+	case ST_UNBALANCED: return "fault";
+	case ST_BOTH:       return "fault";
+	default:            return "unknown";
+	}
+}
+
+static void model_init(void)
+{
+	const tss_task_ops_t *ops = tss_get_task_ops();
+
+	if (ops != NULL && ops->task == TASK_CLS &&
+	    ops->cls_ops.init() == TSS_SUCCESS) {
+		g_cls = &ops->cls_ops;
+		LOG_INF("eIQ TSS model ready: %d-class classifier (per-sample)",
+			ops->algo_attribute ? ops->algo_attribute()->target_num
+					    : ST_COUNT);
+	} else {
+		LOG_WRN("eIQ TSS model init failed; falling back to RMS heuristic");
+	}
+}
+#endif /* HAVE_EIQ_MODEL */
+
+/* Collect a ~1 s window of accelerometer while driving the current motor state.
+ * Returns per-axis RMS of the AC component + overall vibration magnitude (g).
+ * When an eIQ model is linked, also classifies every sample and returns the
+ * majority-vote class (else *maj_class = -1) plus the mean fault probability. */
+static void vib_window(double rms[3], double *overall, int *maj_class,
+		       double *fault_prob)
 {
 	enum vib_state st = demo_state;
 	double sum[3] = {0}, sumsq[3] = {0};
 	int n = 0;
 	int64_t t0 = k_uptime_get();
+#if defined(HAVE_EIQ_MODEL)
+	int votes[ST_COUNT] = {0};
+	double fault_sum = 0.0;   /* per-sample P(unbalanced) + P(both) */
+	int cls_n = 0;
+#endif
 
 	while (k_uptime_get() - t0 < 1000) {
 		double g[3];
@@ -178,6 +244,22 @@ static void vib_window(double rms[3], double *overall)
 				sumsq[i] += g[i] * g[i];
 			}
 			n++;
+#if defined(HAVE_EIQ_MODEL)
+			if (g_cls != NULL) {
+				float in[3] = { (float)g[0], (float)g[1],
+						(float)g[2] };
+				float prob[ST_COUNT] = {0};
+				int cls = -1;
+
+				if (g_cls->predict(in, prob, &cls) == TSS_SUCCESS &&
+				    cls >= 0 && cls < ST_COUNT) {
+					votes[cls]++;
+					fault_sum += (double)prob[ST_UNBALANCED] +
+						     (double)prob[ST_BOTH];
+					cls_n++;
+				}
+			}
+#endif
 		}
 		k_msleep(SAMPLE_MS);
 	}
@@ -192,6 +274,22 @@ static void vib_window(double rms[3], double *overall)
 		var_sum += (var > 0) ? var : 0;
 	}
 	*overall = sqrt(var_sum);
+
+	*maj_class = -1;
+	*fault_prob = 0.0;
+#if defined(HAVE_EIQ_MODEL)
+	if (g_cls != NULL && cls_n > 0) {
+		int best = 0;
+
+		for (int i = 1; i < ST_COUNT; i++) {
+			if (votes[i] > votes[best]) {
+				best = i;
+			}
+		}
+		*maj_class = best;
+		*fault_prob = fault_sum / cls_n;
+	}
+#endif
 }
 
 static const char *classify(double overall, double *score)
@@ -211,10 +309,26 @@ static const char *classify(double overall, double *score)
 static void publish_vib(void)
 {
 	double rms[3], overall, score;
+	int maj_class;
+	double fault_prob;
 
-	vib_window(rms, &overall);
+	vib_window(rms, &overall, &maj_class, &fault_prob);
 
-	const char *st = classify(overall, &score);
+	const char *st;
+	const char *source;
+
+#if defined(HAVE_EIQ_MODEL)
+	if (maj_class >= 0) {
+		st = class_to_health(maj_class);   /* trained eIQ classifier  */
+		score = fault_prob;
+		source = "eiq-model";
+	} else
+#endif
+	{
+		st = classify(overall, &score);    /* RMS-threshold fallback  */
+		source = "rms-heuristic";
+	}
+
 	IotclMessageHandle msg = iotcl_telemetry_create();
 
 	if (msg == NULL) {
@@ -227,13 +341,18 @@ static void publish_vib(void)
 	iotcl_telemetry_set_number(msg, "vib.rms_y", rms[1]);
 	iotcl_telemetry_set_number(msg, "vib.rms_z", rms[2]);
 	iotcl_telemetry_set_string(msg, "vib.motor", state_name[demo_state]);
+	iotcl_telemetry_set_string(msg, "vib.source", source);
+	if (maj_class >= 0) {
+		iotcl_telemetry_set_string(msg, "vib.model_class",
+					   state_name[maj_class]);
+	}
 #if defined(CONFIG_IOTCONNECT_DEVICE_VITALS)
 	iotc_vitals_append(msg);
 #endif
 	(void)iotcl_mqtt_send_telemetry(msg, false);
 	iotcl_telemetry_destroy(msg);
-	LOG_INF("vib: state=%s score=%.2f rms=%.3f (driving %s)",
-		st, score, overall, state_name[demo_state]);
+	LOG_INF("vib: state=%s score=%.2f rms=%.3f src=%s (driving %s)",
+		st, score, overall, source, state_name[demo_state]);
 }
 
 /* --- C2D command handling ------------------------------------------------- */
@@ -344,12 +463,24 @@ static int network_up(void)
 
 int main(void)
 {
+	struct iotc_identity id;
 	int ret;
 
 	LOG_INF("eIQ PdM vibration monitor starting");
 	if (hw_init()) {
 		return 0;
 	}
+#if defined(HAVE_EIQ_MODEL)
+	model_init();
+#endif
+	/* Identity is provisioned at the prompt: iotcprov provision <duid>, then
+	 * register the printed cert and paste iotcDeviceConfig.json (iotc config). */
+	if (iotc_identity_load(&id) != 0) {
+		print_guide("no identity stored in NVS");
+		return 0; /* stay alive at the shell for provisioning */
+	}
+	LOG_INF("Provisioned as duid=%s -- bringing up network", id.duid);
+
 	if (network_up() != 0) {
 		return 0;
 	}
@@ -368,18 +499,18 @@ int main(void)
 #elif defined(CONFIG_IOTCONNECT_CT_AZURE)
 	config.connection_type = IOTC_CT_AZURE;
 #endif
-	config.cpid = NULL;
-	config.env = NULL;
-	config.duid = NULL;
+	config.cpid = (char *)id.cpid;
+	config.env = (char *)id.env;
+	config.duid = (char *)id.duid;
 	config.auth_info.type = IOTC_AT_X509;
-	config.auth_info.ca_cert = broker_ca_pem;
+	config.auth_info.ca_cert = broker_ca_pem;      /* public roots, compiled in */
 	config.auth_info.ca_cert_len = sizeof(broker_ca_pem);
 	config.auth_info.dra_ca = dra_ca_pem;
 	config.auth_info.dra_ca_len = sizeof(dra_ca_pem);
-	config.auth_info.data.cert_info.device_cert = device_cert_pem;
-	config.auth_info.data.cert_info.device_cert_len = sizeof(device_cert_pem);
-	config.auth_info.data.cert_info.device_key = device_key_pem;
-	config.auth_info.data.cert_info.device_key_len = sizeof(device_key_pem);
+	config.auth_info.data.cert_info.device_cert = id.device_cert;   /* from NVS */
+	config.auth_info.data.cert_info.device_cert_len = id.device_cert_len;
+	config.auth_info.data.cert_info.device_key = id.device_key;     /* from NVS */
+	config.auth_info.data.cert_info.device_key_len = id.device_key_len;
 	config.cmd_cb = on_command;
 	config.verbose = true;
 

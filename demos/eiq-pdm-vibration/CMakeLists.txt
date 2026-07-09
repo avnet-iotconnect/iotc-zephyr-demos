@@ -8,9 +8,19 @@ project(iotc_eiq_pdm_vibration)
 
 target_sources(app PRIVATE src/main.c)
 
-# device_credentials.h (device cert/key + CA roots) lives with the SDK sample;
-# only #included in connect mode. Harmless on the capture build.
-if(NOT DEFINED IOTC_SDK_SAMPLE_DIR)
-  set(IOTC_SDK_SAMPLE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../iotc-zephyr-sdk/samples/telemetry)
+# quickstart_credentials.h: PUBLIC CA roots only (no device key). Connect mode
+# provisions the per-device key/cert on-chip (iotcprov provision) into NVS.
+target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../quickstart/src)
+
+# Optional eIQ Time Series Studio model. Drop the TSS-generated deployment
+# package (libtss.a + TimeSeries.h) into ./model/ and it links into the connect
+# build, replacing the RMS heuristic with the trained per-sample classifier.
+# The library is NXP-proprietary (git-ignored); see model/README.md to generate.
+set(EIQ_MODEL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/model)
+if(CONFIG_IOTCONNECT AND EXISTS ${EIQ_MODEL_DIR}/libtss.a
+                     AND EXISTS ${EIQ_MODEL_DIR}/TimeSeries.h)
+  message(STATUS "eiq-pdm-vibration: linking eIQ TSS model from ${EIQ_MODEL_DIR}")
+  target_include_directories(app PRIVATE ${EIQ_MODEL_DIR})
+  target_link_libraries(app PRIVATE ${EIQ_MODEL_DIR}/libtss.a)
+  target_compile_definitions(app PRIVATE HAVE_EIQ_MODEL)
 endif()
-target_include_directories(app PRIVATE ${IOTC_SDK_SAMPLE_DIR}/src)
