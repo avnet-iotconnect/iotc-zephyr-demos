@@ -77,11 +77,19 @@ static int hw_init(void)
 	gpio_pin_configure_dt(&bal, GPIO_OUTPUT_INACTIVE);
 	gpio_pin_configure_dt(&unb, GPIO_OUTPUT_INACTIVE);
 
-	/* FXLS8974 takes the ODR on SENSOR_CHAN_ALL (not the XYZ channel). */
-	struct sensor_value odr = { .val1 = 200, .val2 = 0 };
+	/* Raise the output data rate. The driver defaults to 6.25 Hz, and the
+	 * FXLS8974 only accepts an ODR change in STANDBY, so drop to standby, set
+	 * the rate on SENSOR_CHAN_ALL, then re-activate. Without this the sensor
+	 * repeats each reading ~16x under a 100 Hz poll -> useless for vibration. */
+	extern int fxls8974_set_active(const struct device *dev, uint8_t active);
+	struct sensor_value odr = { .val1 = 400, .val2 = 0 };
 
-	(void)sensor_attr_set(accel, SENSOR_CHAN_ALL,
-			      SENSOR_ATTR_SAMPLING_FREQUENCY, &odr);
+	(void)fxls8974_set_active(accel, 0x00);   /* standby (ACTIVE bit clear) */
+	if (sensor_attr_set(accel, SENSOR_CHAN_ALL,
+			    SENSOR_ATTR_SAMPLING_FREQUENCY, &odr) != 0) {
+		printk("WARN: could not set ODR (400 Hz); using sensor default\n");
+	}
+	(void)fxls8974_set_active(accel, 0x01);   /* active */
 	return 0;
 }
 

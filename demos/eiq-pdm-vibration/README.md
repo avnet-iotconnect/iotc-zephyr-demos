@@ -57,6 +57,24 @@ component): idle ≈ 0.04, balanced ≈ 0.22, unbalanced ≈ 0.50 — cleanly di
 > content, raise the console baud, or use the FXLS8974 FIFO + on-device windowing
 > (a Phase-2 refinement).
 
+### Import into eIQ Time Series Studio
+
+TSS import wants **space-delimited** files with **only the numeric channels** (no
+marker / timestamp / label column), **one file per class**. Convert a capture log
+with the bundled tool:
+
+```sh
+python tools/tss_convert.py C:/eiq-data/session.log
+# -> C:/eiq-data/tss/{idle,balanced,unbalanced,both}.csv  (space-delimited "ax ay az")
+```
+
+Then in TSS import each file with **delimiter = Space**, **channels = 3**, set the
+sample rate (~100 Hz) and the class per file (`balanced` = healthy, `unbalanced` =
+fault). The firmware sets the FXLS8974 to **400 Hz** (the Zephyr driver defaults
+to 6.25 Hz, and the ODR can only change in standby — otherwise every reading
+repeats ~16× under the 100 Hz poll and the model is useless). Sanity check: your
+capture should show the values changing on nearly every line.
+
 ## Phase 2 — connect to /IOTCONNECT (build)
 
 The **same demo** builds a connected monitor when `CONFIG_IOTCONNECT` is on: it
