@@ -26,6 +26,12 @@ device_credentials.h
 *.p12
 *.pfx
 
+# --- eIQ Time Series Studio deployment package -------------------------------
+# The pretrained model in demos/eiq-pdm-vibration/model/ IS committed (NXP
+# LA_OPT Online Code Hosting license; LICENSE.txt ships alongside) -- un-ignore
+# its .a from the global binary-artifact rule above.
+!demos/eiq-pdm-vibration/model/libtss.a
+
 # --- Editor / OS ---
 .DS_Store
 Thumbs.db

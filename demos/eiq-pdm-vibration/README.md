@@ -1,18 +1,24 @@
 # eIQ predictive-maintenance — vibration (FRDM-MCXN947)
 
 On-device **predictive maintenance** for rotating machines: a MIKROE **ML Vibro
-Sens Click** (NXP **FXLS8974CF** 3-axis accelerometer) measures vibration, an
-**eIQ Time Series Studio** model flags **imbalance / bearing wear / blocked /
-abnormal** states, and the verdict streams to **/IOTCONNECT**. The eIQ **Neutron
-NPU** on the MCXN947 runs the model. This is NXP's reference vibration-anomaly
-setup (eIQ TSS + the Smart Fan / portable-anomaly-detect demos).
+Sens Click** (NXP **FXLS8974CF** 3-axis accelerometer + two onboard motors)
+measures vibration, an **eIQ Time Series Studio** model (Random Forest, 0.30 KB
+RAM / 0.05 ms on the Cortex-M33) classifies the machine state, and the verdict
+streams to **/IOTCONNECT** — where cloud commands inject the faults. This is
+NXP's reference vibration-anomaly setup (eIQ TSS + the Smart Fan /
+portable-anomaly-detect demos).
+
+> **Start here → [QUICKSTART.md](QUICKSTART.md)** — the full walkthrough with
+> screenshots. A **pretrained model ships in [`model/`](model/)** and the
+> dataset + training report in [`training/`](training/), so you can run the
+> whole demo without training anything.
 
 The eIQ workflow is **capture → train → deploy**, so this demo ships in phases:
 
 | Phase | What | Status |
 |---|---|---|
-| **1 — capture** *(this build)* | Sample the FXLS8974 and print CSV for eIQ TSS training | ✅ builds |
-| **2 — connect** | Connect + publish `vib.*` (RMS heuristic now, eIQ model later) + cloud fault-injection commands (+ device-vitals) | ✅ builds |
+| **1 — capture** *(this build)* | Drive the motors through labeled states + print CSV for eIQ TSS training | ✅ HW-verified |
+| **2 — connect** | Connect + publish `vib.*` — **eIQ TSS model** (shipped in `model/`), RMS-heuristic fallback otherwise — + cloud fault-injection commands (+ device-vitals) | ✅ HW-verified end-to-end |
 
 ## Hardware — self-contained, no external rig
 
@@ -93,8 +99,10 @@ west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/eiq_vib_connect \
 west flash -d build/eiq_vib_connect
 ```
 
-Provision device identity the usual way (baked `device_credentials.h`, or the
-quickstart flow). It publishes every ~2 s:
+No credentials are compiled in — the device **provisions itself at the serial
+prompt** (`iotcprov provision <duid>` → register the printed cert → `iotc
+config` → reboot; see [QUICKSTART.md §5](QUICKSTART.md)). Once connected it
+publishes every ~2 s:
 
 ```json
 { "vib": { "state": "fault", "anomaly_score": 0.86, "rms_g": 0.50,
@@ -117,12 +125,23 @@ dashboard** and watch them get detected. Commands (device template:
 | `set-interval <s>` | reporting cadence |
 | `reboot` | restart |
 
-Classification today is an **RMS-threshold heuristic** (idle 0.04 / balanced 0.22
-/ unbalanced 0.50 g-rms are cleanly separable). When you export a model from eIQ
-Time Series Studio, it drops in behind the same `vib.*` telemetry.
+### Classifier: eIQ model (with RMS fallback)
 
-> **Note on eIQ TSS:** Time Series Studio is a desktop autoML tool (MCUXpresso /
-> VS Code deploy target). The generated library is plain C (init + inference) and
-> is expected to link into the Zephyr app; if it needs the MCUXpresso runtime,
-> the fallback is a MCUXpresso inference app bridged to /IOTCONNECT via the
-> portable `iotc-c-lib` (same pattern as the UART telemetry source).
+A pretrained eIQ Time Series Studio package ships in [`model/`](model/) (NXP
+license — see `model/LICENSE.txt`), and the connect build links whatever package
+is in that folder automatically (see [`model/README.md`](model/README.md)):
+the firmware runs the trained **per-sample classifier** on every sample of the
+1 s window and **majority-votes** for a stable `vib.state` (`balanced`→healthy,
+`unbalanced`/`both`→fault), publishing the raw detected class as `vib.model_class`
+and `vib.source = eiq-model`. The model is hard-float, so the connect build sets
+`CONFIG_FPU=y` (the MCXN947 FPU) — this is baked into `connect.conf`.
+
+With no model present, it falls back to an **RMS-threshold heuristic** (idle 0.04
+/ balanced 0.22 / unbalanced 0.50 g-rms are cleanly separable) and reports
+`vib.source = rms-heuristic` — same `vib.*` telemetry either way.
+
+> **Note on eIQ TSS:** Time Series Studio is a desktop autoML tool. The
+> generated library is plain C — its only external symbols are `memcpy`/`memset`
+> — and links straight into the Zephyr app (confirmed on hardware). It is built
+> hard-float, so the connect build enables the FPU. Generate with **GCC** +
+> matching flags (see [QUICKSTART.md §3](QUICKSTART.md)).
