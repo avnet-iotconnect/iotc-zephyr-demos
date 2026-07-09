@@ -14,17 +14,20 @@ The eIQ workflow is **capture → train → deploy**, so this demo ships in phas
 | **1 — capture** *(this build)* | Sample the FXLS8974 and print CSV for eIQ TSS training | ✅ builds |
 | **2 — deploy** | Load the TSS model, infer on-device, stream `vib.state`/`vib.anomaly_*` to /IOTCONNECT (+ device-vitals) | 🔜 needs a trained model |
 
-## Hardware — and why it's simple
+## Hardware — self-contained, no external rig
 
 - **FRDM-MCXN947** + a **mikroBUS Shuttle** (or a direct socket).
-- **ML Vibro Sens Click** (FXLS8974CF) on the mikroBUS I²C (`@0x18`).
-- A **vibration source** — no rig or plumbing needed: mount the board/Click on a
-  small **fan or motor** and stage states by hand:
-  *healthy* → *imbalance* (stick a scrap of tape/a paperclip to a blade) →
-  *blocked* (restrict the airflow) → *bearing/rough* (press on it) → *off*.
-  You can also just **tap or shake the board** to prove the signal before mounting.
+- **ML Vibro Sens Click** (MIKROE-6470) on the mikroBUS — that's it.
 
-## Phase 1 — capture training data (build)
+The Click carries **both the sensor and the vibration source**: the FXLS8974CF
+accelerometer (I²C `@0x18`) plus **two onboard DC motors** — a *balanced* motor
+(steady "healthy" baseline) and an *unbalanced* motor ("fault"/imbalance). The
+firmware drives the motors itself, so **no external fan/motor or rig is needed**.
+Motor pins (from the board overlay): BAL → mikroBUS CS (`gpio3 23`), UNB →
+mikroBUS PWM (`gpio3 19`); the unbalanced motor is software-pulsed (~30 % duty)
+so it is never held at continuous full power.
+
+## Phase 1 — capture (self-labeling) training data (build)
 
 ```sh
 west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/eiq_vib \
@@ -32,24 +35,27 @@ west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/eiq_vib \
 west flash -d build/eiq_vib      # onboard MCU-Link (LinkServer)
 ```
 
-Open the MCU-Link VCom @115200. The board streams CSV at ~100 Hz:
+The firmware cycles the motors through labeled states (4 s each) and streams CSV
+at ~100 Hz on the MCU-Link VCom @115200, with the **state column auto-labeling
+the data** for eIQ Time Series Studio:
 
 ```
-VIB,t_ms,ax_g,ay_g,az_g
-VIB,120,0.0132,-0.0071,1.0024
-VIB,130,0.0145,-0.0069,0.9981
+VIB,t_ms,state,ax_g,ay_g,az_g
+VIB,4002,balanced,0.155,0.085,1.180
+VIB,8003,unbalanced,-0.310,0.092,1.560
 ...
 ```
 
-**Log the console to a file** while you run each machine state for a while, then
-**label** the segments in **eIQ Time Series Studio** (import → label
-*healthy/imbalance/…* → autoML → export a deployment library). `t_ms` records the
-exact sample time so TSS can resample to a fixed window.
+`state` ∈ `idle` / `balanced` (healthy) / `unbalanced` (fault) / `both`. **Log the
+console to a file**, then in eIQ Time Series Studio import it, use the `state`
+column as the label, autoML a model, and export a deployment library — no manual
+labeling. HW-verified per-state separation on the FRDM-MCXN947 (g-rms of the AC
+component): idle ≈ 0.04, balanced ≈ 0.22, unbalanced ≈ 0.50 — cleanly distinct.
 
-> **Sample rate:** ~100 Hz over the default 115200 console captures vibration
-> content up to ~50 Hz (fine for typical fan/motor RPM bands). For higher-
-> frequency content, raise the console baud, or use the FXLS8974 FIFO + on-device
-> windowing (a Phase-2 refinement).
+> **Sample rate:** ~100 Hz over the 115200 console captures vibration content up
+> to ~50 Hz (fine for these motors / typical RPM bands). For higher-frequency
+> content, raise the console baud, or use the FXLS8974 FIFO + on-device windowing
+> (a Phase-2 refinement).
 
 ## Phase 2 — deploy to /IOTCONNECT (next)
 

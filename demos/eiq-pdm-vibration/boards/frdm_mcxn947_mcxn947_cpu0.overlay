@@ -1,9 +1,14 @@
 /*
- * FRDM-MCXN947: enable the mikroBUS / Shuttle I2C bus and attach the MIKROE ML
- * Vibro Sens Click (NXP FXLS8974CF 3-axis accelerometer @0x18). No Ethernet
- * needed -- capture is network-free. Read via the Zephyr sensor API (no raw
- * register access).
+ * FRDM-MCXN947 + MIKROE ML Vibro Sens Click on the mikroBUS / Shuttle:
+ *   - FXLS8974CF 3-axis accelerometer on the mikroBUS I2C (@0x18), read via the
+ *     Zephyr nxp,fxls8974 sensor driver.
+ *   - The Click's two onboard DC vibration motors, driven as active-high GPIOs:
+ *       BAL (balanced, steady "healthy" baseline) -> mikroBUS CS  (gpio3 23)
+ *       UNB (unbalanced, "fault" pattern)         -> mikroBUS PWM (gpio3 19)
+ * No Ethernet needed -- capture is network-free.
  */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
 
 &mikrobus_i2c {
 	status = "okay";
@@ -13,5 +18,21 @@
 		compatible = "nxp,fxls8974";
 		reg = <0x18>;
 		status = "okay";
+	};
+};
+
+/ {
+	/* gpio-leds gives the two motor pins a typed "gpios" property (we drive them
+	 * as plain GPIOs from the app; no LED driver needed). */
+	vibro_motors {
+		compatible = "gpio-leds";
+		bal_motor: bal_motor {
+			gpios = <&mikrobus_header 2 GPIO_ACTIVE_HIGH>;  /* CS  -> balanced */
+			label = "ML Vibro balanced motor";
+		};
+		unb_motor: unb_motor {
+			gpios = <&mikrobus_header 6 GPIO_ACTIVE_HIGH>;  /* PWM -> unbalanced */
+			label = "ML Vibro unbalanced motor";
+		};
 	};
 };
