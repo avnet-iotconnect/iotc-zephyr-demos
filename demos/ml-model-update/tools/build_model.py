@@ -28,6 +28,7 @@ Features fed by the firmware: x0 = temp_c / 50.0, x1 = light_pct / 100.0.
 import base64
 import binascii
 import struct
+import zipfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -158,14 +159,22 @@ rows = ["\t" + " ".join(lines[i:i + 12]) for i in range(0, len(lines), 12)]
     "static const uint8_t model_builtin[] = {\n" + "\n".join(rows) +
     "\n};\n\n#endif /* MODEL_BUILTIN_H */\n")
 
-# Per model: .bin = raw blob (upload to IOTCONNECT AI Models and Push Model);
-# .b64 = paste as the model-push command parameter; .cmd = the full one-liner.
+# Per model: .zip = STORED (uncompressed) single-entry archive for the
+# IOTCONNECT AI Models upload (the firmware unwraps stored zips); .bin = the
+# raw blob; .b64 = paste as the model-push command parameter; .cmd = the full
+# one-liner.
 for blob, fname in ((v2, "model_v2_comfort"), (v3, "model_v3_nightlight"),
                     (v4, "model_v4_hotalarm"), (v5, "model_v5_fusion")):
     b64 = base64.b64encode(blob).decode()
     (models / f"{fname}.bin").write_bytes(blob)
     (models / f"{fname}.b64").write_text(b64 + "\n")
     (models / f"{fname}.cmd").write_text("model-push " + b64 + "\n")
-    print(f"  wrote models/{fname}.bin/.b64/.cmd "
-          f"({len(blob)} B; cmd {len('model-push ') + len(b64)} chars)")
+    with zipfile.ZipFile(models / f"{fname}.zip", "w",
+                         zipfile.ZIP_STORED) as z:
+        # fixed date so regeneration is byte-identical
+        z.writestr(zipfile.ZipInfo(f"{fname}.bin", (2026, 1, 1, 0, 0, 0)),
+                   blob)
+    zsize = (models / f"{fname}.zip").stat().st_size
+    print(f"  wrote models/{fname}.zip/.bin/.b64/.cmd "
+          f"({len(blob)} B blob, {zsize} B zip)")
 print("  wrote src/model_builtin.h (v1)")

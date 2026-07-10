@@ -46,6 +46,7 @@
 #include <zephyr/drivers/adc.h>
 #include <zephyr/settings/settings.h>
 #include <zephyr/sys/base64.h>
+#include <zephyr/sys/byteorder.h>
 #include <zephyr/sys/crc.h>
 #include <zephyr/sys/reboot.h>
 #include <zephyr/net/net_if.h>
@@ -189,6 +190,7 @@ static int read_light_pct(double *light_pct)
 #define MODEL_HDR_LEN  64
 #define MODEL_MAX_BLOB 768        /* header + worst-case 4-16-4 weights */
 #define MODEL_B64_MAX  1100       /* base64 text for MODEL_MAX_BLOB */
+#define MODEL_DL_MAX   2048       /* download buffer: blob + zip wrapping */
 
 struct model_hdr {
 	char magic[4];
@@ -610,6 +612,42 @@ out:
 	}
 }
 
+/* Minimal ZIP unwrap: the platform's AI Models upload takes a .zip, and the
+ * device receives it verbatim. Accept a single-entry archive whose entry is
+ * STORED (method 0, no compression) -- tools/build_model.py emits exactly
+ * that -- and point at the embedded payload in place. NULL on success. */
+#define ZIP_LOCAL_HDR_LEN 30
+
+static const char *zip_extract_stored(const uint8_t *buf, size_t len,
+				      const uint8_t **payload,
+				      size_t *payload_len)
+{
+	if (len < ZIP_LOCAL_HDR_LEN || memcmp(buf, "PK\x03\x04", 4) != 0) {
+		return "not a zip archive";
+	}
+	uint16_t flags = sys_get_le16(buf + 6);
+	uint16_t method = sys_get_le16(buf + 8);
+	uint32_t comp_size = sys_get_le32(buf + 18);
+	size_t off = ZIP_LOCAL_HDR_LEN + sys_get_le16(buf + 26) +
+		     sys_get_le16(buf + 28);
+
+	if (flags & 0x01) {
+		return "zip entry is encrypted";
+	}
+	if (flags & 0x08) {
+		return "zip uses a streaming data descriptor";
+	}
+	if (method != 0) {
+		return "zip entry is compressed; re-zip with 'store'";
+	}
+	if (comp_size == 0 || off + comp_size > len) {
+		return "zip entry truncated";
+	}
+	*payload = buf + off;
+	*payload_len = comp_size;
+	return NULL;
+}
+
 /* Native IOTCONNECT "AI Model" push (Devices -> AI Models -> Push Model).
  * The platform delivers a module command (ct:2) carrying a download URL --
  * the same schema as OTA, so it arrives on the OTA callback. Fetch the raw
@@ -617,7 +655,7 @@ out:
  * model-push command. The uploaded platform file is the raw .bin blob. */
 static void on_model_push(IotclC2dEventData data)
 {
-	static uint8_t dl_buf[MODEL_MAX_BLOB] __aligned(4);
+	static uint8_t dl_buf[MODEL_DL_MAX] __aligned(4);
 	const char *ack = iotcl_c2d_get_ack_id(data);
 	const char *host = iotcl_c2d_get_ota_url_hostname(data, 0);
 	const char *res = iotcl_c2d_get_ota_url_resource(data, 0);
@@ -637,17 +675,28 @@ static void on_model_push(IotclC2dEventData data)
 		if (ret != 0) {
 			snprintf(note, sizeof(note), "download failed (%d)", ret);
 		} else {
-			const char *err = model_validate(dl_buf, len);
+			/* The platform upload is a .zip; unwrap it (stored
+			 * entry) when present, else treat as the raw blob. */
+			const uint8_t *blob = dl_buf;
+			size_t blob_len = len;
+			const char *err = NULL;
 
+			if (len >= 4 && memcmp(dl_buf, "PK", 2) == 0) {
+				err = zip_extract_stored(dl_buf, len,
+							 &blob, &blob_len);
+			}
+			if (err == NULL) {
+				err = model_validate(blob, blob_len);
+			}
 			if (err != NULL) {
 				snprintf(note, sizeof(note), "rejected: %s", err);
 			} else {
-				(void)model_install(dl_buf, len, "cloud", true);
+				(void)model_install(blob, blob_len, "cloud", true);
 				status = IOTCL_C2D_EVT_OTA_DOWNLOAD_DONE;
 				snprintf(note, sizeof(note),
 					 "model v%u deployed (%u B)",
 					 ((struct model_hdr *)model_blob)->model_ver,
-					 (unsigned)len);
+					 (unsigned)blob_len);
 			}
 		}
 	}

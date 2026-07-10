@@ -49,9 +49,9 @@ The same blobs also ride IOTCONNECT's first-class
 command involved:
 
 1. In IOTCONNECT: **AI Models → Create Model** — Name/Code (e.g.
-   `nightlight`), Version (e.g. `3.0`), upload the raw
-   [models/model_vN_*.bin](models/) file (124 B), leave SageMaker conversion
-   off.
+   `nightlight`), Version (e.g. `3.0`), upload the
+   [models/model_vN_*.zip](models/) file (a STORED single-entry archive the
+   firmware unwraps on-device; ~260 B), leave SageMaker conversion off.
 2. **Push Model** to the device.
 3. The platform sends a module command (`ct:2`) with a signed download URL;
    the device fetches the blob over HTTPS (second TLS session), runs the same
