@@ -1,0 +1,43 @@
+/*
+ * SAM E54 Xplained Pro overlay for the Click telemetry demo.
+ *
+ * Ethernet needs no overlay on this board: the devicetree already enables
+ * gmac/mdio/phy (KSZ8091 RMII, factory MAC from the AT24MAC402 EEPROM).
+ *
+ * Sensor bus: EXT1's I2C is SERCOM3 (PA22/PA23) -- its own bus. Attach the
+ * demo's expected mikrobus_i2c label there and plug the sensor wing into
+ * EXT1: either the IO1 Xplained Pro (AT30TSE758 auto-detected at 0x4F) or a
+ * mikroBUS Xplained Pro adapter (ATMBUSADAPTER-XPRO) carrying Clicks/Shuttle.
+ *
+ * (EXT2/EXT3 I2C is the SHARED SERCOM7 bus -- AT24MAC402 EEPROM at 0x5E and
+ * ATECC508 at 0x60 live there. If you must use those headers, point
+ * mikrobus_i2c at &sercom7 and mind the address collisions.)
+ */
+
+#include <zephyr/dt-bindings/i2c/i2c.h>
+#include <dt-bindings/pinctrl/same54p-pinctrl.h>
+
+&pinctrl {
+	sercom3_i2c_ext1: sercom3_i2c_ext1 {
+		group1 {
+			pinmux = <PA22C_SERCOM3_PAD0>,
+				 <PA23C_SERCOM3_PAD1>;
+		};
+	};
+};
+
+mikrobus_i2c: &sercom3 {
+	status = "okay";
+	compatible = "atmel,sam0-i2c";
+	/* 400 kHz, NOT the usual 100 kHz: the i2c_sam0 driver clocks SERCOMs
+	 * from GCLK0 (120 MHz here) and its 8-bit BAUD divider overflows below
+	 * ~235 kHz (-ERANGE at init -> device never ready). All registry
+	 * sensors except Air quality 7 (MiCS-VZ-89TE, 100 kHz max) are 400k+;
+	 * that one Click is unusable on this board's bus. */
+	clock-frequency = <I2C_BITRATE_FAST>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	pinctrl-0 = <&sercom3_i2c_ext1>;
+	pinctrl-names = "default";
+};

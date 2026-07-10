@@ -399,6 +399,26 @@ static bool read_pht(const struct device *bus, uint16_t addr,
 	return true;
 }
 
+/* ---------------- IO1 Xplained Pro @0x4F (AT30TSE758) ---------------------- *
+ * Not a Click: Microchip's Xplained Pro sensor wing, same probe-and-read
+ * pattern on the shared bus. Config reg (ptr 0x01) bits 14:13=11 -> 12-bit;
+ * temp reg (ptr 0x00) is left-justified two's complement, 0.0625 C/LSB.
+ * (Its EEPROM half sits separately at 0x57 and is not probed.)              */
+static bool read_io1_temp(const struct device *bus, uint16_t addr,
+			  IotclMessageHandle msg, const char *ns)
+{
+	uint8_t cfg[3] = { 0x01, 0x60, 0x00 };
+	uint8_t reg = 0x00, b[2] = {0};
+
+	(void)i2c_write(bus, cfg, sizeof(cfg), addr);
+	if (i2c_write_read(bus, addr, &reg, 1, b, sizeof(b)) != 0) {
+		return false;
+	}
+	add_num(msg, ns, "temperature_c",
+		(double)((int16_t)((b[0] << 8) | b[1]) >> 4) * 0.0625);
+	return true;
+}
+
 /* --- Registry ------------------------------------------------------------- */
 struct click {
 	const char *name;
@@ -420,6 +440,7 @@ static struct click clicks[] = {
 	{ "T6713 CO2",       "Amphenol T6713",    "t6713",           0x15, read_t6713,         true,  false },
 	{ "T9602",           "Amphenol T9602",    "t9602",           0x28, read_t9602,         true,  false },
 	{ "PHT",             "TE MS8607",         "pht",             0x40, read_pht,           false, false },
+	{ "IO1 Xplained Pro", "AT30TSE758",       "io1",             0x4F, read_io1_temp,      true,  false },
 };
 
 /* Best-effort I2C presence probe (ACK on a 1-byte read). */

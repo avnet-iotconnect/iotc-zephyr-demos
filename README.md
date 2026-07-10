@@ -15,14 +15,15 @@ showcases live under `vendor/<name>/`.
 Legend: ✅ verified on hardware · 🔒 verified on the **TF-M hardware-sealed-key**
 (`/ns`) build · 🔨 builds (not yet hardware-tested) · 🔜 planned · — not applicable
 
-| Demo | `frdm_mcxn947`<br>MCXN947 | `mimxrt1170_evk`<br>RT1170-EVKB | `frdm_imx93`<br>i.MX93 (A55) | `frdm_mcxe31b`<br>MCXE31B | `frdm_mcxw72`<br>MCXW72 |
-|------|:---:|:---:|:---:|:---:|:---:|
-| **quickstart** | ✅ 🔒 sealed key⁴ | ✅ connects | ✅ A55 · eMMC persist⁵ | — | — (no IP link)² |
-| **telemetry** | ✅ connects | ✅ connects | ✅ A55 · SD boot⁵ | —¹ | —² |
-| **uart-telemetry-source** | — | — | — | ✅ M7¹ | ✅ M33² |
-| **c2d-led** | ✅ LED verified | 🔨 builds | 🔜⁵ | — (no IP link) | — (no IP link)² |
-| **click-telemetry** | ✅ 🔒 sealed key⁴ | ◇ adapter³ | 🔜⁵ | ⇢ separate probe¹ | — |
-| **npu-benchmark** (vendor) | 🔨 builds | — | — | — | — |
+| Demo | `frdm_mcxn947`<br>MCXN947 | `mimxrt1170_evk`<br>RT1170-EVKB | `frdm_imx93`<br>i.MX93 (A55) | `frdm_mcxe31b`<br>MCXE31B | `frdm_mcxw72`<br>MCXW72 | `same54_xpro`<br>SAM E54 |
+|------|:---:|:---:|:---:|:---:|:---:|:---:|
+| **quickstart** | ✅ 🔒 sealed key⁴ | ✅ connects | ✅ A55 · eMMC persist⁵ | — | — (no IP link)² | 🔨 builds⁶ |
+| **telemetry** | ✅ connects | ✅ connects | ✅ A55 · SD boot⁵ | —¹ | —² | 🔨 builds⁶ |
+| **uart-telemetry-source** | — | — | — | ✅ M7¹ | ✅ M33² | — |
+| **c2d-led** | ✅ LED verified | 🔨 builds | 🔜⁵ | — (no IP link) | — (no IP link)² | 🔨 builds⁶ |
+| **click-telemetry** | ✅ 🔒 sealed key⁴ | ◇ adapter³ | 🔜⁵ | ⇢ separate probe¹ | — | 🔨 IO1 wing⁶ |
+| **ml-model-update** | — | — | — | — | — | 🔨 builds⁶ |
+| **npu-benchmark** (vendor) | 🔨 builds | — | — | — | — | — |
 
 ¹ MCXE31B (Cortex-M7) has no Ethernet/Wi‑Fi → it runs the in-repo
 **[uart-telemetry-source](demos/uart-telemetry-source)** demo (**hardware-verified**):
@@ -57,12 +58,28 @@ story on the MCXN947; an A55 sealed key would be an ELE effort.) Build needs the
 `aarch64-zephyr-elf` toolchain + `spsdk`; console is `lpuart2`. See the
 [i.MX93 quickstart](boards/frdm-imx93/QUICKSTART.md). The chip's flagship
 IOTCONNECT path is still Linux/A55 + KVS (deferred).
+⁶ **First Microchip board.** SAM E54 Xplained Pro (ATSAME54P20A, Cortex-M4F
+@120 MHz) — all four demos **build-verified** for the legacy Atmel-tree
+`same54_xpro` target (working GMAC Ethernet + factory MAC from the onboard
+AT24MAC402); hardware validation pending. Zephyr also carries Microchip's
+new-tree port of this board (`sam_e54_xpro`) — their active Zephyr investment,
+but **no Ethernet node yet**; migrate when GMAC lands. The sensor wing goes on
+**EXT1** (its I²C is SERCOM3, a private bus; EXT2/EXT3 share SERCOM7 with the
+onboard EEPROM/ATECC508): either the **IO1 Xplained Pro** (AT30TSE758 temp
+auto-detected by click-telemetry; light + LED used by **ml-model-update**) or
+a mikroBUS Xplained Pro adapter (ATMBUSADAPTER-XPRO) for Clicks. See the
+[E54 quickstart](boards/sam-e54-xpro/QUICKSTART.md).
+The Microchip **BLE tier** (WBZ451HPE Curiosity beacon → SAMA7D65 Curiosity
+gateway) is deferred until Microchip's WBZ45x Zephyr support lands (tracked in
+their Zephyr re-org RFC, zephyr#92168) — no PIC32CX-BZ2 Zephyr support exists
+today, and Zephyr's `sama7d65_curiosity` has no networking yet.
 
 **Connectivity per board** (why the matrix looks the way it does):
 MCXN947 = Ethernet (ENET-QoS + LAN8741) · RT1170-EVKB = Ethernet (100M ENET,
 on by default) · i.MX93 = Ethernet on the **Cortex-A55** (RGMII + YT8521 PHY;
 Zephyr runs bare-metal there — the M33 has no Ethernet; Linux/A55 + KVS is the
-deferred streaming tier) · MCXE31B = none (UART source) · MCXW72 = 802.15.4 only.
+deferred streaming tier) · MCXE31B = none (UART source) · MCXW72 = 802.15.4 only ·
+SAM E54 Xpro = Ethernet (GMAC + KSZ8091, factory MAC from EEPROM).
 
 ## Per-board quickstarts
 
@@ -72,6 +89,7 @@ adds one under `boards/<vendor>-<board>/QUICKSTART.md`):
 - [MIMXRT1170-EVKB](boards/mimxrt1170-evkb/QUICKSTART.md)
 - [FRDM-MCXN947](boards/frdm-mcxn947/QUICKSTART.md) (incl. TF-M sealed-key `/ns`)
 - [FRDM-IMX93](boards/frdm-imx93/QUICKSTART.md) (Zephyr on the Cortex-A55)
+- [SAM E54 Xplained Pro](boards/sam-e54-xpro/QUICKSTART.md) (first Microchip board)
 
 ## Demos
 
@@ -84,6 +102,7 @@ adds one under `boards/<vendor>-<board>/QUICKSTART.md`):
 | Click telemetry | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
 | NXP eIQ Neutron NPU benchmark | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
 | eIQ PdM (vibration) | [demos/eiq-pdm-vibration](demos/eiq-pdm-vibration) | Predictive maintenance: ML Vibro Sens Click (NXP FXLS8974 + onboard fault motors) → **eIQ Time Series Studio model on-device** → IOTCONNECT, with cloud fault-injection. Pretrained model + dataset bundled; HW-verified end-to-end. [Quickstart](demos/eiq-pdm-vibration/QUICKSTART.md). |
+| **ML model update** | [demos/ml-model-update](demos/ml-model-update) | **The model is data, not firmware**: a fixed tiny-MLP engine + a validated ~124 B IOTM weights blob. IOTCONNECT pushes a NEW model as a single C2D command (chunked path for bigger blobs) → CRC-checked, hot-swapped, NVS-persisted — device behavior changes with no reflash. IO1 Xplained Pro sensors (temp+light) + LED. Template: [templates/ml-model-update-template.json](templates/ml-model-update-template.json). |
 
 ## Device vitals (operational telemetry)
 
@@ -134,3 +153,9 @@ needs no creds — just `-DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib`. See 
 - **Streaming tier** (KVS/WebRTC): deferred — anchored on i.MX93 under Linux
   (upstream KVS WebRTC SDK + GStreamer/VPU), reusing IOTCONNECT's STS +
   channel-ARN brokering.
+- **Microchip**: SAM E54 Xpro 🔨 (all four demos build; HW validation next).
+  Then the **BLE tier**: WBZ451HPE Curiosity as a Click-carrying BLE
+  beacon/peripheral (adv telemetry + GATT commands) feeding a SAMA7D65
+  Curiosity gateway (Linux + BlueZ) into IOTCONNECT — firmware blocked on
+  Microchip landing WBZ45x Zephyr support (zephyr#92168; today the part is
+  MPLAB-Harmony-only).

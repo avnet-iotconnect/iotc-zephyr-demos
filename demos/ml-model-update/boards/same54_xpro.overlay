@@ -1,0 +1,68 @@
+/*
+ * SAM E54 Xplained Pro overlay for the ml-model-update demo -- wires the
+ * IO1 Xplained Pro extension on EXT1 (user-guide Atmel-42078):
+ *
+ *   IO1 EXT pin 3  LIGHTSENSOR (TEMT6000)  -> EXT1 pin 3  = PB04 ADC1/AIN[6]
+ *   IO1 EXT pin 7  LED (active low)        -> EXT1 pin 7  = PB08
+ *   IO1 EXT pins 11/12  AT30TSE758 I2C     -> EXT1 = SERCOM3 (PA22/PA23)
+ *
+ * NOTE: EXT1's I2C is SERCOM3 -- its own bus. (EXT2/EXT3 share SERCOM7 with
+ * the AT24MAC402 EEPROM and ATECC508; if you move the IO1 there, point
+ * io1-i2c at &sercom7 instead.)
+ *
+ * Ethernet needs no overlay on this board: the devicetree already enables
+ * gmac/mdio/phy (KSZ8091 RMII, factory MAC from the AT24MAC402 EEPROM).
+ */
+
+#include <zephyr/dt-bindings/i2c/i2c.h>
+#include <dt-bindings/pinctrl/same54p-pinctrl.h>
+
+/ {
+	aliases {
+		io1-i2c = &sercom3;
+		io1-led = &io1_led;
+	};
+
+	leds {
+		io1_led: led_io1 {
+			gpios = <&portb 8 GPIO_ACTIVE_LOW>;
+			label = "IO1 Xplained Pro LED";
+		};
+	};
+};
+
+&pinctrl {
+	sercom3_i2c_ext1: sercom3_i2c_ext1 {
+		group1 {
+			pinmux = <PA22C_SERCOM3_PAD0>,
+				 <PA23C_SERCOM3_PAD1>;
+		};
+	};
+
+	adc1_ext1: adc1_ext1 {
+		group1 {
+			pinmux = <PB4B_ADC1_AIN6>;
+		};
+	};
+};
+
+&sercom3 {
+	status = "okay";
+	compatible = "atmel,sam0-i2c";
+	/* 400 kHz, NOT 100 kHz: the i2c_sam0 driver clocks SERCOMs from GCLK0
+	 * (120 MHz here) and its 8-bit BAUD divider overflows below ~235 kHz
+	 * (-ERANGE at init -> device never ready). AT30TSE758 is fine at 400k. */
+	clock-frequency = <I2C_BITRATE_FAST>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	pinctrl-0 = <&sercom3_i2c_ext1>;
+	pinctrl-names = "default";
+};
+
+&adc1 {
+	status = "okay";
+
+	pinctrl-0 = <&adc1_ext1>;
+	pinctrl-names = "default";
+};

@@ -29,6 +29,7 @@ manifest:
           - mbedtls
           - mcuboot
           - hal_nxp        # FRDM-MCXN947 reference target
+          - hal_atmel      # SAM E54 Xplained Pro (same54_xpro, legacy Atmel tree)
           # - hal_nordic
           # - hal_st
           # - hal_renesas

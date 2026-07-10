@@ -1,0 +1,14 @@
+sample:
+  name: IOTCONNECT ML model update demo
+  description: |
+    Cloud-updatable tiny-MLP on IO1 Xplained Pro sensors: the model is a
+    validated data blob (IOTM) pushed from IOTCONNECT as a C2D command,
+    hot-swapped without reflash and persisted to NVS.
+common:
+  tags: iotconnect ml
+  harness: console
+tests:
+  sample.iotconnect.ml_model_update.build:
+    build_only: true
+    platform_allow:
+      - same54_xpro
