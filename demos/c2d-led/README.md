@@ -1,5 +1,8 @@
 # c2d-led demo
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 Cloud-to-device control: toggle the board LED (`led0`) from Avnet /IOTCONNECT
 **commands**, and report the LED state back as **telemetry** (`{"led": 0|1}`).
 Demonstrates the C2D command path of the SDK (command callback + ACK).

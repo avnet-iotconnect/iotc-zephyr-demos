@@ -1,5 +1,8 @@
 # uart-telemetry-source demo
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 The **constrained-tier** demo: for MCUs whose Zephyr port has **no IP transport**
 (no Ethernet/Wi-Fi, so no MQTT/TLS). It compiles the portable **iotc-c-lib**
 protocol core + cJSON straight into the app and emits IOTCONNECT 2.1 telemetry

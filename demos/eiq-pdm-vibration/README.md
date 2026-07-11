@@ -1,5 +1,8 @@
 # eIQ predictive-maintenance — vibration (FRDM-MCXN947)
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 On-device **predictive maintenance** for rotating machines: a MIKROE **ML Vibro
 Sens Click** (NXP **FXLS8974CF** 3-axis accelerometer + two onboard motors)
 measures vibration, an **eIQ Time Series Studio** model (Random Forest, 0.30 KB

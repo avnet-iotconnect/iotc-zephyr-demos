@@ -1,5 +1,8 @@
 # /IOTCONNECT Zephyr Quickstart
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 A **flash-and-provision** binary. No build toolchain, no credentials to embed —
 flash the prebuilt image, open the serial console, and provision the device to
 **your own** IOTCONNECT account entirely from the prompt. The device generates

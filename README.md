@@ -93,6 +93,10 @@ adds one under `boards/<vendor>-<board>/QUICKSTART.md`):
 
 ## Demos
 
+Every demo ships a **DEMO.md** — an end-to-end walkthrough of the demo flow
+with the underlying mechanics explained at each step — alongside its README
+(build/flash mechanics).
+
 | Demo | Path | What it shows |
 |------|------|---------------|
 | **Quickstart** ⭐ | [demos/quickstart](demos/quickstart) | Flash-and-provision binary: no toolchain, no baked-in creds. Device generates its **own** key+cert on-chip (`iotcprov provision`), you register it, paste `iotcDeviceConfig.json` (`iotc config`), and it connects. Only public CAs compiled in. |

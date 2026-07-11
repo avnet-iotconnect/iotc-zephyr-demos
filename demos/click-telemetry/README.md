@@ -1,5 +1,8 @@
 # click-telemetry demo
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 Auto-detect MikroE **Click** sensor boards on a **Shuttle** (up to 4 Clicks on
 one mikroBUS socket) and stream their readings to Avnet /IOTCONNECT. Clicks are
 **recognized on power-up** and every recognized Click is read each publish cycle

@@ -1,5 +1,8 @@
 # Telemetry demo (reference)
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 Connect to Avnet /IOTCONNECT and publish periodic telemetry over MQTT/TLS, with a
 cloud-to-device command callback. This is the portable reference demo: it reuses
 the app in `iotc-zephyr-sdk/samples/telemetry` and adds this demo's own

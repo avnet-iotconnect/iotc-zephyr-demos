@@ -1,5 +1,8 @@
 # NXP eIQ Neutron NPU benchmark → /IOTCONNECT
 
+> **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
+> behavior and what the device and platform are doing underneath.
+
 A vendor-specific demo that **proves NPU acceleration**: it runs the same
 quantized model on the FRDM-MCXN947's eIQ **Neutron NPU** and on the
 **Cortex-M33**, times each inference, and streams the numbers to Avnet
