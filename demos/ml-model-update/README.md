@@ -1,5 +1,9 @@
 # ml-model-update — cloud-updatable ML on-device
 
+> Presenting this? **[DEMO.md](DEMO.md)** is the walkthrough: the demo
+> script act by act, what the audience sees, and what is happening under
+> the hood at each step.
+
 **The pitch (for Microchip):** the ML model on the device is *data, not
 firmware*. The firmware ships a fixed tiny-MLP inference engine; a model is a
 ~124-byte validated blob (**IOTM** format: header + float32 weights + class
