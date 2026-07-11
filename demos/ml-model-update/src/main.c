@@ -190,7 +190,8 @@ static int read_light_pct(double *light_pct)
 #define MODEL_HDR_LEN  64
 #define MODEL_MAX_BLOB 768        /* header + worst-case 4-16-4 weights */
 #define MODEL_B64_MAX  1100       /* base64 text for MODEL_MAX_BLOB */
-#define MODEL_DL_MAX   2048       /* download buffer: blob + zip wrapping */
+#define MODEL_DL_MAX   8192       /* download buffer (heap): the platform
+				   * repackages uploads, so allow slack */
 
 struct model_hdr {
 	char magic[4];
@@ -612,40 +613,53 @@ out:
 	}
 }
 
-/* Minimal ZIP unwrap: the platform's AI Models upload takes a .zip, and the
- * device receives it verbatim. Accept a single-entry archive whose entry is
- * STORED (method 0, no compression) -- tools/build_model.py emits exactly
- * that -- and point at the embedded payload in place. NULL on success. */
+/* Minimal ZIP walk: the platform's AI Models upload takes a .zip and may
+ * repackage it, so scan every local-file entry for a STORED (method 0,
+ * uncompressed) payload that starts with the IOTM magic -- extra entries
+ * (manifests etc.) are skipped by their recorded sizes. Points at the
+ * payload in place; NULL on success. */
 #define ZIP_LOCAL_HDR_LEN 30
 
-static const char *zip_extract_stored(const uint8_t *buf, size_t len,
-				      const uint8_t **payload,
-				      size_t *payload_len)
+static const char *zip_find_iotm_stored(const uint8_t *buf, size_t len,
+					const uint8_t **payload,
+					size_t *payload_len)
 {
+	bool compressed_seen = false;
+	size_t off = 0;
+
 	if (len < ZIP_LOCAL_HDR_LEN || memcmp(buf, "PK\x03\x04", 4) != 0) {
 		return "not a zip archive";
 	}
-	uint16_t flags = sys_get_le16(buf + 6);
-	uint16_t method = sys_get_le16(buf + 8);
-	uint32_t comp_size = sys_get_le32(buf + 18);
-	size_t off = ZIP_LOCAL_HDR_LEN + sys_get_le16(buf + 26) +
-		     sys_get_le16(buf + 28);
+	while (off + ZIP_LOCAL_HDR_LEN <= len &&
+	       memcmp(buf + off, "PK\x03\x04", 4) == 0) {
+		uint16_t flags = sys_get_le16(buf + off + 6);
+		uint16_t method = sys_get_le16(buf + off + 8);
+		uint32_t comp_size = sys_get_le32(buf + off + 18);
+		size_t data_off = off + ZIP_LOCAL_HDR_LEN +
+				  sys_get_le16(buf + off + 26) +
+				  sys_get_le16(buf + off + 28);
 
-	if (flags & 0x01) {
-		return "zip entry is encrypted";
+		if (flags & 0x08) {
+			return "zip uses a streaming data descriptor";
+		}
+		if (data_off + comp_size > len) {
+			return "zip entry truncated";
+		}
+		if (method == 0 && !(flags & 0x01) &&
+		    comp_size >= MODEL_HDR_LEN &&
+		    memcmp(buf + data_off, MODEL_MAGIC, 4) == 0) {
+			*payload = buf + data_off;
+			*payload_len = comp_size;
+			return NULL;
+		}
+		if (method != 0) {
+			compressed_seen = true;
+		}
+		off = data_off + comp_size;
 	}
-	if (flags & 0x08) {
-		return "zip uses a streaming data descriptor";
-	}
-	if (method != 0) {
-		return "zip entry is compressed; re-zip with 'store'";
-	}
-	if (comp_size == 0 || off + comp_size > len) {
-		return "zip entry truncated";
-	}
-	*payload = buf + off;
-	*payload_len = comp_size;
-	return NULL;
+	return compressed_seen ?
+		"no stored IOTM entry (a zip entry is compressed; use 'store')" :
+		"no IOTM entry found in zip";
 }
 
 /* Native IOTCONNECT "AI Model" push (Devices -> AI Models -> Push Model).
@@ -655,7 +669,7 @@ static const char *zip_extract_stored(const uint8_t *buf, size_t len,
  * model-push command. The uploaded platform file is the raw .bin blob. */
 static void on_model_push(IotclC2dEventData data)
 {
-	static uint8_t dl_buf[MODEL_DL_MAX] __aligned(4);
+	uint8_t *dl_buf = k_malloc(MODEL_DL_MAX);
 	const char *ack = iotcl_c2d_get_ack_id(data);
 	const char *host = iotcl_c2d_get_ota_url_hostname(data, 0);
 	const char *res = iotcl_c2d_get_ota_url_resource(data, 0);
@@ -664,32 +678,41 @@ static void on_model_push(IotclC2dEventData data)
 	size_t len = 0;
 
 	LOG_INF("Model push from platform: host=%s", host ? host : "(none)");
-	if (host == NULL || res == NULL) {
+	if (dl_buf == NULL) {
+		snprintf(note, sizeof(note), "no memory for download buffer");
+	} else if (host == NULL || res == NULL) {
 		snprintf(note, sizeof(note), "no download URL in model push");
 	} else {
 		int ret = iotc_https_download(host, res,
 					      CONFIG_IOTCONNECT_SEC_TAG_BROKER_CA,
 					      CONFIG_IOTCONNECT_DRA_HTTP_TIMEOUT_MS,
-					      dl_buf, sizeof(dl_buf), &len);
+					      dl_buf, MODEL_DL_MAX, &len);
 
 		if (ret != 0) {
 			snprintf(note, sizeof(note), "download failed (%d)", ret);
 		} else {
-			/* The platform upload is a .zip; unwrap it (stored
-			 * entry) when present, else treat as the raw blob. */
+			/* The platform serves a (possibly repackaged) .zip;
+			 * find the stored IOTM entry in it, else treat the
+			 * body as the raw blob. */
 			const uint8_t *blob = dl_buf;
 			size_t blob_len = len;
 			const char *err = NULL;
 
 			if (len >= 4 && memcmp(dl_buf, "PK", 2) == 0) {
-				err = zip_extract_stored(dl_buf, len,
-							 &blob, &blob_len);
+				err = zip_find_iotm_stored(dl_buf, len,
+							   &blob, &blob_len);
 			}
 			if (err == NULL) {
 				err = model_validate(blob, blob_len);
 			}
 			if (err != NULL) {
 				snprintf(note, sizeof(note), "rejected: %s", err);
+				/* Show what actually arrived so the next
+				 * integration step is fact-based. */
+				LOG_INF("downloaded body: %u bytes total",
+					(unsigned)len);
+				LOG_HEXDUMP_INF(dl_buf, MIN(len, 64),
+						"body head:");
 			} else {
 				(void)model_install(blob, blob_len, "cloud", true);
 				status = IOTCL_C2D_EVT_OTA_DOWNLOAD_DONE;
@@ -700,6 +723,7 @@ static void on_model_push(IotclC2dEventData data)
 			}
 		}
 	}
+	k_free(dl_buf);
 	LOG_INF("Model push: %s", note);
 	if (ack != NULL) {
 		(void)iotcl_mqtt_send_ota_ack(ack, status, note);
