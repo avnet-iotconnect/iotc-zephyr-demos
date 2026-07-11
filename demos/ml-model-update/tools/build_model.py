@@ -163,8 +163,12 @@ rows = ["\t" + " ".join(lines[i:i + 12]) for i in range(0, len(lines), 12)]
 # IOTCONNECT AI Models upload (the firmware unwraps stored zips); .bin = the
 # raw blob; .b64 = paste as the model-push command parameter; .cmd = the full
 # one-liner.
-for blob, fname in ((v2, "model_v2_comfort"), (v3, "model_v3_nightlight"),
-                    (v4, "model_v4_hotalarm"), (v5, "model_v5_fusion")):
+# v1 is also emitted even though it ships builtin, so the platform's model
+# registry can hold the full catalog and "push ambient" returns the device to
+# baseline from the dashboard (no model-reset command needed).
+for blob, fname in ((v1, "model_v1_ambient"), (v2, "model_v2_comfort"),
+                    (v3, "model_v3_nightlight"), (v4, "model_v4_hotalarm"),
+                    (v5, "model_v5_fusion")):
     b64 = base64.b64encode(blob).decode()
     (models / f"{fname}.bin").write_bytes(blob)
     (models / f"{fname}.b64").write_text(b64 + "\n")
