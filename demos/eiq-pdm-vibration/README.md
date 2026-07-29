@@ -11,6 +11,11 @@ streams to **/IOTCONNECT** — where cloud commands inject the faults. This is
 NXP's reference vibration-anomaly setup (eIQ TSS + the Smart Fan /
 portable-anomaly-detect demos).
 
+> **Companion demo:** an NXP **i.MX 95** running the
+> [eIQ GenAI Flow edge-LLM agent](https://github.com/avnet-iotconnect/iotc-python-lite-sdk-demos/tree/main/nxp-frdm-imx-95/genai-flow-demo#10-agent-llm-with-real-board-tools-ask-agent)
+> can **monitor and control this device by voice/natural language** over /IOTCONNECT — *"how's the motor"* reads the
+> `vib.*` telemetry below, *"inject a fault"* spins the unbalanced motor. The i.MX 95 asks; this MCXN947 detects.
+
 > **Start here → [QUICKSTART.md](QUICKSTART.md)** — the full walkthrough with
 > screenshots. A **pretrained model ships in [`model/`](model/)** and the
 > dataset + training report in [`training/`](training/), so you can run the
