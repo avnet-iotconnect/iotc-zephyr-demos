@@ -17,13 +17,13 @@ Legend: ✅ verified on hardware · 🔒 verified on the **TF-M hardware-sealed-
 
 | Demo | `frdm_mcxn947`<br>MCXN947 | `mimxrt1170_evk`<br>RT1170-EVKB | `frdm_imx93`<br>i.MX93 (A55) | `frdm_mcxe31b`<br>MCXE31B | `frdm_mcxw72`<br>MCXW72 | `same54_xpro`<br>SAM E54 |
 |------|:---:|:---:|:---:|:---:|:---:|:---:|
-| **quickstart** | ✅ 🔒 sealed key⁴ | ✅ connects | ✅ A55 · eMMC persist⁵ | — | — (no IP link)² | 🔨 builds⁶ |
-| **telemetry** | ✅ connects | ✅ connects | ✅ A55 · SD boot⁵ | —¹ | —² | 🔨 builds⁶ |
-| **uart-telemetry-source** | — | — | — | ✅ M7¹ | ✅ M33² | — |
-| **c2d-led** | ✅ LED verified | 🔨 builds | 🔜⁵ | — (no IP link) | — (no IP link)² | 🔨 builds⁶ |
-| **click-telemetry** | ✅ 🔒 sealed key⁴ | ◇ adapter³ | 🔜⁵ | ⇢ separate probe¹ | — | 🔨 IO1 wing⁶ |
-| **ml-model-update** | — | — | — | — | — | 🔨 builds⁶ |
-| **npu-benchmark** (vendor) | 🔨 builds | — | — | — | — | — |
+| **[quickstart](demos/quickstart)** | ✅ 🔒 sealed key⁴ | ✅ connects | ✅ A55 · eMMC persist⁵ | — | — (no IP link)² | 🔨 builds⁶ |
+| **[telemetry](demos/telemetry)** | ✅ connects | ✅ connects | ✅ A55 · SD boot⁵ | —¹ | —² | 🔨 builds⁶ |
+| **[uart-telemetry-source](demos/uart-telemetry-source)** | — | — | — | ✅ M7¹ | ✅ M33² | — |
+| **[c2d-led](demos/c2d-led)** | ✅ LED verified | 🔨 builds | 🔜⁵ | — (no IP link) | — (no IP link)² | 🔨 builds⁶ |
+| **[click-telemetry](demos/click-telemetry)** | ✅ 🔒 sealed key⁴ | ◇ adapter³ | 🔜⁵ | ⇢ separate probe¹ | — | 🔨 IO1 wing⁶ |
+| **[ml-model-update](demos/ml-model-update)** | — | — | — | — | — | 🔨 builds⁶ |
+| **[npu-benchmark](vendor/nxp/npu-benchmark)** (vendor) | 🔨 builds | — | — | — | — | — |
 
 ¹ MCXE31B (Cortex-M7) has no Ethernet/Wi‑Fi → it runs the in-repo
 **[uart-telemetry-source](demos/uart-telemetry-source)** demo (**hardware-verified**):
@@ -99,14 +99,14 @@ with the underlying mechanics explained at each step — alongside its README
 
 | Demo | Path | What it shows |
 |------|------|---------------|
-| **Quickstart** ⭐ | [demos/quickstart](demos/quickstart) | Flash-and-provision binary: no toolchain, no baked-in creds. Device generates its **own** key+cert on-chip (`iotcprov provision`), you register it, paste `iotcDeviceConfig.json` (`iotc config`), and it connects. Only public CAs compiled in. |
-| Telemetry (reference) | [demos/telemetry](demos/telemetry) | Connect + periodic telemetry over MQTT/TLS. Reuses the SDK sample. |
-| UART telemetry source | [demos/uart-telemetry-source](demos/uart-telemetry-source) | **Constrained tier** — for MCUs with no IP stack (MCXE31B, MCXW72). iotc-c-lib builds IOTCONNECT 2.1 JSON on-device and prints it on the console UART for a gateway to forward. Board name via `CONFIG_BOARD`; no SDK/network module. |
-| c2d-led | [demos/c2d-led](demos/c2d-led) | Cloud→device commands (`led-on/off/toggle`) drive the board LED, with ACKs. |
-| Click telemetry | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
-| NXP eIQ Neutron NPU benchmark | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
-| eIQ PdM (vibration) | [demos/eiq-pdm-vibration](demos/eiq-pdm-vibration) | Predictive maintenance: ML Vibro Sens Click (NXP FXLS8974 + onboard fault motors) → **eIQ Time Series Studio model on-device** → IOTCONNECT, with cloud fault-injection. Pretrained model + dataset bundled; HW-verified end-to-end. [Quickstart](demos/eiq-pdm-vibration/QUICKSTART.md). |
-| **ML Model Hot-Swap** | [demos/ml-model-update](demos/ml-model-update) | **The model is data, not firmware**: a fixed tiny-MLP engine + a validated ~124 B IOTM weights blob. IOTCONNECT pushes a NEW model as a single C2D command (chunked path for bigger blobs) → CRC-checked, hot-swapped, NVS-persisted — device behavior changes with no reflash. IO1 Xplained Pro sensors (temp+light) + LED. Template: [templates/ml-model-update-template.json](templates/ml-model-update-template.json). |
+| **[Quickstart](demos/quickstart)** ⭐ | [demos/quickstart](demos/quickstart) | Flash-and-provision binary: no toolchain, no baked-in creds. Device generates its **own** key+cert on-chip (`iotcprov provision`), you register it, paste `iotcDeviceConfig.json` (`iotc config`), and it connects. Only public CAs compiled in. |
+| [Telemetry](demos/telemetry) (reference) | [demos/telemetry](demos/telemetry) | Connect + periodic telemetry over MQTT/TLS. Reuses the SDK sample. |
+| [UART telemetry source](demos/uart-telemetry-source) | [demos/uart-telemetry-source](demos/uart-telemetry-source) | **Constrained tier** — for MCUs with no IP stack (MCXE31B, MCXW72). iotc-c-lib builds IOTCONNECT 2.1 JSON on-device and prints it on the console UART for a gateway to forward. Board name via `CONFIG_BOARD`; no SDK/network module. |
+| [c2d-led](demos/c2d-led) | [demos/c2d-led](demos/c2d-led) | Cloud→device commands (`led-on/off/toggle`) drive the board LED, with ACKs. |
+| [Click telemetry](demos/click-telemetry) | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
+| [NXP eIQ Neutron NPU benchmark](vendor/nxp/npu-benchmark) | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
+| [eIQ PdM (vibration)](demos/eiq-pdm-vibration) | [demos/eiq-pdm-vibration](demos/eiq-pdm-vibration) | Predictive maintenance: ML Vibro Sens Click (NXP FXLS8974 + onboard fault motors) → **eIQ Time Series Studio model on-device** → IOTCONNECT, with cloud fault-injection. Pretrained model + dataset bundled; HW-verified end-to-end. [Quickstart](demos/eiq-pdm-vibration/QUICKSTART.md). |
+| **[ML Model Hot-Swap](demos/ml-model-update)** | [demos/ml-model-update](demos/ml-model-update) | **The model is data, not firmware**: a fixed tiny-MLP engine + a validated ~124 B IOTM weights blob. IOTCONNECT pushes a NEW model as a single C2D command (chunked path for bigger blobs) → CRC-checked, hot-swapped, NVS-persisted — device behavior changes with no reflash. IO1 Xplained Pro sensors (temp+light) + LED. Template: [templates/ml-model-update-template.json](templates/ml-model-update-template.json). |
 
 ## Device vitals (operational telemetry)
 
