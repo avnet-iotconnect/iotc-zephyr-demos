@@ -122,6 +122,18 @@ imperfection worth showing rather than hiding).
 All commands are acknowledged; unknown commands ack as failed with
 `unknown command`.
 
+## Dashboard
+
+A ready-made dashboard export accompanies the demo
+([dashboard/mcxn947-vibro-pdm_dashboard_export.json](dashboard/mcxn947-vibro-pdm_dashboard_export.json);
+import steps in [QUICKSTART.md §7](QUICKSTART.md)). It surfaces the whole
+loop on one screen: the anomaly-score and RMS gauges react as the motors
+change, the per-axis chart shows the vibration signature the model sees,
+the command buttons drive the motor states, and their ack history doubles
+as the injected-ground-truth log:
+
+![MCXN947 Vibro PdM dashboard](docs/images/dashboard.png)
+
 ## Implementation notes
 
 - **Per-sample classification + majority vote:** the model classifies every

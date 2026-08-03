@@ -153,3 +153,16 @@ With no model present, it falls back to an **RMS-threshold heuristic** (idle 0.0
 > — and links straight into the Zephyr app (confirmed on hardware). It is built
 > hard-float, so the connect build enables the FPU. Generate with **GCC** +
 > matching flags (see [QUICKSTART.md §3](QUICKSTART.md)).
+
+## Dashboard
+
+A ready-made IOTCONNECT dashboard ships with the demo — gauges for anomaly
+score / vibration RMS / CPU / heap, a per-axis RMS live chart, one-click
+motor controls with their ack history, and a machine-state view:
+
+![MCXN947 Vibro PdM dashboard](docs/images/dashboard.png)
+
+Import
+[dashboard/mcxn947-vibro-pdm_dashboard_export.json](dashboard/mcxn947-vibro-pdm_dashboard_export.json)
+via **Create Dashboard → Import dashboard** and bind the widgets to your
+device — step-by-step instructions in [QUICKSTART.md §7](QUICKSTART.md).

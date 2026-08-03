@@ -176,6 +176,31 @@ the cloud asked the motors to do), `model_class` (raw class the model detected),
 The key relationship: **`motor` is the injected ground truth, `model_class` is what the ML
 detected** — the demo is watching them agree within a second or two.
 
+## 7. Dashboard
+
+A ready-made IOTCONNECT dashboard for this demo — anomaly/vibration/vitals
+gauges, a per-axis RMS live chart, one-click motor controls with their ack
+history, and the machine-state view:
+
+![MCXN947 Vibro PdM dashboard](docs/images/dashboard.png)
+
+To import it into your IOTCONNECT account:
+
+1. Make sure the device template is imported and your device exists (step 5
+   above) — the dashboard binds to the template's `vib.*` / `sys.*`
+   attributes and commands.
+2. **Create Dashboard → Import dashboard**, and select
+   [dashboard/mcxn947-vibro-pdm_dashboard_export.json](dashboard/mcxn947-vibro-pdm_dashboard_export.json).
+3. Name the dashboard and bind the device-bound widgets (info tiles, command
+   buttons, command history) to your device.
+4. Save. The **PdM Status** image widget switches between hosted state
+   images per `vib.state`; if it comes up empty on your account, edit the
+   widget and re-point its image URLs (or switch it to upload mode).
+
+The command buttons (`Pwr` / `Fault` / `Both`) map to `inject-healthy` /
+`inject-fault` / `run-both`, so the whole fault-injection flow in step 6 can
+be driven from the dashboard.
+
 ## Files
 
 | Path | What |
