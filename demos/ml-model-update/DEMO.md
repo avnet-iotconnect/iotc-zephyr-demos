@@ -1,4 +1,4 @@
-# /IOTCONNECT ML Model Update — Demo Flow and Internals
+# ML Model Hot-Swap with /IOTCONNECT on Zephyr
 
 This document walks through the ml-model-update demo end to end: the sequence
 of steps, the behavior observable at each one, and what the device and
@@ -44,6 +44,14 @@ Five models are pre-built and verified, each 124 bytes:
 
 All five differ only in their data: same firmware, same engine, same sensors.
 
+<p>
+  <img src="media/sam-e54-xpro.png" alt="SAM E54 Xplained Pro" height="170">
+  <img src="media/io1-wing.png" alt="IO1 Xplained Pro sensor wing" height="170">
+</p>
+
+*The hardware: SAM E54 Xplained Pro and the IO1 Xplained Pro sensor wing,
+which plugs into the EXT1 header.*
+
 ## Setup
 
 1. **Provision the device** (no credentials are compiled into the binary):
@@ -58,8 +66,17 @@ All five differ only in their data: same firmware, same engine, same sensors.
    entry per file, version matching the model number, SageMaker conversion
    off). Registering v1 as well allows the return-to-baseline step to be a
    platform push like the others.
-3. Useful views while running the demo: the serial console, the device's
-   live telemetry, and the AI Models push page.
+3. **Import the dashboard**: **Create Dashboard → Import dashboard**, select
+   [dashboard/e54-model-hot-swap_dashboard_export.json](dashboard/e54-model-hot-swap_dashboard_export.json),
+   and bind its widgets to the device created in step 1. The result:
+
+   ![Model Hot-Swap dashboard](media/dashboard.png)
+
+   The dashboard combines the states legend, live temperature and light
+   gauges, the model's current state, and the `sys.*` / `ml.*` info tiles —
+   `ml.model_ver` and `ml.model_src` are the two to watch during pushes.
+4. Useful views while running the demo: the serial console, the dashboard,
+   and the AI Models push page.
 
 ## Demo flow
 

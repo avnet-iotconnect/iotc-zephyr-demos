@@ -173,8 +173,8 @@ the model), `rms_g`/`rms_x`/`rms_y`/`rms_z` (measured vibration), `motor` (what
 the cloud asked the motors to do), `model_class` (raw class the model detected),
 `source` (`eiq-model`) — plus the `sys` device-vitals object (CPU, heap, uptime).
 
-The pitch: **`motor` is the injected ground truth, `model_class` is what the ML
-detected** — watching them agree (within a second or two) *is* the demo.
+The key relationship: **`motor` is the injected ground truth, `model_class` is what the ML
+detected** — the demo is watching them agree within a second or two.
 
 ## Files
 
