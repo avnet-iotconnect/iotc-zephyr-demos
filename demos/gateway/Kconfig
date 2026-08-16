@@ -1,0 +1,65 @@
+# IOTCONNECT gateway demo configuration.
+
+mainmenu "IOTCONNECT gateway demo"
+
+menu "Gateway demo"
+
+config GATEWAY_SPOOL_DISK_NAME
+	string "Disk name for the store-and-forward spool"
+	default "SD2"
+	help
+	  Zephyr disk-access name of the raw block device holding the spool
+	  ring (on the FRDM-i.MX93, "SD2" = the on-SOM eMMC on uSDHC1, the
+	  same disk the SDK's identity store uses).
+
+config GATEWAY_SPOOL_SECTOR
+	int "First sector of the spool ring"
+	default 20100000
+	help
+	  Keep clear of the identity region (default sector 20,000,000 + 16)
+	  and of anything else on the disk. The default sits ~10 GB into the
+	  16 GB eMMC user area, which the SD-booted demo does not otherwise
+	  use.
+
+config GATEWAY_SPOOL_SLOTS
+	int "Spool capacity in records (3 sectors / 1536 B each)"
+	default 2048
+	help
+	  2048 slots = 3 MB = several hours of offline buffering at the demo
+	  cadence (one gateway record per interval + one record per child
+	  message).
+
+config GATEWAY_SELF_TAG
+	string "Gateway's own tag in the gateway template"
+	default "gw"
+	help
+	  The "tg" stamped on the gateway's own telemetry records. Gateway
+	  templates scope attributes by tag, and the platform binds values
+	  only when the record's tg matches the attribute's tag.
+
+config GATEWAY_LINK0_CHILD_ID
+	string "Child device unique id for UART link 0"
+	default "frdmmcxe31b01"
+	help
+	  Must match the child device's Unique ID on the platform. The
+	  uart-telemetry-source demo announces itself as "<board>-01".
+
+config GATEWAY_LINK0_TAG
+	string "Gateway-template tag for UART link 0's child"
+	default "uartsrc"
+	help
+	  The "tg" value sent with this child's records; must match the tag
+	  the child template is attached under in the GATEWAY template.
+	  Leave empty to omit "tg".
+
+config GATEWAY_LINK1_CHILD_ID
+	string "Child device unique id for UART link 1"
+	default "frdmmcxw7201"
+
+config GATEWAY_LINK1_TAG
+	string "Gateway-template tag for UART link 1's child"
+	default "uartsrc"
+
+endmenu
+
+source "Kconfig.zephyr"

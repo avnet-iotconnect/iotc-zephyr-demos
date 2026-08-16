@@ -1,0 +1,293 @@
+{
+ "code": "visionocc",
+ "name": "Vision Occupancy",
+ "authType": 2,
+ "attributes": [
+  {
+   "name": "vision",
+   "displayName": "Vision Inference",
+   "type": "OBJECT",
+   "description": "On-device person detection (TFLite-Micro, 96x96 int8)",
+   "childs": [
+    {
+     "name": "person",
+     "displayName": "Person present",
+     "type": "DECIMAL",
+     "description": "occupancy state after hysteresis, 0/1",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "state",
+     "displayName": "Occupancy state",
+     "type": "STRING",
+     "description": "occupied / clear",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "score",
+     "displayName": "Person score",
+     "type": "DECIMAL",
+     "description": "last frame's person probability",
+     "unit": "%",
+     "attributeColor": ""
+    },
+    {
+     "name": "clear_score",
+     "displayName": "No-person score",
+     "type": "DECIMAL",
+     "description": "last frame's no-person probability",
+     "unit": "%",
+     "attributeColor": ""
+    },
+    {
+     "name": "threshold",
+     "displayName": "Trigger threshold",
+     "type": "DECIMAL",
+     "description": "occupancy trigger (threshold command)",
+     "unit": "%",
+     "attributeColor": ""
+    },
+    {
+     "name": "infer_ms",
+     "displayName": "Inference time",
+     "type": "DECIMAL",
+     "description": "measured on-device per frame",
+     "unit": "ms",
+     "attributeColor": ""
+    },
+    {
+     "name": "fps",
+     "displayName": "Inference rate",
+     "type": "DECIMAL",
+     "description": "frames classified per second",
+     "unit": "fps",
+     "attributeColor": ""
+    },
+    {
+     "name": "frames",
+     "displayName": "Frames processed",
+     "type": "DECIMAL",
+     "description": "total since boot",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "cam_ok",
+     "displayName": "Camera OK",
+     "type": "DECIMAL",
+     "description": "0 when the OV5640 is missing/failed",
+     "unit": "",
+     "attributeColor": ""
+    }
+   ]
+  },
+  {
+   "name": "model",
+   "displayName": "Vision Model",
+   "type": "OBJECT",
+   "description": "Active IOTV-enveloped .tflite (hot-swappable from the cloud)",
+   "childs": [
+    {
+     "name": "ver",
+     "displayName": "Model version",
+     "type": "DECIMAL",
+     "description": "from the IOTV header",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "name",
+     "displayName": "Model name",
+     "type": "STRING",
+     "description": "from the IOTV header",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "src",
+     "displayName": "Model source",
+     "type": "STRING",
+     "description": "builtin / flash / cloud",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "size_b",
+     "displayName": "Model size",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "B",
+     "attributeColor": ""
+    },
+    {
+     "name": "arena_b",
+     "displayName": "Tensor arena used",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "B",
+     "attributeColor": ""
+    }
+   ]
+  },
+  {
+   "name": "led",
+   "displayName": "Board LED",
+   "type": "DECIMAL",
+   "description": "0/1; in auto mode occupancy drives it",
+   "unit": "",
+   "attributeColor": ""
+  },
+  {
+   "name": "sys",
+   "displayName": "Device Vitals",
+   "type": "OBJECT",
+   "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
+   "childs": [
+    {
+     "name": "cpu_pct",
+     "displayName": "CPU load",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "%",
+     "attributeColor": ""
+    },
+    {
+     "name": "freq_mhz",
+     "displayName": "Core clock",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "MHz",
+     "attributeColor": ""
+    },
+    {
+     "name": "heap_used",
+     "displayName": "Heap used",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "B",
+     "attributeColor": ""
+    },
+    {
+     "name": "heap_free",
+     "displayName": "Heap free",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "B",
+     "attributeColor": ""
+    },
+    {
+     "name": "uptime_s",
+     "displayName": "Uptime",
+     "type": "DECIMAL",
+     "description": "",
+     "unit": "s",
+     "attributeColor": ""
+    },
+    {
+     "name": "reset_cause",
+     "displayName": "Reset cause",
+     "type": "STRING",
+     "description": "",
+     "unit": "",
+     "attributeColor": ""
+    },
+    {
+     "name": "fw",
+     "displayName": "Firmware",
+     "type": "STRING",
+     "description": "",
+     "unit": "",
+     "attributeColor": ""
+    }
+   ],
+   "aggregateTypes": []
+  }
+ ],
+ "commands": [
+  {
+   "name": "Take Snapshot",
+   "command": "snapshot",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Set Threshold (%)",
+   "command": "threshold",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Set Interval (s)",
+   "command": "interval",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "LED On",
+   "command": "led-on",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "LED Off",
+   "command": "led-off",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "LED Auto (occupancy-driven)",
+   "command": "led-auto",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Model Info",
+   "command": "model-info",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Fetch Model (https URL)",
+   "command": "model-fetch",
+   "requiredParam": true,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Revert To Builtin Model",
+   "command": "model-reset",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  },
+  {
+   "name": "Reboot",
+   "command": "reboot",
+   "requiredParam": false,
+   "requiredAck": true,
+   "isOTACommand": false
+  }
+ ],
+ "messageVersion": "2.1",
+ "capability": "0",
+ "c2dOnDemand": 0,
+ "properties": {
+  "description": null,
+  "dataFrequency": "2",
+  "fileSupport": true,
+  "certRenewalDay": 0,
+  "enableCSR": false
+ },
+ "_meta": {
+  "version": "2.0"
+ }
+}

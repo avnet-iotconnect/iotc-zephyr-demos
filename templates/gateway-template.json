@@ -1,0 +1,95 @@
+{
+ "code": "zephyrgw",
+ "name": "Zephyr Gateway",
+ "authType": 2,
+ "messageVersion": "2.1",
+ "c2dOnDemand": 0,
+ "tag": "gw",
+ "capability": "1",
+ "properties": {
+  "description": "Zephyr gateway (FRDM-i.MX93) + uart-telemetry-source children. Gateway-owned attributes/commands are tagged 'gw'; child devices are created under the gateway with tag 'uartsrc'.",
+  "dataFrequency": "2",
+  "fileSupport": false,
+  "certRenewalDay": 0,
+  "enableCSR": false
+ },
+ "attributes": [
+  {
+   "name": "gw",
+   "displayName": "Gateway",
+   "type": "OBJECT",
+   "description": "Gateway health: uplink, UART links, store-and-forward spool",
+   "tag": "gw",
+   "unit": "",
+   "attributeColor": "",
+   "childs": [
+    { "name": "online", "displayName": "Uplink online", "type": "DECIMAL", "description": "0 in records that were spooled offline", "unit": "", "attributeColor": "" },
+    { "name": "links", "displayName": "UART links", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "fwd_total", "displayName": "Child records forwarded", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "spool_count", "displayName": "Spool queued", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "spool_pushed", "displayName": "Spooled total", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "spool_drained", "displayName": "Drained total", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "spool_drops", "displayName": "Spool drops", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "link0_rx", "displayName": "Link 0 lines", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "link0_drop", "displayName": "Link 0 drops", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "link0_age_s", "displayName": "Link 0 last seen", "type": "DECIMAL", "description": "-1 = never", "unit": "s", "attributeColor": "" },
+    { "name": "link1_rx", "displayName": "Link 1 lines", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "link1_drop", "displayName": "Link 1 drops", "type": "DECIMAL", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "link1_age_s", "displayName": "Link 1 last seen", "type": "DECIMAL", "description": "-1 = never", "unit": "s", "attributeColor": "" }
+   ]
+  },
+  {
+   "name": "sys",
+   "displayName": "Device Vitals",
+   "type": "OBJECT",
+   "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
+   "tag": "gw",
+   "unit": "",
+   "attributeColor": "",
+   "childs": [
+    { "name": "cpu_pct", "displayName": "CPU load", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" },
+    { "name": "freq_mhz", "displayName": "Core clock", "type": "DECIMAL", "description": "", "unit": "MHz", "attributeColor": "" },
+    { "name": "heap_used", "displayName": "Heap used", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+    { "name": "heap_free", "displayName": "Heap free", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+    { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "unit": "s", "attributeColor": "" },
+    { "name": "reset_cause", "displayName": "Reset cause", "type": "STRING", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "fw", "displayName": "Firmware", "type": "STRING", "description": "", "unit": "", "attributeColor": "" }
+   ]
+  },
+  { "name": "sequence", "displayName": "Sequence", "type": "DECIMAL", "description": "message counter from the source MCU", "tag": "uartsrc", "unit": "", "attributeColor": "" },
+  { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "tag": "uartsrc", "unit": "s", "attributeColor": "" },
+  { "name": "cpu_temp_c", "displayName": "CPU temperature", "type": "DECIMAL", "description": "", "tag": "uartsrc", "unit": "C", "attributeColor": "" },
+  { "name": "board", "displayName": "Board", "type": "STRING", "description": "source MCU board name", "tag": "uartsrc", "unit": "", "attributeColor": "" },
+  { "name": "bearer", "displayName": "Bearer", "type": "STRING", "description": "how this record reached the cloud", "tag": "uartsrc", "unit": "", "attributeColor": "" },
+  { "name": "status", "displayName": "Status", "type": "STRING", "description": "", "tag": "uartsrc", "unit": "", "attributeColor": "" },
+  { "name": "safe_state", "displayName": "Safe state", "type": "BOOLEAN", "description": "", "tag": "uartsrc", "unit": "", "attributeColor": "" },
+  {
+   "name": "sys",
+   "displayName": "Device Vitals",
+   "type": "OBJECT",
+   "description": "Source MCU vitals, passed through the gateway",
+   "tag": "uartsrc",
+   "unit": "",
+   "attributeColor": "",
+   "childs": [
+    { "name": "cpu_pct", "displayName": "CPU load", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" },
+    { "name": "freq_mhz", "displayName": "Core clock", "type": "DECIMAL", "description": "", "unit": "MHz", "attributeColor": "" },
+    { "name": "heap_used", "displayName": "Heap used", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+    { "name": "heap_free", "displayName": "Heap free", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+    { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "unit": "s", "attributeColor": "" },
+    { "name": "reset_cause", "displayName": "Reset cause", "type": "STRING", "description": "", "unit": "", "attributeColor": "" },
+    { "name": "fw", "displayName": "Firmware", "type": "STRING", "description": "", "unit": "", "attributeColor": "" }
+   ]
+  }
+ ],
+ "commands": [
+  { "name": "Set Interval (s)", "command": "interval", "requiredParam": true, "requiredAck": true, "isOTACommand": false, "tag": "gw" },
+  { "name": "Spool Info", "command": "spool-info", "requiredParam": false, "requiredAck": true, "isOTACommand": false, "tag": "gw" },
+  { "name": "Spool Wipe", "command": "spool-wipe", "requiredParam": false, "requiredAck": true, "isOTACommand": false, "tag": "gw" },
+  { "name": "Link Status", "command": "links", "requiredParam": false, "requiredAck": true, "isOTACommand": false, "tag": "gw" },
+  { "name": "Reboot", "command": "reboot", "requiredParam": false, "requiredAck": true, "isOTACommand": false, "tag": "gw" }
+ ],
+ "_meta": {
+  "version": "2.0"
+ }
+}

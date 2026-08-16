@@ -1,0 +1,18 @@
+sample:
+  name: IOTCONNECT gateway demo
+  description: >
+    IOTCONNECT gateway with offline store-and-forward on the FRDM-i.MX93
+    (Cortex-A55, Zephyr): ingests IOTCONNECT 2.1 JSON lines from
+    connectivity-less MCUs over UART (demos/uart-telemetry-source), forwards
+    them as child-device records over one MQTT/TLS uplink, and spools every
+    record to a raw eMMC ring while offline -- reconnect backfills the
+    timeline. Built on the iotc-zephyr-sdk.
+tests:
+  sample.iotconnect.gateway:
+    harness: net
+    platform_allow:
+      - frdm_imx93/mimx9352/a55
+    tags:
+      - iotconnect
+      - net
+      - gateway

@@ -26,6 +26,7 @@ manifest:
       import:
         name-allowlist:
           - cmsis
+          - cmsis-nn       # TFLM optimized kernels (vision-occupancy)
           - mbedtls
           - mcuboot
           - hal_nxp        # FRDM-MCXN947 reference target
@@ -33,6 +34,16 @@ manifest:
           # - hal_nordic
           # - hal_st
           # - hal_renesas
+
+    # TFLite-Micro inference engine (vision-occupancy demo). Zephyr carries
+    # this in its optional group (submanifests/optional.yaml); pin the same
+    # revision here so the standalone workspace gets it without group games.
+    # In a vanilla zephyrproject workspace enable it instead with:
+    #   west config manifest.project-filter -- +tflite-micro && west update tflite-micro
+    - name: tflite-micro
+      remote: zephyrproject
+      revision: fcc760af130f3a595b5802cdebcc77461e54f382
+      path: modules/lib/tflite-micro
 
     - name: iotc-zephyr-sdk
       remote: avnet

@@ -1,0 +1,40 @@
+/*
+ * FRDM-IMX93 Cortex-A55 gateway overlay.
+ *   - Extend the Zephyr DRAM window (the 1 MB board default is too small for
+ *     arm64 + net + TLS + keygen). Must fit the DDR region your BSP reserves.
+ *   - Enable usdhc1 (the on-SOM eMMC, disk "SD2"): the SDK's identity store
+ *     and the demo's store-and-forward spool ring both live there. The ROM
+ *     boots from the uSDHC2 SD slot; per the board doc Zephyr storage must
+ *     use a DIFFERENT controller, and the eMMC qualifies.
+ *   - Enable lpuart1 as UART ingest link 0 (alias iotc-link0): wire a
+ *     uart-telemetry-source board's TX to UART1 RXD = 40-pin header P11
+ *     pin 7 (net GPIO_IO04; GND on pin 9), 115200 8N1. lpuart2 stays the
+ *     console/shell. UART1 doubles as the A55 debug port through the
+ *     CH342F bridge, so the second debug COM port can emulate a source
+ *     (tools/emulate_source.py) -- but not while a real TX is wired.
+ */
+
+/ {
+	aliases {
+		iotc-link0 = &lpuart1;
+	};
+};
+
+&dram {
+	reg = <0xd0000000 DT_SIZE_M(16)>;
+};
+
+&usdhc1 {
+	status = "okay";
+
+	sdmmc {
+		status = "okay";
+	};
+};
+
+&lpuart1 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart1_default>;
+	pinctrl-names = "default";
+};

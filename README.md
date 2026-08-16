@@ -23,6 +23,8 @@ Legend: ✅ verified on hardware · 🔒 verified on the **TF-M hardware-sealed-
 | **[c2d-led](demos/c2d-led)** | ✅ LED verified | 🔨 builds | 🔜⁵ | — (no IP link) | — (no IP link)² | 🔨 builds⁶ |
 | **[click-telemetry](demos/click-telemetry)** | ✅ 🔒 sealed key⁴ | ◇ adapter³ | 🔜⁵ | ⇢ separate probe¹ | — | 🔨 IO1 wing⁶ |
 | **[ml-model-update](demos/ml-model-update)** | — | — | — | — | — | 🔨 builds⁶ |
+| **[vision-occupancy](demos/vision-occupancy)** | — | 🔨 builds | — | — | — | — |
+| **[gateway](demos/gateway)** | — | — | ✅ | ⇢ source¹ | ⇢ source² | — |
 | **[npu-benchmark](vendor/nxp/npu-benchmark)** (vendor) | 🔨 builds | — | — | — | — | — |
 
 ¹ MCXE31B (Cortex-M7) has no Ethernet/Wi‑Fi → it runs the in-repo

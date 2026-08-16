@@ -72,6 +72,8 @@ the certificate.
 
 ## 5. Demos for this board
 
-Telemetry ✅ · c2d-led ✅ · quickstart ✅ — see the
+Telemetry ✅ · c2d-led ✅ · quickstart ✅ ·
+[vision-occupancy](../../demos/vision-occupancy) 🔨 (uses the OV5640 camera
+module shipped with the kit) — see the
 [board × demo matrix](../../README.md#board--demo-support-matrix). click-telemetry
 needs a mikroBUS-to-Arduino Click adapter (RT1170 has no mikroBUS socket).

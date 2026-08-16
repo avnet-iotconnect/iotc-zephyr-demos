@@ -1,0 +1,20 @@
+sample:
+  name: IOTCONNECT vision-occupancy demo
+  description: >
+    Edge person detection on the MIMXRT1170-EVKB: OV5640 camera frames run
+    through a TFLite-Micro person-detect CNN on-device; occupancy state,
+    scores and latency stream to /IOTCONNECT. Cloud commands pull snapshots
+    (chunked telemetry) and hot-swap the vision model (IOTV envelope,
+    persisted to flash). Built on the iotc-zephyr-sdk.
+tests:
+  sample.iotconnect.vision_occupancy:
+    harness: net
+    platform_allow:
+      - mimxrt1170_evk/mimxrt1176/cm7
+    extra_args:
+      - SHIELD=nxp_btb44_ov5640
+    tags:
+      - iotconnect
+      - net
+      - video
+      - tflite-micro

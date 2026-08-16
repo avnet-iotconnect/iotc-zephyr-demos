@@ -25,6 +25,11 @@ live (the M33 has no Ethernet). Zephyr runs **bare-metal on the A55 from DRAM**.
 > Note: the FRDM-IMX93 has two RJ45 jacks — use the ENET one, and two debug COM
 > ports — SPL/ATF print on one, Zephyr's console on `lpuart2`.
 
+Also for this board: **[gateway](../../demos/gateway)** 🔨 — an IOTCONNECT
+gateway that ingests [uart-telemetry-source](../../demos/uart-telemetry-source)
+MCUs over `lpuart1` as child devices and spools telemetry to the on-SOM eMMC
+while the uplink is down (store-and-forward).
+
 ## 1. One-time toolchain
 
 The A55 is **arm64**, so it needs the `aarch64-zephyr-elf` toolchain (the MCX

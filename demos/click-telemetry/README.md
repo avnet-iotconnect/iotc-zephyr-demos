@@ -90,5 +90,20 @@ template defines the attributes. Import
 [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON)
 (the 9 Clicks as OBJECT attributes) onto the device's template.
 
+## Dashboard
+
+![MCXN947 Click telemetry dashboard](docs/images/dashboard.png)
+
+A ready-made dashboard export ships in
+[dashboard/mcxn947-click-telemetry_dashboard_export.json](dashboard/mcxn947-click-telemetry_dashboard_export.json)
+— status icons for air quality / airflow / pressure with live thresholds,
+gauges for every sensor (temperature, humidity, absolute pressure, tVOC,
+eCO₂, ULP differential pressure), sensor-trend charts, vitals + telemetry
+tables, and the LED / report-interval cloud controls. Import via
+**Dashboards → Create Dashboard → Import dashboard** and re-bind the widgets
+to your device (any device on the Click template); the image widgets
+reference hosted PNGs — swap the URLs for your own artwork if importing
+into a different tenant.
+
 The connectivity Clicks in the inventory (LTE IoT 12 / BG95 cellular, EnOcean 4)
 are bearers/links, not I2C sensors — they belong in their own demos.

@@ -1,0 +1,2640 @@
+{
+    "ddType": 2,
+    "items": [
+        {
+            "widgetGuid": "A8CB394D-15B1-42C9-94FC-AD7BDC599E2A",
+            "widgetProperties": {
+                "i": "Image",
+                "background": "#0b1226",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "",
+                "titleAlign": "",
+                "contents": {
+                    "option": {
+                        "imageUpload": "false",
+                        "imageUrl": "true",
+                        "imageDevice": "false",
+                        "imageTelemetry": "false",
+                        "key": "option",
+                        "position": "center"
+                    },
+                    "upload": {
+                        "imageurl": "",
+                        "key": "upload"
+                    },
+                    "url": {
+                        "imageurl": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/rt1170_header.png",
+                        "key": "url"
+                    },
+                    "device": {
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "deviceName": "",
+                        "imageurl": "",
+                        "key": "device",
+                        "deviceUniqueId": "zephRTobj"
+                    },
+                    "telemetry": {
+                        "deviceGuid": "",
+                        "deviceName": "",
+                        "imageurl": "",
+                        "key": "telemetry"
+                    },
+                    "classification": {
+                        "showClassification": "false",
+                        "key": "classification"
+                    }
+                }
+            },
+            "properties": {
+                "x": "0",
+                "y": "0",
+                "w": "40",
+                "h": "9",
+                "i": "Image",
+                "minW": "5",
+                "minH": "5",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "6FEFF6B7-15C4-4095-A156-87A1B38D2FF5",
+            "widgetProperties": {
+                "i": "Transformation",
+                "background": "#0b1226",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Model Source",
+                "titleAlign": "",
+                "contents": {
+                    "Transformation": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "12517A07-06F6-40FE-AE48-043F0F574463",
+                                    "attributeName": "vision.person",
+                                    "displayName": "Person present",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "0",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "0"
+                                },
+                                {
+                                    "attributeGuid": "1110421F-7AFD-4A07-81B5-3EF7452CD11C",
+                                    "attributeName": "vision.state",
+                                    "displayName": "Occupancy state",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "clear",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "clear"
+                                },
+                                {
+                                    "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                    "attributeName": "vision.score",
+                                    "displayName": "Person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "30",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "30"
+                                },
+                                {
+                                    "attributeGuid": "E38AA559-CA94-4FDD-8DFF-E1A1871BA69A",
+                                    "attributeName": "vision.clear_score",
+                                    "displayName": "No-person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "69",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "69"
+                                },
+                                {
+                                    "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                    "attributeName": "vision.threshold",
+                                    "displayName": "Trigger threshold",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "60",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "60"
+                                },
+                                {
+                                    "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                    "attributeName": "vision.infer_ms",
+                                    "displayName": "Inference time",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "21",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "21"
+                                },
+                                {
+                                    "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                    "attributeName": "vision.fps",
+                                    "displayName": "Inference rate",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "4",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "4"
+                                },
+                                {
+                                    "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                    "attributeName": "vision.frames",
+                                    "displayName": "Frames processed",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "14272",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "14272"
+                                },
+                                {
+                                    "attributeGuid": "4369DFF3-566A-4846-9C52-055C682374F6",
+                                    "attributeName": "vision.cam_ok",
+                                    "displayName": "Camera OK",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "1",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "1"
+                                },
+                                {
+                                    "attributeGuid": "led",
+                                    "attributeName": "led",
+                                    "displayName": "led",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.ver",
+                                    "attributeName": "model.ver",
+                                    "displayName": "model.ver",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.name",
+                                    "attributeName": "model.name",
+                                    "displayName": "model.name",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.src",
+                                    "attributeName": "model.src",
+                                    "displayName": "model.src",
+                                    "checked": "true",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.size_b",
+                                    "attributeName": "model.size_b",
+                                    "displayName": "model.size_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.arena_b",
+                                    "attributeName": "model.arena_b",
+                                    "displayName": "model.arena_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.cpu_pct",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "sys.cpu_pct",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.freq_mhz",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "sys.freq_mhz",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_used",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "sys.heap_used",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_free",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "sys.heap_free",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.uptime_s",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "sys.uptime_s",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.reset_cause",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "sys.reset_cause",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.fw",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "sys.fw",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "attrType": "1",
+                        "key": "Transformation",
+                        "transformations": [
+                            {
+                                "condition": "eq",
+                                "conditionValue": "builtin",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/model_builtin.png",
+                                "isShowLiveFontColor": "false"
+                            },
+                            {
+                                "condition": "eq",
+                                "conditionValue": "flash",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/model_flash.png",
+                                "isShowLiveFontColor": "false"
+                            },
+                            {
+                                "condition": "eq",
+                                "conditionValue": "cloud",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/model_cloud.png",
+                                "isShowLiveFontColor": "false"
+                            }
+                        ],
+                        "position": "center"
+                    }
+                }
+            },
+            "properties": {
+                "x": "40",
+                "y": "0",
+                "w": "18",
+                "h": "10",
+                "i": "Transformation",
+                "minW": "7",
+                "minH": "4",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "6FEFF6B7-15C4-4095-A156-87A1B38D2FF5",
+            "widgetProperties": {
+                "i": "Transformation",
+                "background": "#0b1226",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Board LED",
+                "titleAlign": "",
+                "contents": {
+                    "Transformation": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "12517A07-06F6-40FE-AE48-043F0F574463",
+                                    "attributeName": "vision.person",
+                                    "displayName": "Person present",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "0",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "0"
+                                },
+                                {
+                                    "attributeGuid": "1110421F-7AFD-4A07-81B5-3EF7452CD11C",
+                                    "attributeName": "vision.state",
+                                    "displayName": "Occupancy state",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "clear",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "clear"
+                                },
+                                {
+                                    "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                    "attributeName": "vision.score",
+                                    "displayName": "Person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "30",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "30"
+                                },
+                                {
+                                    "attributeGuid": "E38AA559-CA94-4FDD-8DFF-E1A1871BA69A",
+                                    "attributeName": "vision.clear_score",
+                                    "displayName": "No-person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "69",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "69"
+                                },
+                                {
+                                    "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                    "attributeName": "vision.threshold",
+                                    "displayName": "Trigger threshold",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "60",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "60"
+                                },
+                                {
+                                    "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                    "attributeName": "vision.infer_ms",
+                                    "displayName": "Inference time",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "21",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "21"
+                                },
+                                {
+                                    "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                    "attributeName": "vision.fps",
+                                    "displayName": "Inference rate",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "4",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "4"
+                                },
+                                {
+                                    "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                    "attributeName": "vision.frames",
+                                    "displayName": "Frames processed",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "14272",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "14272"
+                                },
+                                {
+                                    "attributeGuid": "4369DFF3-566A-4846-9C52-055C682374F6",
+                                    "attributeName": "vision.cam_ok",
+                                    "displayName": "Camera OK",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "1",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "1"
+                                },
+                                {
+                                    "attributeGuid": "led",
+                                    "attributeName": "led",
+                                    "displayName": "led",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.ver",
+                                    "attributeName": "model.ver",
+                                    "displayName": "model.ver",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.name",
+                                    "attributeName": "model.name",
+                                    "displayName": "model.name",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.src",
+                                    "attributeName": "model.src",
+                                    "displayName": "model.src",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.size_b",
+                                    "attributeName": "model.size_b",
+                                    "displayName": "model.size_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.arena_b",
+                                    "attributeName": "model.arena_b",
+                                    "displayName": "model.arena_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.cpu_pct",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "sys.cpu_pct",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.freq_mhz",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "sys.freq_mhz",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_used",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "sys.heap_used",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_free",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "sys.heap_free",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.uptime_s",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "sys.uptime_s",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.reset_cause",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "sys.reset_cause",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.fw",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "sys.fw",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "attrType": "1",
+                        "key": "Transformation",
+                        "transformations": [
+                            {
+                                "condition": "eq",
+                                "conditionValue": "1",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/led_on.png",
+                                "isShowLiveFontColor": "false"
+                            },
+                            {
+                                "condition": "eq",
+                                "conditionValue": "0",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/led_off.png",
+                                "isShowLiveFontColor": "false"
+                            }
+                        ],
+                        "position": "center"
+                    }
+                }
+            },
+            "properties": {
+                "x": "61",
+                "y": "0",
+                "w": "10",
+                "h": "7",
+                "i": "Transformation",
+                "minW": "7",
+                "minH": "4",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "6FEFF6B7-15C4-4095-A156-87A1B38D2FF5",
+            "widgetProperties": {
+                "i": "Transformation",
+                "background": "#0b1226",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Camera",
+                "titleAlign": "",
+                "contents": {
+                    "Transformation": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "12517A07-06F6-40FE-AE48-043F0F574463",
+                                    "attributeName": "vision.person",
+                                    "displayName": "Person present",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "0",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "0"
+                                },
+                                {
+                                    "attributeGuid": "1110421F-7AFD-4A07-81B5-3EF7452CD11C",
+                                    "attributeName": "vision.state",
+                                    "displayName": "Occupancy state",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "clear",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "clear"
+                                },
+                                {
+                                    "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                    "attributeName": "vision.score",
+                                    "displayName": "Person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "30",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "30"
+                                },
+                                {
+                                    "attributeGuid": "E38AA559-CA94-4FDD-8DFF-E1A1871BA69A",
+                                    "attributeName": "vision.clear_score",
+                                    "displayName": "No-person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "69",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "69"
+                                },
+                                {
+                                    "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                    "attributeName": "vision.threshold",
+                                    "displayName": "Trigger threshold",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "60",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "60"
+                                },
+                                {
+                                    "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                    "attributeName": "vision.infer_ms",
+                                    "displayName": "Inference time",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "21",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "21"
+                                },
+                                {
+                                    "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                    "attributeName": "vision.fps",
+                                    "displayName": "Inference rate",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "4",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "4"
+                                },
+                                {
+                                    "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                    "attributeName": "vision.frames",
+                                    "displayName": "Frames processed",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "14272",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "14272"
+                                },
+                                {
+                                    "attributeGuid": "4369DFF3-566A-4846-9C52-055C682374F6",
+                                    "attributeName": "vision.cam_ok",
+                                    "displayName": "Camera OK",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "1",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "1"
+                                },
+                                {
+                                    "attributeGuid": "led",
+                                    "attributeName": "led",
+                                    "displayName": "led",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.ver",
+                                    "attributeName": "model.ver",
+                                    "displayName": "model.ver",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.name",
+                                    "attributeName": "model.name",
+                                    "displayName": "model.name",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.src",
+                                    "attributeName": "model.src",
+                                    "displayName": "model.src",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.size_b",
+                                    "attributeName": "model.size_b",
+                                    "displayName": "model.size_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.arena_b",
+                                    "attributeName": "model.arena_b",
+                                    "displayName": "model.arena_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.cpu_pct",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "sys.cpu_pct",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.freq_mhz",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "sys.freq_mhz",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_used",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "sys.heap_used",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_free",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "sys.heap_free",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.uptime_s",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "sys.uptime_s",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.reset_cause",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "sys.reset_cause",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.fw",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "sys.fw",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "attrType": "1",
+                        "key": "Transformation",
+                        "transformations": [
+                            {
+                                "condition": "eq",
+                                "conditionValue": "1",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/cam_ok.png",
+                                "isShowLiveFontColor": "false"
+                            },
+                            {
+                                "condition": "eq",
+                                "conditionValue": "0",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/cam_fault.png",
+                                "isShowLiveFontColor": "false"
+                            }
+                        ],
+                        "position": "center"
+                    }
+                }
+            },
+            "properties": {
+                "x": "73",
+                "y": "0",
+                "w": "10",
+                "h": "7",
+                "i": "Transformation",
+                "minW": "7",
+                "minH": "4",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
+            "widgetProperties": {
+                "i": "gauge",
+                "background": "#000000",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Inference (fps)",
+                "titleAlign": "",
+                "contents": {
+                    "gauge": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                "attributeName": "vision.fps",
+                                "displayName": "Inference rate",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "4",
+                                "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "4"
+                            }
+                        },
+                        "minValue": "0",
+                        "maxValue": "20",
+                        "version": "2.0",
+                        "zones": [
+                            {
+                                "zoneColor": "#d0021b",
+                                "zoneName": "Slow",
+                                "upToValue": "3"
+                            },
+                            {
+                                "zoneColor": "#f5a623",
+                                "zoneName": "OK",
+                                "upToValue": "8"
+                            },
+                            {
+                                "zoneColor": "#7ed321",
+                                "zoneName": "Live",
+                                "upToValue": "20"
+                            }
+                        ],
+                        "attrType": "1",
+                        "key": "gauge"
+                    }
+                }
+            },
+            "properties": {
+                "x": "58",
+                "y": "7",
+                "w": "10",
+                "h": "10",
+                "i": "gauge",
+                "minW": "10",
+                "minH": "9",
+                "maxH": "15",
+                "maxW": "16",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
+            "widgetProperties": {
+                "i": "gauge",
+                "background": "#000000",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Threshold (%)",
+                "titleAlign": "",
+                "contents": {
+                    "gauge": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                "attributeName": "vision.threshold",
+                                "displayName": "Trigger threshold",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "60",
+                                "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "60"
+                            }
+                        },
+                        "minValue": "0",
+                        "maxValue": "100",
+                        "version": "2.0",
+                        "zones": {
+                            "zoneColor": "#f5a623",
+                            "zoneName": "Trigger",
+                            "upToValue": "100"
+                        },
+                        "attrType": "1",
+                        "key": "gauge"
+                    }
+                }
+            },
+            "properties": {
+                "x": "68",
+                "y": "7",
+                "w": "10",
+                "h": "10",
+                "i": "gauge",
+                "minW": "10",
+                "minH": "9",
+                "maxH": "15",
+                "maxW": "16",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
+            "widgetProperties": {
+                "i": "gauge",
+                "background": "#000000",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "CPU (%)",
+                "titleAlign": "",
+                "contents": {
+                    "gauge": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "sys.cpu_pct",
+                                "attributeName": "sys.cpu_pct",
+                                "displayName": "sys.cpu_pct",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "",
+                                "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "NA"
+                            }
+                        },
+                        "minValue": "0",
+                        "maxValue": "100",
+                        "version": "2.0",
+                        "zones": [
+                            {
+                                "zoneColor": "#7ed321",
+                                "zoneName": "",
+                                "upToValue": "50"
+                            },
+                            {
+                                "zoneColor": "#f5a623",
+                                "zoneName": "",
+                                "upToValue": "85"
+                            },
+                            {
+                                "zoneColor": "#d0021b",
+                                "zoneName": "",
+                                "upToValue": "100"
+                            }
+                        ],
+                        "attrType": "1",
+                        "key": "gauge"
+                    }
+                }
+            },
+            "properties": {
+                "x": "78",
+                "y": "7",
+                "w": "10",
+                "h": "10",
+                "i": "gauge",
+                "minW": "10",
+                "minH": "9",
+                "maxH": "15",
+                "maxW": "16",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "A8CB394D-15B1-42C9-94FC-AD7BDC599E2A",
+            "widgetProperties": {
+                "i": "Image",
+                "background": "#eeeeee",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "25",
+                "title": "Latest Snapshot (OV5640)",
+                "titleAlign": "",
+                "contents": {
+                    "option": {
+                        "imageUpload": "false",
+                        "imageUrl": "false",
+                        "imageDevice": "false",
+                        "imageTelemetry": "true",
+                        "key": "option",
+                        "position": "center"
+                    },
+                    "upload": {
+                        "imageurl": "",
+                        "key": "upload"
+                    },
+                    "url": {
+                        "imageurl": "",
+                        "key": "url"
+                    },
+                    "device": {
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "deviceName": "",
+                        "imageurl": "",
+                        "key": "device",
+                        "deviceUniqueId": "zephRTobj"
+                    },
+                    "telemetry": {
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "deviceName": "zephRTobj",
+                        "imageurl": "https://iotc-857898724229-telemetry-1769715628145.s3.us-east-1.amazonaws.com/device-uploads/zephRTobj/snap-1786822112.png?X-Amz-Expires=86400&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFUaCXVzLWVhc3QtMSJHMEUCIBxopwHqaZL9HGRHvFIsosEgdy4olaWIDyFODDiMx5N%2BAiEAnrHc7DHt4xhBsRYJgUggvnZlvt6c8dfstpxwTx4%2Bgv4q2gMIHhABGgw0NzUxMjM2NzEyNjIiDAg7afxfynQWPUtWkSq3A5AA3ewW8DpDI6OWtblMgL2DlZ2cvCIZTibvLqaCkC0XL20Rik05mnsXehgb3lgNejS3SxNzOV%2FgU0N1k9hXdmKSMrVnjPMuHlxYktrapcOjPYGSMj4rGdkZtOnk5Wc4q6VmNZKupdnZ9ogrVt2RBzRbzF0BpCI6e6jGuEnJukxLTiS4BihttAWLtKOr1zJFQr41fpJ0uCjNukdv3UXaCgeawJ1xrq7Vh9YW2Pgt50qN7dQdIUPP068abjmojK3CgkbV8o4sB8rkzfcHgDt7M4AgraUqzUMakGUj8QfD5ChQNRHQT%2BrO27GPI3PfR1kPat2Gwx8sbeMZRy%2B6f%2Fvl8h3AEPn7N7YLvEkrXRqZd%2BBO1ObBNM4%2BsHp5D5PuvYzgPsUlZtSfQYBRQQ6rWL6rM%2BEGlm1yxcoZ2y8nEs0r1%2BTBKj8YozzP6%2BaaoHm4MD7faqzAce5VnLheDRoFudkGFCpcjNqKT9EKZfbttlVsWQW6ij2cGeQwvuHHcQzu1wSOh8QYR2eGps%2FEWlWxKsVJSbVoMXsBjIGxaUcIGytOYfVWPgFkfOOdKfURaIjqs%2FPEmj64P5WXGTYwyZWD1AY6oQGXDipj2tWGTuXsRYHVCDs3M3DoxMcPgwFix9X3CAVa00%2Fuiu%2BkmIg2HcWIO4fbERmN4lmuPQXATTSU%2FHrnZE%2FCQ2qOS40FeT1YT1%2FUOFU1GSDQXUJl0bVAjlGB%2F7xwI6KomOPnFhQz1VoCauslwFcvHwfsJMcPZY2cr15LNmAKIYKb8KvkrslHkK%2F9RqkolSq3x%2BWPkwbT%2Fto1vM3fQxMydg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAW5H4T4DPMN27SHZZ%2F20260815%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260815T203252Z&X-Amz-SignedHeaders=host&X-Amz-Signature=12c0a64610a015ac1a250375b850afc9594349a704a8dad3c4c13c819f69aa4b",
+                        "key": "telemetry"
+                    },
+                    "classification": {
+                        "showClassification": "true",
+                        "key": "classification"
+                    }
+                }
+            },
+            "properties": {
+                "x": "0",
+                "y": "9",
+                "w": "20",
+                "h": "19",
+                "i": "Image",
+                "minW": "5",
+                "minH": "5",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "6FEFF6B7-15C4-4095-A156-87A1B38D2FF5",
+            "widgetProperties": {
+                "i": "Transformation",
+                "background": "#0b1226",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "24",
+                "title": "Occupancy",
+                "titleAlign": "",
+                "contents": {
+                    "Transformation": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "12517A07-06F6-40FE-AE48-043F0F574463",
+                                    "attributeName": "vision.person",
+                                    "displayName": "Person present",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "0",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "0"
+                                },
+                                {
+                                    "attributeGuid": "1110421F-7AFD-4A07-81B5-3EF7452CD11C",
+                                    "attributeName": "vision.state",
+                                    "displayName": "Occupancy state",
+                                    "checked": "true",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "clear",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "clear"
+                                },
+                                {
+                                    "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                    "attributeName": "vision.score",
+                                    "displayName": "Person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "30",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "30"
+                                },
+                                {
+                                    "attributeGuid": "E38AA559-CA94-4FDD-8DFF-E1A1871BA69A",
+                                    "attributeName": "vision.clear_score",
+                                    "displayName": "No-person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "69",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "69"
+                                },
+                                {
+                                    "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                    "attributeName": "vision.threshold",
+                                    "displayName": "Trigger threshold",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "60",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "60"
+                                },
+                                {
+                                    "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                    "attributeName": "vision.infer_ms",
+                                    "displayName": "Inference time",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "21",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "21"
+                                },
+                                {
+                                    "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                    "attributeName": "vision.fps",
+                                    "displayName": "Inference rate",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "4",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "4"
+                                },
+                                {
+                                    "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                    "attributeName": "vision.frames",
+                                    "displayName": "Frames processed",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "14272",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "14272"
+                                },
+                                {
+                                    "attributeGuid": "4369DFF3-566A-4846-9C52-055C682374F6",
+                                    "attributeName": "vision.cam_ok",
+                                    "displayName": "Camera OK",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "1",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "1"
+                                },
+                                {
+                                    "attributeGuid": "led",
+                                    "attributeName": "led",
+                                    "displayName": "led",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.ver",
+                                    "attributeName": "model.ver",
+                                    "displayName": "model.ver",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.name",
+                                    "attributeName": "model.name",
+                                    "displayName": "model.name",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.src",
+                                    "attributeName": "model.src",
+                                    "displayName": "model.src",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.size_b",
+                                    "attributeName": "model.size_b",
+                                    "displayName": "model.size_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.arena_b",
+                                    "attributeName": "model.arena_b",
+                                    "displayName": "model.arena_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.cpu_pct",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "sys.cpu_pct",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.freq_mhz",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "sys.freq_mhz",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_used",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "sys.heap_used",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_free",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "sys.heap_free",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.uptime_s",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "sys.uptime_s",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.reset_cause",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "sys.reset_cause",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.fw",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "sys.fw",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "attrType": "1",
+                        "key": "Transformation",
+                        "transformations": [
+                            {
+                                "condition": "eq",
+                                "conditionValue": "occupied",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/occ_occupied.png",
+                                "isShowLiveFontColor": "false"
+                            },
+                            {
+                                "condition": "eq",
+                                "conditionValue": "clear",
+                                "type": "Url",
+                                "errors": "",
+                                "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/occ_clear.png",
+                                "isShowLiveFontColor": "false"
+                            }
+                        ],
+                        "position": "center"
+                    }
+                }
+            },
+            "properties": {
+                "x": "20",
+                "y": "9",
+                "w": "20",
+                "h": "19",
+                "i": "Transformation",
+                "minW": "7",
+                "minH": "4",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
+            "widgetProperties": {
+                "i": "gauge",
+                "background": "#000000",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Person Score (%)",
+                "titleAlign": "",
+                "contents": {
+                    "gauge": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                "attributeName": "vision.score",
+                                "displayName": "Person score",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "30",
+                                "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "30"
+                            }
+                        },
+                        "minValue": "0",
+                        "maxValue": "100",
+                        "version": "2.0",
+                        "zones": [
+                            {
+                                "zoneColor": "#9b9b9b",
+                                "zoneName": "Below",
+                                "upToValue": "60"
+                            },
+                            {
+                                "zoneColor": "#7ed321",
+                                "zoneName": "Trigger",
+                                "upToValue": "100"
+                            }
+                        ],
+                        "attrType": "1",
+                        "key": "gauge"
+                    }
+                }
+            },
+            "properties": {
+                "x": "40",
+                "y": "10",
+                "w": "9",
+                "h": "10",
+                "i": "gauge",
+                "minW": "10",
+                "minH": "9",
+                "maxH": "15",
+                "maxW": "16",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
+            "widgetProperties": {
+                "i": "gauge",
+                "background": "#000000",
+                "fontColor": "#ffffff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Inference (ms)",
+                "titleAlign": "",
+                "contents": {
+                    "gauge": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                "attributeName": "vision.infer_ms",
+                                "displayName": "Inference time",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "21",
+                                "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "21"
+                            }
+                        },
+                        "minValue": "0",
+                        "maxValue": "100",
+                        "version": "2.0",
+                        "zones": [
+                            {
+                                "zoneColor": "#7ed321",
+                                "zoneName": "Fast",
+                                "upToValue": "30"
+                            },
+                            {
+                                "zoneColor": "#f5a623",
+                                "zoneName": "OK",
+                                "upToValue": "60"
+                            },
+                            {
+                                "zoneColor": "#d0021b",
+                                "zoneName": "Slow",
+                                "upToValue": "100"
+                            }
+                        ],
+                        "attrType": "1",
+                        "key": "gauge"
+                    }
+                }
+            },
+            "properties": {
+                "x": "49",
+                "y": "10",
+                "w": "9",
+                "h": "10",
+                "i": "gauge",
+                "minW": "10",
+                "minH": "9",
+                "maxH": "15",
+                "maxW": "16",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "8BF5A2DF-51FA-479B-B5D8-8413DC425CFF",
+            "widgetProperties": {
+                "i": "LiveLineChart",
+                "background": "#fff",
+                "fontColor": "#343434",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Inference Time (ms)",
+                "titleAlign": "",
+                "contents": {
+                    "liveChart": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "12517A07-06F6-40FE-AE48-043F0F574463",
+                                    "attributeName": "vision.person",
+                                    "displayName": "Person present",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "0",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "0"
+                                },
+                                {
+                                    "attributeGuid": "1110421F-7AFD-4A07-81B5-3EF7452CD11C",
+                                    "attributeName": "vision.state",
+                                    "displayName": "Occupancy state",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "clear",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "clear"
+                                },
+                                {
+                                    "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                    "attributeName": "vision.score",
+                                    "displayName": "Person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "30",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "30"
+                                },
+                                {
+                                    "attributeGuid": "E38AA559-CA94-4FDD-8DFF-E1A1871BA69A",
+                                    "attributeName": "vision.clear_score",
+                                    "displayName": "No-person score",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "69",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "69"
+                                },
+                                {
+                                    "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                    "attributeName": "vision.threshold",
+                                    "displayName": "Trigger threshold",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "60",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "60"
+                                },
+                                {
+                                    "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                    "attributeName": "vision.infer_ms",
+                                    "displayName": "Inference time",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "21",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "21"
+                                },
+                                {
+                                    "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                    "attributeName": "vision.fps",
+                                    "displayName": "Inference rate",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "4",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "4"
+                                },
+                                {
+                                    "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                    "attributeName": "vision.frames",
+                                    "displayName": "Frames processed",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "14272",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "14272"
+                                },
+                                {
+                                    "attributeGuid": "4369DFF3-566A-4846-9C52-055C682374F6",
+                                    "attributeName": "vision.cam_ok",
+                                    "displayName": "Camera OK",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "1",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "1"
+                                },
+                                {
+                                    "attributeGuid": "led",
+                                    "attributeName": "led",
+                                    "displayName": "led",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.ver",
+                                    "attributeName": "model.ver",
+                                    "displayName": "model.ver",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.name",
+                                    "attributeName": "model.name",
+                                    "displayName": "model.name",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.src",
+                                    "attributeName": "model.src",
+                                    "displayName": "model.src",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.size_b",
+                                    "attributeName": "model.size_b",
+                                    "displayName": "model.size_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.arena_b",
+                                    "attributeName": "model.arena_b",
+                                    "displayName": "model.arena_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.cpu_pct",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "sys.cpu_pct",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.freq_mhz",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "sys.freq_mhz",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_used",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "sys.heap_used",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_free",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "sys.heap_free",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.uptime_s",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "sys.uptime_s",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.reset_cause",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "sys.reset_cause",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.fw",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "sys.fw",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "lineColor": "#f5a623",
+                        "barColor": "#f5a623",
+                        "barCount": "10",
+                        "attrType": "1",
+                        "key": "line",
+                        "recentEndPoints": "20"
+                    }
+                }
+            },
+            "properties": {
+                "x": "58",
+                "y": "17",
+                "w": "30",
+                "h": "12",
+                "i": "LiveLineChart",
+                "minW": "12",
+                "minH": "12",
+                "maxH": "30",
+                "maxW": "60",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "8BF5A2DF-51FA-479B-B5D8-8413DC425CFF",
+            "widgetProperties": {
+                "i": "LiveLineChart",
+                "background": "#fff",
+                "fontColor": "#343434",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Person vs Clear Score (%)",
+                "titleAlign": "",
+                "contents": {
+                    "liveChart": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "12517A07-06F6-40FE-AE48-043F0F574463",
+                                    "attributeName": "vision.person",
+                                    "displayName": "Person present",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "0",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "0"
+                                },
+                                {
+                                    "attributeGuid": "1110421F-7AFD-4A07-81B5-3EF7452CD11C",
+                                    "attributeName": "vision.state",
+                                    "displayName": "Occupancy state",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "clear",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "clear"
+                                },
+                                {
+                                    "attributeGuid": "F4C6DB7D-E406-4F9F-BB1D-B7314CDB9E00",
+                                    "attributeName": "vision.score",
+                                    "displayName": "Person score",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "30",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "30"
+                                },
+                                {
+                                    "attributeGuid": "E38AA559-CA94-4FDD-8DFF-E1A1871BA69A",
+                                    "attributeName": "vision.clear_score",
+                                    "displayName": "No-person score",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "69",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "69"
+                                },
+                                {
+                                    "attributeGuid": "261CA290-7722-487A-A956-8AC39983F63C",
+                                    "attributeName": "vision.threshold",
+                                    "displayName": "Trigger threshold",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "60",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "60"
+                                },
+                                {
+                                    "attributeGuid": "3E14F726-FD2A-469E-8378-706FE125A7E1",
+                                    "attributeName": "vision.infer_ms",
+                                    "displayName": "Inference time",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "21",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "21"
+                                },
+                                {
+                                    "attributeGuid": "FDD9986C-4A0F-4438-BBC8-069CC101F5C5",
+                                    "attributeName": "vision.fps",
+                                    "displayName": "Inference rate",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "4",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "4"
+                                },
+                                {
+                                    "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                    "attributeName": "vision.frames",
+                                    "displayName": "Frames processed",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "14272",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "14272"
+                                },
+                                {
+                                    "attributeGuid": "4369DFF3-566A-4846-9C52-055C682374F6",
+                                    "attributeName": "vision.cam_ok",
+                                    "displayName": "Camera OK",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "1",
+                                    "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "1"
+                                },
+                                {
+                                    "attributeGuid": "led",
+                                    "attributeName": "led",
+                                    "displayName": "led",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.ver",
+                                    "attributeName": "model.ver",
+                                    "displayName": "model.ver",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.name",
+                                    "attributeName": "model.name",
+                                    "displayName": "model.name",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.src",
+                                    "attributeName": "model.src",
+                                    "displayName": "model.src",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.size_b",
+                                    "attributeName": "model.size_b",
+                                    "displayName": "model.size_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "model.arena_b",
+                                    "attributeName": "model.arena_b",
+                                    "displayName": "model.arena_b",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.cpu_pct",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "sys.cpu_pct",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.freq_mhz",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "sys.freq_mhz",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_used",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "sys.heap_used",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.heap_free",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "sys.heap_free",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.uptime_s",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "sys.uptime_s",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.reset_cause",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "sys.reset_cause",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "sys.fw",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "sys.fw",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "lineColor": "#00d474",
+                        "barColor": "#00d474",
+                        "barCount": "10",
+                        "attrType": "1",
+                        "key": "line",
+                        "recentEndPoints": "20"
+                    }
+                }
+            },
+            "properties": {
+                "x": "40",
+                "y": "20",
+                "w": "17",
+                "h": "18",
+                "i": "LiveLineChart",
+                "minW": "12",
+                "minH": "12",
+                "maxH": "30",
+                "maxW": "60",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "C6C9FCF9-FAEF-49E1-B546-9E066BF9A02C",
+            "widgetProperties": {
+                "i": "Control",
+                "background": "#eeeeee",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "25",
+                "title": "Snapshot",
+                "titleAlign": "",
+                "contents": {
+                    "control": {
+                        "device": "zephRTobj",
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "controlType": "button",
+                        "leftText": "Snap",
+                        "leftCommand": "snapshot",
+                        "leftSwitchColor": "#7ed321",
+                        "leftBackgroundColor": "",
+                        "leftParam": "",
+                        "rightText": "Snap",
+                        "rightCommand": "snapshot",
+                        "rightSwitchColor": "#7ed321",
+                        "rightBackgroundColor": "",
+                        "rightParam": "",
+                        "showStatus": "true",
+                        "template": "A9462DC9-C967-4E05-81BC-5AA8C9A22FD4",
+                        "key": "control",
+                        "showleftSwitchColorPicker": "false",
+                        "showrightSwitchColorPicker": "false"
+                    }
+                }
+            },
+            "properties": {
+                "x": "0",
+                "y": "28",
+                "w": "10",
+                "h": "6",
+                "i": "Control",
+                "minW": "9",
+                "minH": "6",
+                "maxH": "15",
+                "maxW": "15",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "C6C9FCF9-FAEF-49E1-B546-9E066BF9A02C",
+            "widgetProperties": {
+                "i": "Control",
+                "background": "#eeeeee",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "25",
+                "title": "Threshold",
+                "titleAlign": "",
+                "contents": {
+                    "control": {
+                        "device": "zephRTobj",
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "controlType": "button",
+                        "leftText": "50%",
+                        "leftCommand": "threshold",
+                        "leftSwitchColor": "#f5a623",
+                        "leftBackgroundColor": "",
+                        "leftParam": "50",
+                        "rightText": "70%",
+                        "rightCommand": "threshold",
+                        "rightSwitchColor": "#d0021b",
+                        "rightBackgroundColor": "",
+                        "rightParam": "70",
+                        "showStatus": "true",
+                        "template": "A9462DC9-C967-4E05-81BC-5AA8C9A22FD4",
+                        "key": "control",
+                        "showleftSwitchColorPicker": "false",
+                        "showrightSwitchColorPicker": "false"
+                    }
+                }
+            },
+            "properties": {
+                "x": "10",
+                "y": "28",
+                "w": "10",
+                "h": "6",
+                "i": "Control",
+                "minW": "9",
+                "minH": "6",
+                "maxH": "15",
+                "maxW": "15",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "C6C9FCF9-FAEF-49E1-B546-9E066BF9A02C",
+            "widgetProperties": {
+                "i": "Control",
+                "background": "#eeeeee",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "25",
+                "title": "Board LED",
+                "titleAlign": "",
+                "contents": {
+                    "control": {
+                        "device": "zephRTobj",
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "controlType": "button",
+                        "leftText": "On",
+                        "leftCommand": "led-on",
+                        "leftSwitchColor": "#7ed321",
+                        "leftBackgroundColor": "",
+                        "leftParam": "",
+                        "rightText": "Off",
+                        "rightCommand": "led-off",
+                        "rightSwitchColor": "#9b9b9b",
+                        "rightBackgroundColor": "",
+                        "rightParam": "",
+                        "showStatus": "true",
+                        "template": "A9462DC9-C967-4E05-81BC-5AA8C9A22FD4",
+                        "key": "control",
+                        "showleftSwitchColorPicker": "false",
+                        "showrightSwitchColorPicker": "false"
+                    }
+                }
+            },
+            "properties": {
+                "x": "20",
+                "y": "28",
+                "w": "10",
+                "h": "6",
+                "i": "Control",
+                "minW": "9",
+                "minH": "6",
+                "maxH": "15",
+                "maxW": "15",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "C6C9FCF9-FAEF-49E1-B546-9E066BF9A02C",
+            "widgetProperties": {
+                "i": "Control",
+                "background": "#eeeeee",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "25",
+                "title": "LED Mode",
+                "titleAlign": "",
+                "contents": {
+                    "control": {
+                        "device": "zephRTobj",
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                        "controlType": "button",
+                        "leftText": "Auto",
+                        "leftCommand": "led-auto",
+                        "leftSwitchColor": "#00afaf",
+                        "leftBackgroundColor": "",
+                        "leftParam": "",
+                        "rightText": "Off",
+                        "rightCommand": "led-off",
+                        "rightSwitchColor": "#9b9b9b",
+                        "rightBackgroundColor": "",
+                        "rightParam": "",
+                        "showStatus": "true",
+                        "template": "A9462DC9-C967-4E05-81BC-5AA8C9A22FD4",
+                        "key": "control",
+                        "showleftSwitchColorPicker": "false",
+                        "showrightSwitchColorPicker": "false"
+                    }
+                }
+            },
+            "properties": {
+                "x": "30",
+                "y": "28",
+                "w": "10",
+                "h": "6",
+                "i": "Control",
+                "minW": "9",
+                "minH": "6",
+                "maxH": "15",
+                "maxW": "15",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "E413CDFD-54EB-465E-BA97-CE610867E440",
+            "widgetProperties": {
+                "i": "DeviceCommand",
+                "background": "#fff",
+                "fontColor": "#000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "Command Console",
+                "titleAlign": "",
+                "contents": {
+                    "deviceCommand": {
+                        "template": "A9462DC9-C967-4E05-81BC-5AA8C9A22FD4",
+                        "device": "zephRTobj",
+                        "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3"
+                    }
+                }
+            },
+            "properties": {
+                "x": "58",
+                "y": "29",
+                "w": "30",
+                "h": "10",
+                "i": "DeviceCommand",
+                "minW": "22",
+                "minH": "10",
+                "maxH": "20",
+                "maxW": "35",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+            "widgetProperties": {
+                "i": "Live",
+                "background": "#ffffff",
+                "fontColor": "#4682ff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "22",
+                "title": "Model Name",
+                "titleAlign": "",
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "model.name",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "model.name",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "model.name",
+                                "attributeName": "model.name",
+                                "displayName": "model.name",
+                                "checked": "true",
+                                "dataType": "STRING",
+                                "attributeLatestValue": "",
+                                "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "NA"
+                            }
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
+            },
+            "properties": {
+                "x": "0",
+                "y": "34",
+                "w": "10",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
+                "maxH": "4",
+                "maxW": "20",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+            "widgetProperties": {
+                "i": "Live",
+                "background": "#ffffff",
+                "fontColor": "#4682ff",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "22",
+                "title": "Model Version",
+                "titleAlign": "",
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "model.ver",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "model.ver",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "model.ver",
+                                "attributeName": "model.ver",
+                                "displayName": "model.ver",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "",
+                                "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "NA"
+                            }
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
+            },
+            "properties": {
+                "x": "10",
+                "y": "34",
+                "w": "10",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
+                "maxH": "4",
+                "maxW": "20",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+            "widgetProperties": {
+                "i": "Live",
+                "background": "#ffffff",
+                "fontColor": "#555555",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "22",
+                "title": "Firmware",
+                "titleAlign": "",
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "sys.fw",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "sys.fw",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "sys.fw",
+                                "attributeName": "sys.fw",
+                                "displayName": "sys.fw",
+                                "checked": "true",
+                                "dataType": "STRING",
+                                "attributeLatestValue": "",
+                                "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "NA"
+                            }
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
+            },
+            "properties": {
+                "x": "20",
+                "y": "34",
+                "w": "10",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
+                "maxH": "4",
+                "maxW": "20",
+                "isStatic": "false"
+            }
+        },
+        {
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+            "widgetProperties": {
+                "i": "Live",
+                "background": "#ffffff",
+                "fontColor": "#00afaf",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "22",
+                "title": "Frames Processed",
+                "titleAlign": "",
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "vision.frames",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "vision.frames",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "64BA2276-7606-4BA7-942B-CF9DB99298F3",
+                            "deviceUniqueId": "zephRTobj"
+                        },
+                        "attributes": {
+                            "attribute": {
+                                "attributeGuid": "83515254-C29B-40E1-8A48-664E13734558",
+                                "attributeName": "vision.frames",
+                                "displayName": "Frames processed",
+                                "checked": "true",
+                                "dataType": "DECIMAL",
+                                "attributeLatestValue": "14272",
+                                "deviceUpdatedDate": "2026-08-15T20:32:02.000Z",
+                                "gatewayUpdatedDate": "NA",
+                                "attributeValue": "14272"
+                            }
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
+            },
+            "properties": {
+                "x": "30",
+                "y": "34",
+                "w": "10",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
+                "maxH": "4",
+                "maxW": "20",
+                "isStatic": "false"
+            }
+        }
+    ]
+}

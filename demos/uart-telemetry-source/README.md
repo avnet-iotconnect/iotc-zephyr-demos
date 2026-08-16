@@ -14,7 +14,10 @@ IOTC-TELEMETRY: {"d":[{"d":{"sequence":9,"uptime_s":45.005,"cpu_temp_c":34.5,"bo
 
 A **gateway** relays that line to the cloud (over CAN FD / UART, or a future
 cell-modem Click bearer) — the connectivity-less MCU still contributes to
-IOTCONNECT as a verified *telemetry source*. Unlike the other demos, this one
+IOTCONNECT as a verified *telemetry source*. The in-repo counterpart is the
+**[gateway](../gateway)** demo (FRDM-i.MX93): it ingests these lines over
+UART, forwards each as this device's **child-device record**, and spools to
+eMMC while its uplink is down. Unlike the other demos, this one
 does **not** pull in the `iotc-zephyr-sdk` module (there is no network stack to
 drive) — it needs only `iotc-c-lib`. The board name comes from `CONFIG_BOARD`, so
 one app serves every target.
