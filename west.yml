@@ -47,12 +47,15 @@ manifest:
 
     - name: iotc-zephyr-sdk
       remote: avnet
-      revision: v0.1.0      # pinned SDK release (track a tag, not a branch)
+      # Needs the shared samples (quickstart/c2d-led/click-telemetry) that the
+      # demos here wrap. Move to the next release tag when one is cut.
+      revision: 454f22f7f87f425929792db94d876521ab88f53c
       path: modules/lib/iotc-zephyr-sdk
 
     - name: iotc-c-lib
       remote: avnet
-      revision: v3.0.0      # TODO: pin to the exact reviewed tag
+      # Needs ct:2 module-command routing + urls[] parsing (AI Model push).
+      revision: d3ff2bc43a5170d1c26eb54c7a9f82c392c3cf53
       path: modules/lib/iotc-c-lib
       submodules: true      # checks out lib/cJSON
 

@@ -1,10 +1,12 @@
 # iotc-zephyr-demos
 
-Use-case demos for the [IOTCONNECT Zephyr SDK](../iotc-zephyr-sdk).
+Use-case demos for the
+[IOTCONNECT Zephyr SDK](https://github.com/avnet-iotconnect/iotc-zephyr-sdk).
 
 The demos are **use-case-first** (one app, many boards): a demo lives under
-`demos/<use-case>/` with a portable `src/main.c`, and a board is "supported" by
-adding a `boards/<board>.{conf,overlay}` — not a fork. This is the Zephyr
+`demos/<use-case>/` with a portable app (its own `src/main.c`, or one reused
+from the SDK's `samples/`), and a board is "supported" by adding a
+`boards/<board>.{conf,overlay}` — not a fork. This is the Zephyr
 "write once, run on many boards" model. Each demo folder carries its own README
 (requirements → build → flash → onboard → run), and the **board × demo support
 matrix** below is the at-a-glance capability grid. Inherently vendor-specific

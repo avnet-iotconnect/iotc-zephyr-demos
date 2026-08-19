@@ -10,7 +10,11 @@ target_sources(app PRIVATE src/main.c)
 
 # quickstart_credentials.h: PUBLIC CA roots only (no device key). Connect mode
 # provisions the per-device key/cert on-chip (iotcprov provision) into NVS.
-target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../quickstart/src)
+# Capture mode builds without the SDK module, so only resolve it when needed.
+if(CONFIG_IOTCONNECT)
+  include(${CMAKE_CURRENT_SOURCE_DIR}/../../common/cmake/iotc_sdk_samples.cmake)
+  target_include_directories(app PRIVATE ${IOTC_SDK_SAMPLES_DIR}/quickstart/src)
+endif()
 
 # Optional eIQ Time Series Studio model. Drop the TSS-generated deployment
 # package (libtss.a + TimeSeries.h) into ./model/ and it links into the connect

@@ -57,8 +57,8 @@ itself.
 - **The private key is generated on the device** (PSA Crypto + hardware RNG) and
   never touches a PC.
 - **No device credentials are compiled into the binary** — only the public AWS
-  broker CAs and the discovery-host CA (`src/quickstart_credentials.h`). The
-  binary is safe to distribute.
+  broker CAs and the discovery-host CA (the SDK sample's
+  `quickstart_credentials.h`). The binary is safe to distribute.
 - Credentials live in NVS and survive an application reflash. `iotc cred show`
   inspects them; `iotc cred clear` erases them.
 - *Current limitation:* the on-device key is exported into NVS (in the clear).

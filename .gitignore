@@ -16,7 +16,8 @@ twister-out*/
 
 # --- Secrets: per-device TLS credentials ---
 # device_credentials.h is GENERATED and contains the device PRIVATE KEY -- NEVER
-# commit it. quickstart_credentials.h (public CA roots only) is safe and committed.
+# commit it. (It lives in the SDK's samples/telemetry/src; this rule is a
+# safety net in case a copy lands here.)
 device_credentials.h
 
 # Key material of any kind (safety net)

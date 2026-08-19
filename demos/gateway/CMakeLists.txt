@@ -10,7 +10,9 @@ target_sources(app PRIVATE
   src/spool.c
 )
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../common/cmake/iotc_sdk_samples.cmake)
+
 # quickstart_credentials.h: PUBLIC CA roots only (no device key). The
 # per-device key/cert is provisioned on-chip (iotcprov provision).
 target_include_directories(app PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/../quickstart/src)
+  ${IOTC_SDK_SAMPLES_DIR}/quickstart/src)

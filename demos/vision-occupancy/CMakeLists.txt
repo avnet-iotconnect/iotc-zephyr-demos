@@ -27,10 +27,12 @@ target_sources(app PRIVATE
   src/png_gray.c
 )
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../common/cmake/iotc_sdk_samples.cmake)
+
 # quickstart_credentials.h: PUBLIC CA roots only (no device key). The
 # per-device key/cert is provisioned on-chip (iotcprov provision) into NVS.
 target_include_directories(app PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/../quickstart/src)
+  ${IOTC_SDK_SAMPLES_DIR}/quickstart/src)
 
 # Built-in model: embed the stock TFLM person-detect .tflite (int8, 96x96x1,
 # Apache-2.0) straight from the tflite-micro module -- no binary in this repo.
