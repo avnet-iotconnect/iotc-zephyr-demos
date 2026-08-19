@@ -1,0 +1,98 @@
+/*
+ * FRDM-MCXN947 face-detect: OV7670 camera (SmartDMA), LCD-PAR-S035 display,
+ * and an LTE IoT 12 Click cellular modem on FLEXCOMM1 LPUART (P0_26/P0_27,
+ * bent-pin wiring per the demo README) with the modem power key on P1_3.
+ *
+ * The camera/LCD setup requires NXP's solder-jumper rework, which re-routes
+ * the shared ENET pins -- Ethernet is disconnected in hardware on a board
+ * prepared for this demo. That is why the transport is cellular.
+ */
+
+#include <nxp/mcx/MCXN947VDF-pinctrl.h>
+
+/ {
+	aliases {
+		modem = &modem;
+	};
+
+	chosen {
+		/delete-property/ zephyr,canbus;
+		zephyr,camera = &video_sdma;
+		/* Camera slices are stitched into one model input frame here */
+		zephyr,modelbuf = &sramx;
+	};
+};
+
+&sram0 {
+	reg = <0x20000000 DT_SIZE_K(408)>;
+};
+
+/* The board rework re-routes the ENET pins to the camera interface */
+/delete-node/ &enet;
+/delete-node/ &pinmux_enet_qos;
+
+/* Keep the model buffer clear of the SmartDMA camera firmware that occupies
+ * the start of SRAMX. The upstream camera firmware is 2541 B (0x9ED) -- an
+ * 0x800 offset (as the original demo used with its older firmware) overlaps
+ * it, and the frame copies then corrupt the running SmartDMA program (bus
+ * fault). 4 KB clears it with headroom.
+ */
+/delete-node/ &sramx;
+&sram {
+	sramx: memory@4001000 {
+		compatible = "zephyr,memory-region", "mmio-sram";
+		reg = <0x4001000 DT_SIZE_K(92)>;
+		zephyr,memory-region = "SRAM1";
+		zephyr,memory-attr = <(DT_MEM_ARM(ATTR_MPU_RAM))>;
+	};
+};
+
+/* Rotate the display to portrait mode */
+&st7796s {
+	madctl = <0x88>;
+	height = <480>;
+	width = <320>;
+};
+
+/* The OV7670 answers on I2C only once its XCLK is running, but the CLKOUT
+ * pin feeding XCLK is muxed by the SmartDMA video driver's pinctrl -- which
+ * initializes AFTER the sensor driver. Defer the sensor and initialize it
+ * from main() once the video device is up.
+ */
+&ov7670 {
+	zephyr,deferred-init;
+};
+
+&pinctrl {
+	pinmux_flexcomm1_lpuart: pinmux_flexcomm1_lpuart {
+		group0 {
+			pinmux = <FC1_P3_PIO0_27>, <FC1_P2_PIO0_26>;
+			slew-rate = "fast";
+			drive-strength = "low";
+			input-enable;
+		};
+	};
+};
+
+&flexcomm1_lpspi1 {
+	status = "disabled";
+};
+
+&flexcomm1_lpuart1 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&pinmux_flexcomm1_lpuart>;
+	pinctrl-names = "default";
+
+	/* LTE IoT 12 Click (SIMCom SIM7672, an A76xx-family part). The
+	 * simcom,a76xx profile matches its power-key timing -- these modems
+	 * need ~20 s from power-on to AT-ready, where the bg95 profile the
+	 * original demo used only waits 5 s and re-pulses the power key on
+	 * every retry, perpetually power-cycling the modem.
+	 */
+	modem: modem {
+		compatible = "simcom,a76xx";
+		mdm-power-gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;	/* P1_3 */
+		status = "okay";
+	};
+};

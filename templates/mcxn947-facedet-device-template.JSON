@@ -1,0 +1,38 @@
+{
+    "code": "mcxn9FACE",
+    "name": "mcxn9FACE",
+    "authType": 2,
+    "attributes": [
+        {
+            "name": "faces",
+            "displayName": "Faces Detected",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "local_timestamp",
+            "displayName": "Inference Time",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "ms",
+            "aggregateTypes": []
+        }
+    ],
+    "messageVersion": "2.1",
+    "msgCode": "XG4ENN4",
+    "capability": "0",
+    "enableCSR": "false",
+    "c2dOnDemand": 0,
+    "properties": {
+        "description": null,
+        "dataFrequency": "5",
+        "fileSupport": false,
+        "certRenewalDay": 0,
+        "enableCSR": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}
