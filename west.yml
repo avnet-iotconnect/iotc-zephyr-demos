@@ -49,7 +49,7 @@ manifest:
       remote: avnet
       # Needs the shared samples (quickstart/c2d-led/click-telemetry) that the
       # demos here wrap. Move to the next release tag when one is cut.
-      revision: 454f22f7f87f425929792db94d876521ab88f53c
+      revision: f1b29b233b28660380dbe92892cc022e100fde7f
       path: modules/lib/iotc-zephyr-sdk
 
     - name: iotc-c-lib

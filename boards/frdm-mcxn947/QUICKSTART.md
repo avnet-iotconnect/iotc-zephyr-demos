@@ -30,6 +30,13 @@ west flash -d build/quickstart_n947
 Prebuilt artifact: `build/quickstart_n947/zephyr/zephyr.hex` (or `.bin`) from
 [demos/quickstart](../../demos/quickstart).
 
+> **Known issue — power-cycle after flashing.** After a warm reset (the reset a
+> debug probe performs right after flashing, or the board's reset button) the
+> MCXN947's ENET-QoS MAC fails to initialize (`Can't clear SWR` on the console)
+> and Ethernet stays down. **Unplug and replug the board's USB after flashing**
+> — cold boots initialize correctly. Verified on Zephyr v4.4.1; the underlying
+> gap is in Zephyr's MCX N platform init.
+
 ## 3. Provision from the prompt
 
 Open the MCU-Link VCom (e.g. `COM41`). On first boot it prints a guide. Then:
