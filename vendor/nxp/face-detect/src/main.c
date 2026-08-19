@@ -161,6 +161,15 @@ int main(void)
 		return -1;
 	}
 
+	/* Program the pipeline (including the sensor) with that format --
+	 * without this the OV7670 free-runs in its power-on format and the
+	 * capture engine slices a mismatched bitstream into static.
+	 */
+	if (video_set_format(video, &fmt)) {
+		LOG_ERR("Unable to set video format");
+		return -1;
+	}
+
 	/* The SmartDMA capture engine streams fixed-height slices */
 	const uint8_t slices_per_frame = fmt.height / SLICE_LINES;
 
