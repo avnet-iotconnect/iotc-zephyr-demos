@@ -170,9 +170,14 @@ int main(void)
 	       (char)(fmt.pixelformat >> 24),
 	       fmt.width, fmt.height);
 
-	/* Size to allocate for each buffer */
+	/* Size to allocate for each buffer. The SmartDMA camera engine writes
+	 * 36 bytes of metadata past the frame data (the original demo sized
+	 * buffers "320W x 15H x 2BPP x 2(SmartDMA) + 36") -- without the slack
+	 * every buffer overruns into adjacent RAM and corrupts whatever the
+	 * linker placed there.
+	 */
 	size_t bsize;
-	bsize = fmt.pitch * SLICE_LINES;
+	bsize = fmt.pitch * SLICE_LINES + 36U;
 
 	/* Alloc video buffers and enqueue for capture */
 	for (i = 0; i < ARRAY_SIZE(buffers); i++) {
