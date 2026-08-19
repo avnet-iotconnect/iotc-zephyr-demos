@@ -30,12 +30,13 @@ west flash -d build/quickstart_n947
 Prebuilt artifact: `build/quickstart_n947/zephyr/zephyr.hex` (or `.bin`) from
 [demos/quickstart](../../demos/quickstart).
 
-> **Known issue — power-cycle after flashing.** After a warm reset (the reset a
-> debug probe performs right after flashing, or the board's reset button) the
-> MCXN947's ENET-QoS MAC fails to initialize (`Can't clear SWR` on the console)
-> and Ethernet stays down. **Unplug and replug the board's USB after flashing**
-> — cold boots initialize correctly. Verified on Zephyr v4.4.1; the underlying
-> gap is in Zephyr's MCX N platform init.
+> **Known issue — `Can't clear SWR` at boot.** If Ethernet fails to initialize
+> with `eth_nxp_enet_qos_mac: Can't clear SWR` on the console, the PHY's RMII
+> reference clock is not reaching the SoC. The usual cause is board rework:
+> NXP's camera/LCD demo setups (e.g. face detection) move **solder jumpers**
+> that re-route the shared ENET pins, disconnecting Ethernet in hardware until
+> the jumpers are restored. The PHY still responds over MDIO and even reports
+> link, so the failure is easy to misread as a software problem.
 
 ## 3. Provision from the prompt
 
