@@ -1,4 +1,10 @@
-# /IOTCONNECT Zephyr demos on Microchip boards
+# /IOTCONNECT Zephyr Demonstrations for Microchip
+
+## Contents
+
+- [SAM E54 Xplained Pro](#sam-e54-xplained-pro)
+- [Planned](#planned)
+- [Building](#building)
 
 ## Boards
 

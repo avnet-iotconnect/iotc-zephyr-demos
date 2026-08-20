@@ -1,4 +1,12 @@
-# /IOTCONNECT Zephyr demos on NXP boards
+# /IOTCONNECT Zephyr Demonstrations for NXP
+
+## Contents
+
+- [FRDM-MCXN947](#frdm-mcxn947)
+- [MIMXRT1170-EVKB](#mimxrt1170-evkb)
+- [FRDM-IMX93](#frdm-imx93)
+- [FRDM-MCXE31B and FRDM-MCXW72](#frdm-mcxe31b-and-frdm-mcxw72)
+- [Building](#building)
 
 ## Boards
 
@@ -21,15 +29,16 @@ Quickstart: [boards/frdm-mcxn947/QUICKSTART.md](boards/frdm-mcxn947/QUICKSTART.m
 | [npu-benchmark](vendor/nxp/npu-benchmark) | builds; needs the eIQ Neutron artifacts |
 | [face-detect](vendor/nxp/face-detect) | vision pipeline hardware-verified; cellular leg implemented, pending verification |
 
-Note on face-detect: the camera setup requires NXP's solder-jumper rework,
-which disconnects the board's Ethernet — a reworked board is a camera board.
-The demo also needs two small Zephyr driver patches, shipped with apply
-instructions in [vendor/nxp/face-detect/patches](vendor/nxp/face-detect/patches).
+Note on face-detect: the camera configuration requires NXP's solder-jumper
+rework, which disconnects the board's Ethernet; a reworked board should be
+dedicated to the camera demonstrations. The demonstration also requires two
+Zephyr driver patches, provided with apply instructions in
+[vendor/nxp/face-detect/patches](vendor/nxp/face-detect/patches).
 
 ### MIMXRT1170-EVKB
 
-100M Ethernet, enabled by default in the board devicetree; the least
-ceremony of any board here (`west flash` just works).
+100M Ethernet, enabled by default in the board devicetree. No board-specific
+flashing procedure is required.
 
 Quickstart: [boards/mimxrt1170-evkb/QUICKSTART.md](boards/mimxrt1170-evkb/QUICKSTART.md)
 

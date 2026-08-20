@@ -1,34 +1,36 @@
 # iotc-zephyr-demos
 
-Demos for connecting Zephyr RTOS devices to Avnet /IOTCONNECT, built on the
+Demonstration applications for connecting Zephyr RTOS devices to Avnet
+/IOTCONNECT, built on the
 [IOTCONNECT Zephyr SDK](https://github.com/avnet-iotconnect/iotc-zephyr-sdk).
-One codebase covers boards from multiple manufacturers: portable demos are
-written once and gain boards through devicetree overlays, and each
-manufacturer also gets demos built around its specific silicon.
+A single codebase serves boards from multiple manufacturers: portable
+demonstrations are written once and gain board support through devicetree
+overlays, while manufacturer-specific demonstrations showcase capabilities
+unique to a given silicon family.
 
-## Start with your manufacturer
+## Demonstrations by manufacturer
 
-- **[NXP](README_NXP.md)** — FRDM-MCXN947, MIMXRT1170-EVKB, FRDM-IMX93,
-  FRDM-MCXE31B, FRDM-MCXW72
-- **[Microchip](README_MICROCHIP.md)** — SAM E54 Xplained Pro
+- [NXP](README_NXP.md)
+- [Microchip](README_MICROCHIP.md)
 
-Each page lists the boards, which demos run on them, their verification
-status, and the board quickstart guides.
+Each page lists the supported boards, the demonstrations available for them,
+verification status, and links to the board quickstart guides.
 
-## How the repository is organized
+## Repository layout
 
 | Directory | Contents |
 |---|---|
-| `demos/` | Portable demos. The application code lives in the SDK's `samples/`; each demo folder holds the per-board configuration and the walkthrough docs. Adding a board means adding a `boards/<board>.conf`/`.overlay`, not forking the app. |
-| `vendor/<manufacturer>/` | Demos built around manufacturer-specific silicon (for example the NXP NPU, or the MCXN947 camera pipeline). These do not port to other manufacturers. |
-| `boards/` | Per-board quickstart guides: flash a prebuilt binary and provision from the serial prompt. |
-| `templates/` | IOTCONNECT device templates used by the demos. |
+| `demos/` | Portable demonstrations. Application code resides in the SDK's `samples/` tree; each demonstration folder contains the per-board configuration and documentation. Support for an additional board is added through a `boards/<board>.conf`/`.overlay` pair. |
+| `vendor/<manufacturer>/` | Demonstrations built around manufacturer-specific silicon capabilities. |
+| `boards/` | Per-board quickstart guides covering flashing and device provisioning. |
+| `templates/` | IOTCONNECT device templates used by the demonstrations. |
 
 ## Building
 
-The demos build against Zephyr v4.4.1 with the SDK as a Zephyr module. Either
-use this repository as a west manifest (`west init -m <this repo>`), or point
-an existing workspace at the modules:
+The demonstrations build against Zephyr v4.4.1 with the SDK included as a
+Zephyr module. Use this repository as a west manifest
+(`west init -m <repository URL>`), or reference the modules from an existing
+workspace:
 
 ```sh
 west build -p always -b <board-target> -d build/<name> demos/<demo> \
@@ -36,8 +38,12 @@ west build -p always -b <board-target> -d build/<name> demos/<demo> \
      -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 ```
 
-Board targets and per-demo notes are on the manufacturer pages.
+Board targets and demonstration-specific notes are documented on the
+manufacturer pages.
 
-Device identity is provisioned at runtime on most demos: the device generates
-its own key and certificate on-chip and stores them in flash, so binaries
-contain no secrets. See any board quickstart for the flow.
+## Device identity
+
+Most demonstrations provision device identity at runtime: the device
+generates its own key and certificate on-chip and stores them in persistent
+storage, so binaries contain no credentials. The provisioning flow is
+described in each board quickstart.
