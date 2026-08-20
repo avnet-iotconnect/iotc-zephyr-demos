@@ -1,5 +1,7 @@
 # MIMXRT1170-EVKB Quickstart
 
+<img src="media/mimxrt1170-evkb.jpg" width="480" alt="NXP MIMXRT1170-EVKB">
+
 This guide provisions an NXP MIMXRT1170-EVKB to Avnet /IOTCONNECT using a
 prebuilt binary. Device identity is generated on the device itself; no
 credentials are stored on the host PC or compiled into the binary.

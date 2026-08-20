@@ -1,5 +1,7 @@
 # FRDM-IMX93 Quickstart (Zephyr on the Cortex-A55)
 
+<img src="media/frdm-imx93.jpg" width="480" alt="NXP FRDM-IMX93">
+
 The NXP FRDM-IMX93 is an application processor board: two Cortex-A55 cores
 (which normally run Linux) and one Cortex-M33 companion. For a Zephyr
 /IOTCONNECT IP client the target is the A55, where the Ethernet MAC and
