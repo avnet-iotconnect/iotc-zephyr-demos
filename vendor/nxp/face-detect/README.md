@@ -13,6 +13,13 @@ the vendored protocol/transport glue is replaced by the SDK, and device
 identity uses the quickstart provisioning flow (key generated on-chip, nothing
 secret in the binary).
 
+**Status:** the vision pipeline (camera → inference → LCD detection boxes) is
+hardware-verified on the FRDM-MCXN947. The cellular/IOTCONNECT leg is
+implemented (SIMCom A76xx modem profile, quickstart provisioning) but pending
+hardware verification. The original repo remains the reference for the
+physical assembly (solder-jumper rework, camera/LCD mounting, and the modem's
+bent-pin wiring photos).
+
 ## Hardware
 
 | Item | Notes |

@@ -28,6 +28,13 @@ Legend: ✅ verified on hardware · 🔒 verified on the **TF-M hardware-sealed-
 | **[vision-occupancy](demos/vision-occupancy)** | — | 🔨 builds | — | — | — | — |
 | **[gateway](demos/gateway)** | — | — | ✅ | ⇢ source¹ | ⇢ source² | — |
 | **[npu-benchmark](vendor/nxp/npu-benchmark)** (vendor) | 🔨 builds | — | — | — | — | — |
+| **[face-detect](vendor/nxp/face-detect)** (vendor) | ✅ vision⁷ | — | — | — | — | — |
+
+⁷ Camera → TFLM face detection → LCD hardware-verified (requires the NXP
+camera solder-jumper rework and the Zephyr patches in
+[vendor/nxp/face-detect/patches](vendor/nxp/face-detect/patches)); the
+cellular/IOTCONNECT leg (LTE IoT 12 Click) is implemented but pending
+hardware verification.
 
 ¹ MCXE31B (Cortex-M7) has no Ethernet/Wi‑Fi → it runs the in-repo
 **[uart-telemetry-source](demos/uart-telemetry-source)** demo (**hardware-verified**):
@@ -109,6 +116,7 @@ with the underlying mechanics explained at each step — alongside its README
 | [c2d-led](demos/c2d-led) | [demos/c2d-led](demos/c2d-led) | Cloud→device commands (`led-on/off/toggle`) drive the board LED, with ACKs. |
 | [Click telemetry](demos/click-telemetry) | [demos/click-telemetry](demos/click-telemetry) | Auto-detect MikroE Click sensors on a Shuttle → nested-object telemetry + C2D commands (LED, reporting interval, reboot). Device template: [templates/click-demos-device-template.JSON](templates/click-demos-device-template.JSON). |
 | [NXP eIQ Neutron NPU benchmark](vendor/nxp/npu-benchmark) | [vendor/nxp/npu-benchmark](vendor/nxp/npu-benchmark) | NPU-vs-CPU inference timing → IOTCONNECT. Needs the eIQ/Neutron artifacts. |
+| [Face detect](vendor/nxp/face-detect) | [vendor/nxp/face-detect](vendor/nxp/face-detect) | OV7670 camera → TFLM face detection → LCD with live boxes, detections to IOTCONNECT over cellular (LTE IoT 12 Click). Port of [iotc-mcx-zephyr-demos](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos) onto upstream Zephyr + the SDK. |
 | [eIQ PdM (vibration)](demos/eiq-pdm-vibration) | [demos/eiq-pdm-vibration](demos/eiq-pdm-vibration) | Predictive maintenance: ML Vibro Sens Click (NXP FXLS8974 + onboard fault motors) → **eIQ Time Series Studio model on-device** → IOTCONNECT, with cloud fault-injection. Pretrained model + dataset bundled; HW-verified end-to-end. [Quickstart](demos/eiq-pdm-vibration/QUICKSTART.md). |
 | **[ML Model Hot-Swap](demos/ml-model-update)** | [demos/ml-model-update](demos/ml-model-update) | **The model is data, not firmware**: a fixed tiny-MLP engine + a validated ~124 B IOTM weights blob. IOTCONNECT pushes a NEW model as a single C2D command (chunked path for bigger blobs) → CRC-checked, hot-swapped, NVS-persisted — device behavior changes with no reflash. IO1 Xplained Pro sensors (temp+light) + LED. Template: [templates/ml-model-update-template.json](templates/ml-model-update-template.json). |
 
