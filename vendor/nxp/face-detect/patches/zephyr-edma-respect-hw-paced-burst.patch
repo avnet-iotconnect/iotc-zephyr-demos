@@ -1,0 +1,19 @@
+diff --git a/drivers/dma/dma_mcux_edma.c b/drivers/dma/dma_mcux_edma.c
+index a79eaffc659..f932fb3a686 100644
+--- a/drivers/dma/dma_mcux_edma.c
++++ b/drivers/dma/dma_mcux_edma.c
+@@ -617,8 +617,13 @@ static inline void dma_mcux_edma_set_xfer_settings(const struct device *dev, uin
+ 	(!defined(FSL_FEATURE_SOC_DMAMUX_COUNT) || (FSL_FEATURE_SOC_DMAMUX_COUNT == 0))
+ 	struct dma_block_config *block_config = config->head_block;
+ 
++	/* Only widen the minor loop for pure software-triggered transfers: a
++	 * channel with a hardware request slot (e.g. FlexIO LCD shifters) is
++	 * paced by the peripheral, and replacing its burst length with the
++	 * whole block floods the peripheral's FIFO ring in one minor loop.
++	 */
+ 	if (xfer_settings->transfer_type == kEDMA_MemoryToMemory &&
+-	    !config->source_chaining_en) {
++	    !config->source_chaining_en && config->dma_slot == 0) {
+ 		xfer_settings->source_burst_length = block_config->block_size;
+ 	}
+ #endif

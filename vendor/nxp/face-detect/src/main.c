@@ -50,6 +50,24 @@ static struct k_thread iotc_thread_data;
 struct k_fifo iotc_fifo;
 
 
+#ifdef CONFIG_BOARD_FRDM_MCXN947
+#include <fsl_common.h>
+
+/* Match the original demo's camera clock: CLKOUT from PLL0 divided by 27
+ * (~5.5 MHz XCLK -> ~22 MHz PCLK after the sensor's x4 PLL). The upstream
+ * board init uses main_clk / 25 (6 MHz -> 24 MHz PCLK), which outruns the
+ * SmartDMA camera firmware's sampling margin and shows up as vertical
+ * strip artifacts.
+ */
+static int facedet_camera_clkout(void)
+{
+	SYSCON->CLKOUTSEL = 0x1;	/* PLL0 */
+	SYSCON->CLKOUTDIV = 26;		/* divide by 27 */
+	return 0;
+}
+SYS_INIT(facedet_camera_clkout, POST_KERNEL, 50);
+#endif /* CONFIG_BOARD_FRDM_MCXN947 */
+
 #define FACEDETECT_DEMO
 #ifdef FACEDETECT_DEMO
 
@@ -214,6 +232,7 @@ int main(void)
 
 	/* use a video buffer to initially draw the display brackground */
 	display_background(buffers[0]->buffer);
+
 
 	/* Start video capture */
 	if (video_stream_start(video, VIDEO_BUF_TYPE_OUTPUT)) {

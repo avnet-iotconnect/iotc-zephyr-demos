@@ -1,0 +1,18 @@
+diff --git a/drivers/video/video_mcux_smartdma.c b/drivers/video/video_mcux_smartdma.c
+index cd4c5c878a1..92fc5364dff 100644
+--- a/drivers/video/video_mcux_smartdma.c
++++ b/drivers/video/video_mcux_smartdma.c
+@@ -86,7 +86,12 @@ static void nxp_video_sdma_callback(const struct device *dev, void *user_data,
+ 			/* Signal any waiting threads */
+ 			k_sem_give(&data->stream_empty);
+ 		}
+-		data->active_buf->line_offset = (data->frame_idx / 2) * SDMA_LINE_COUNT;
++		/* The firmware has already advanced its stripe index past the
++		 * pair just completed -- subtract one before pairing (NXP's
++		 * downstream driver does the same).
++		 */
++		data->active_buf->line_offset =
++			((data->frame_idx - 1) / 2) * SDMA_LINE_COUNT;
+ 		data->active_buf->timestamp = k_uptime_get_32();
+ 		k_fifo_put(&data->fifo_out, data->active_buf);
+ 

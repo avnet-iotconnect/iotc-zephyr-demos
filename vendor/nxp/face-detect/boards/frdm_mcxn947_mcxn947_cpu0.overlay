@@ -47,7 +47,11 @@
 	};
 };
 
-/* Rotate the display to portrait mode */
+/* Portrait orientation (MV=0), as the original demo used: the controller
+ * then walks write windows row-major, matching the row-major slice buffers.
+ * In the shield's default landscape mode (MV=1) windows are walked
+ * column-first and every image write shreds with a 30-pixel period.
+ */
 &st7796s {
 	madctl = <0x88>;
 	height = <480>;

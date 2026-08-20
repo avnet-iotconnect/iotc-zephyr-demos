@@ -30,6 +30,27 @@ source via the upstream `tflite-micro` module. The original NPU-accelerated
 variant requires NXP's eIQ Neutron TFLM middleware (prebuilt binaries not
 available in upstream Zephyr) and is not built here.
 
+## Required Zephyr patches
+
+Two upstream Zephyr v4.4.1 driver bugs break this demo's camera and display
+paths; apply the patches in [patches/](patches/) to the Zephyr tree until the
+fixes land upstream:
+
+| Patch | Bug |
+|---|---|
+| `zephyr-video-smartdma-stripe-index.patch` | The SmartDMA camera firmware post-increments its stripe index; the driver pairs stripes one off, displacing every captured 30-line block. |
+| `zephyr-edma-respect-hw-paced-burst.patch` | The eDMA driver replaces the burst length with the whole block size for memory-to-memory channels, flooding hardware-paced consumers (the FlexIO LCD shifter ring) — large display writes lose most pixels. |
+
+```sh
+cd <workspace>/zephyr
+git apply <path>/vendor/nxp/face-detect/patches/*.patch
+```
+
+A third fix lives in this app (see `facedet_camera_clkout` in `src/main.c`):
+the camera XCLK must come from PLL0 / 27 (~5.5 MHz), not the board default
+main_clk / 25 — the faster clock outruns the SmartDMA sampler (vertical
+strip artifacts).
+
 ## Build
 
 ```sh
