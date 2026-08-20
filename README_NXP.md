@@ -1,0 +1,80 @@
+# /IOTCONNECT Zephyr demos on NXP boards
+
+## Boards
+
+### FRDM-MCXN947
+
+Ethernet via the on-chip ENET-QoS MAC and the onboard LAN8741 PHY. Also the
+board with the deepest coverage here, including a TrustZone/TF-M build
+(`frdm_mcxn947/mcxn947/cpu0/ns`) where the device key is sealed in Protected
+Storage and never appears in the binary.
+
+Quickstart: [boards/frdm-mcxn947/QUICKSTART.md](boards/frdm-mcxn947/QUICKSTART.md)
+
+| Demo | Status |
+|---|---|
+| [quickstart](demos/quickstart) | hardware-verified, including the TF-M sealed-key build |
+| [telemetry](demos/telemetry) | hardware-verified |
+| [c2d-led](demos/c2d-led) | builds |
+| [click-telemetry](demos/click-telemetry) | hardware-verified with four Click sensors on a Shuttle, on the TF-M sealed-key build |
+| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | hardware-verified end to end (capture, eIQ training, on-device model, cloud fault injection) |
+| [npu-benchmark](vendor/nxp/npu-benchmark) | builds; needs the eIQ Neutron artifacts |
+| [face-detect](vendor/nxp/face-detect) | vision pipeline hardware-verified; cellular leg implemented, pending verification |
+
+Note on face-detect: the camera setup requires NXP's solder-jumper rework,
+which disconnects the board's Ethernet — a reworked board is a camera board.
+The demo also needs two small Zephyr driver patches, shipped with apply
+instructions in [vendor/nxp/face-detect/patches](vendor/nxp/face-detect/patches).
+
+### MIMXRT1170-EVKB
+
+100M Ethernet, enabled by default in the board devicetree; the least
+ceremony of any board here (`west flash` just works).
+
+Quickstart: [boards/mimxrt1170-evkb/QUICKSTART.md](boards/mimxrt1170-evkb/QUICKSTART.md)
+
+| Demo | Status |
+|---|---|
+| [quickstart](demos/quickstart) | hardware-verified (on-device keygen, identity in NVS) |
+| [telemetry](demos/telemetry) | hardware-verified |
+| [c2d-led](demos/c2d-led) | builds |
+| [vision-occupancy](demos/vision-occupancy) | builds (OV5640 camera shield + TFLM person detection); pending hardware run |
+
+click-telemetry needs a mikroBUS-to-Arduino adapter on this board plus an
+`arduino_i2c` overlay — there is no mikroBUS socket.
+
+### FRDM-IMX93
+
+Zephyr runs bare-metal on the Cortex-A55 (the M33 has no Ethernet), booted
+from an SPSDK-built SD image, and connects over gigabit Ethernet. The
+provisioned identity persists to the on-SOM eMMC so it survives power
+cycles. Building needs the `aarch64-zephyr-elf` toolchain and `spsdk`.
+
+Quickstart: [boards/frdm-imx93/QUICKSTART.md](boards/frdm-imx93/QUICKSTART.md)
+
+| Demo | Status |
+|---|---|
+| [gateway](demos/gateway) | hardware-verified (UART ingest from a child device, store-and-forward spool on eMMC) |
+| [quickstart](demos/quickstart) | hardware-verified |
+| [telemetry](demos/telemetry) | hardware-verified |
+
+### FRDM-MCXE31B and FRDM-MCXW72
+
+Neither has an IP-capable radio or MAC (the E31B has no network hardware; the
+W72 is 802.15.4-only), so both run
+[uart-telemetry-source](demos/uart-telemetry-source): the device builds
+IOTCONNECT telemetry JSON locally and emits it over UART for a gateway (such
+as the i.MX93 gateway demo) to forward. Hardware-verified on both boards.
+Flash the W72 with the `jlink` runner — its onboard debugger is J-Link OB.
+
+## Building
+
+```sh
+west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/telemetry demos/telemetry \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
+```
+
+Board targets: `frdm_mcxn947/mcxn947/cpu0` (add `/ns` for TF-M),
+`mimxrt1170_evk/mimxrt1176/cm7`, `frdm_imx93/mimx9352/a55`, `frdm_mcxe31b`,
+`frdm_mcxw72/mcxw727c/cpu0`.
