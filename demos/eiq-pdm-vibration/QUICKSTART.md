@@ -134,7 +134,7 @@ No credentials are compiled in. On first boot the console prints a guide:
 iotcprov provision <your-duid>
 ```
 
-→ the device generates an **EC P-256 key on-chip**, self-signs a certificate,
+The device generates an EC P-256 key on-chip, self-signs a certificate,
 stores both in NVS, and prints the certificate PEM.
 
 1. **Import the device template** (once): /IOTCONNECT → Device → Templates →
@@ -161,10 +161,10 @@ From the device's **Command** panel send:
 
 | Command | What you'll see |
 |---|---|
-| `inject-fault` | the **unbalanced motor** spins → `vib.state: fault`, `vib.model_class: unbalanced`, `anomaly_score` ≈ 1 |
-| `inject-healthy` | the balanced motor spins → `vib.state: healthy`, `model_class: balanced` |
-| `run-both` | both motors → `fault` (`model_class: both`) |
-| `motor-stop` | motors off → `healthy` (`model_class: idle`) |
+| `inject-fault` | the unbalanced motor spins; `vib.state` becomes `fault`, `vib.model_class` `unbalanced`, `anomaly_score` near 1 |
+| `inject-healthy` | the balanced motor spins; `vib.state` becomes `healthy`, `model_class` `balanced` |
+| `run-both` | both motors spin; `vib.state` becomes `fault` (`model_class` `both`) |
+| `motor-stop` | motors stop; `vib.state` becomes `healthy` (`model_class` `idle`) |
 | `set-interval <s>` | reporting cadence |
 | `reboot` | restart |
 

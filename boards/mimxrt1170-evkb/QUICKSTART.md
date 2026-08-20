@@ -1,27 +1,27 @@
-# /IOTCONNECT Quickstart — MIMXRT1170-EVKB
+# MIMXRT1170-EVKB Quickstart
 
-Get an **NXP MIMXRT1170-EVKB** onto your /IOTCONNECT account in minutes: flash a
-prebuilt binary, then provision from the serial prompt. The device generates its
-**own** key on-chip — no build toolchain, no credentials on your PC.
+This guide provisions an NXP MIMXRT1170-EVKB to Avnet /IOTCONNECT using a
+prebuilt binary. Device identity is generated on the device itself; no
+credentials are stored on the host PC or compiled into the binary.
 
 | | |
 |---|---|
-| **SoC** | i.MX RT1176 (Cortex-M7 @1 GHz) |
-| **Build target** | `mimxrt1170_evk/mimxrt1176/cm7` |
-| **Connectivity** | Onboard 100 Mbit Ethernet (RJ45), DHCP |
-| **Debug probe / console** | Onboard MCU-Link (CMSIS-DAP) + its USB VCom @115200 8N1 |
+| SoC | i.MX RT1176 (Cortex-M7 at 1 GHz) |
+| Build target | `mimxrt1170_evk/mimxrt1176/cm7` |
+| Connectivity | Onboard 100 Mbit Ethernet, DHCP |
+| Debug probe / console | Onboard MCU-Link (CMSIS-DAP), USB VCom at 115200 8N1 |
 
-## 1. Requirements
+## Requirements
 
-- MIMXRT1170-EVKB, USB-C cable (to the MCU-Link port), and an **Ethernet cable**
-  into the RJ45 with DHCP.
-- A flashing tool: **NXP LinkServer** (or MCUXpresso / J-Link). No Zephyr
-  toolchain needed to *use* the prebuilt binary.
-- A serial terminal (Tera Term, PuTTY, `screen`) at **115200 8N1**.
+- MIMXRT1170-EVKB, a USB-C cable to the MCU-Link port, and an Ethernet
+  connection with DHCP.
+- A flashing tool: NXP LinkServer, MCUXpresso, or a J-Link. No Zephyr
+  toolchain is required to use the prebuilt binary.
+- A serial terminal at 115200 8N1.
 
-## 2. Flash the binary
+## Flashing
 
-The RT1170 boots from external QSPI flash, so flash the image with LinkServer:
+The RT1170 boots from external QSPI flash:
 
 ```sh
 LinkServer flash MIMXRT1176xxxxx:MIMXRT1170-EVKB \
@@ -30,50 +30,53 @@ LinkServer flash MIMXRT1176xxxxx:MIMXRT1170-EVKB \
 west flash -d build/quickstart_rt1170
 ```
 
-Prebuilt artifact: `build/quickstart_rt1170/zephyr/zephyr.bin` (or `.hex`) from
-[demos/quickstart](../../demos/quickstart).
+The prebuilt artifact is `build/quickstart_rt1170/zephyr/zephyr.bin` (or
+`.hex`) from [demos/quickstart](../../demos/quickstart).
 
-## 3. Provision from the prompt
+## Provisioning
 
-Open the MCU-Link VCom (e.g. `COM43`). On first boot it prints a guide. Then:
+Open the MCU-Link VCom port. On first boot the device prints a provisioning
+guide. Then:
 
-```
-iotcprov provision <your-duid>
-```
-→ the device generates an EC P-256 key + self-signed cert **on-chip** and prints
-the certificate.
-
-1. In /IOTCONNECT: **Devices → Create Device**, Unique ID = `<your-duid>`,
-   **Self-Signed**, paste the printed certificate.
-2. Download `iotcDeviceConfig.json` from the device's Info panel, then:
+1. Generate the device identity on the device:
+   ```
+   iotcprov provision <your-duid>
+   ```
+   The device generates an EC P-256 key and self-signed certificate on-chip
+   and prints the certificate.
+2. In /IOTCONNECT, select Devices, then Create Device. Set the Unique ID to
+   your chosen DUID, select Self-Signed authentication, and paste the printed
+   certificate.
+3. Download `iotcDeviceConfig.json` from the device's Info panel, then paste
+   it at the prompt:
    ```
    iotc config
-   { ...paste the json block... }
+   { ...paste the JSON block... }
    ```
-3. Connect:
+4. Reboot to connect:
    ```
    kernel reboot cold
    ```
-   The board comes up as your device and streams telemetry.
+   The board comes up as your device and begins streaming telemetry.
 
-## 4. Board notes
+## Board notes
 
-- **No overlay needed for Ethernet** — the RT1170-EVK's 100M ENET MAC + PHY are
-  enabled by default; the quickstart's `boards/mimxrt1170_evk_mimxrt1176_cm7.conf`
-  just turns on the L2 + DHCP.
-- Reflashing works directly (`west flash`) — no debug-port recovery dance.
-- NVS (the stored identity) lives in the `storage_partition` and **survives an
-  application reflash**.
-- **Key protection: software only (no TF-M).** The RT1170 is Cortex-M7 — no
-  TrustZone-M — so there is no TF-M target and no hardware-sealed key store. The
-  device-generated key lives in NVS. For hardware-backed key protection use a
-  TF-M board (e.g. FRDM-MCXN947). See the SDK
+- No overlay is needed for Ethernet: the board devicetree enables the ENET MAC
+  and PHY by default. The demo configuration enables the network stack and
+  DHCP.
+- Reflashing works directly with `west flash`; no recovery procedure is
+  needed on this board.
+- The stored identity lives in the flash storage partition and survives an
+  application reflash.
+- Key protection is software-only on this board. The RT1176 is a Cortex-M7
+  without TrustZone-M, so there is no TF-M target and the device-generated key
+  is stored in NVS. For hardware-sealed key storage, see the FRDM-MCXN947 and
+  the SDK
   [key-protection matrix](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
+- click-telemetry requires a mikroBUS-to-Arduino adapter; the board has no
+  mikroBUS socket.
 
-## 5. Demos for this board
+## Demonstrations for this board
 
-Telemetry ✅ · c2d-led ✅ · quickstart ✅ ·
-[vision-occupancy](../../demos/vision-occupancy) 🔨 (uses the OV5640 camera
-module shipped with the kit) — see the
-[board × demo matrix](../../README.md#board--demo-support-matrix). click-telemetry
-needs a mikroBUS-to-Arduino Click adapter (RT1170 has no mikroBUS socket).
+See the demonstration list and verification status in
+[README_NXP.md](../../README_NXP.md#mimxrt1170-evkb).

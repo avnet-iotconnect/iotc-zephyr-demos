@@ -37,7 +37,7 @@ frame. Stand in front of the camera during reset and watch the person score.
    ```
    iotcprov provision <your-duid>
    ```
-   → **Devices → Create Device**, Unique ID `<your-duid>`, auth
+   In /IOTCONNECT: **Devices → Create Device**, Unique ID `<your-duid>`, auth
    **Self-Signed**, paste the printed certificate.
 3. Download the device's `iotcDeviceConfig.json`, then at the prompt:
    ```
@@ -48,7 +48,7 @@ frame. Stand in front of the camera during reset and watch the person score.
 
 ## 4. Run the demo
 
-- Walk into the frame → `vision.state` flips to `occupied` (LED on), out →
+- Walk into the frame and `vision.state` changes to `occupied` (LED on); leave and
   `clear`. Publishes every 10 s and instantly on a flip.
 - **Snapshot:** send `snapshot` from the device's command console; the frame
   appears as a PNG card in the device's **Telemetry Files** panel within a
