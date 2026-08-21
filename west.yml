@@ -26,8 +26,10 @@ manifest:
       import:
         name-allowlist:
           - cmsis
+          - cmsis_6        # CMSIS-Core split out of `cmsis` in Zephyr 4.x
           - cmsis-nn       # TFLM optimized kernels (vision-occupancy)
           - mbedtls
+          - tf-psa-crypto  # mbedTLS 4.x split: mbedtls's CMake requires it
           - mcuboot
           - hal_nxp        # FRDM-MCXN947 reference target
           - hal_atmel      # SAM E54 Xplained Pro (same54_xpro, legacy Atmel tree)
