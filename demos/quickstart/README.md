@@ -15,8 +15,13 @@ only the public CA roots are compiled into the binary.
 |---|---|---|
 | MIMXRT1170-EVKB | `mimxrt1170_evk/mimxrt1176/cm7` | `zephyr.bin` / `.hex` |
 | FRDM-MCXN947 | `frdm_mcxn947/mcxn947/cpu0` | `zephyr.hex` |
+| FRDM-RW612 | `frdm_rw612` | `zephyr.hex` / `.bin` |
 
-Both connect over Ethernet (DHCP) — plug in the RJ45.
+The RT1170 and MCXN947 connect over Ethernet (DHCP) — plug in the RJ45. The
+FRDM-RW612 connects over Wi-Fi: credentials are entered at the prompt
+(`wifi cred add -s "<ssid>" -k 1 -p "<passphrase>"`) and stored in flash, so
+the same prebuilt binary works on any network — see the
+[board quickstart](../../boards/frdm-rw612/QUICKSTART.md).
 
 ## Quickstart (no toolchain needed)
 

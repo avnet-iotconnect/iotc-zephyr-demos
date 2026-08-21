@@ -8,6 +8,7 @@ tests:
     harness: net
     platform_allow:
       - frdm_mcxn947/mcxn947/cpu0
+      - frdm_rw612
     tags:
       - iotconnect
       - net

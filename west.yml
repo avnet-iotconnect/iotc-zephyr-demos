@@ -48,8 +48,10 @@ manifest:
     - name: iotc-zephyr-sdk
       remote: avnet
       # Needs the shared samples (quickstart/c2d-led/click-telemetry) that the
-      # demos here wrap. Move to the next release tag when one is cut.
-      revision: a4bde7c0cd54de400b8812ced1cf8262d035fef1
+      # demos here wrap, plus IOTCONNECT_WIFI_AUTOCONNECT and the
+      # credential-free sample builds (FRDM-RW612). Move to the next release
+      # tag when one is cut.
+      revision: 2d69026fa6740fd7aedd4b6b48cd40682b33e07b
       path: modules/lib/iotc-zephyr-sdk
 
     - name: iotc-c-lib

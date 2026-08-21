@@ -1,0 +1,42 @@
+{
+    "code": "zephc2dled",
+    "name": "Zephyr C2D LED",
+    "authType": 2,
+    "attributes": [
+        { "name": "led", "displayName": "LED State", "type": "INTEGER", "description": "Heartbeat: current LED state (0/1)", "unit": "", "aggregateTypes": [] },
+        {
+            "name": "sys",
+            "displayName": "Device Vitals",
+            "type": "OBJECT",
+            "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
+            "childs": [
+                { "name": "cpu_pct", "displayName": "CPU load", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" },
+                { "name": "freq_mhz", "displayName": "Core clock", "type": "DECIMAL", "description": "", "unit": "MHz", "attributeColor": "" },
+                { "name": "heap_used", "displayName": "Heap used", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+                { "name": "heap_free", "displayName": "Heap free", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
+                { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "unit": "s", "attributeColor": "" },
+                { "name": "reset_cause", "displayName": "Reset cause", "type": "STRING", "description": "", "unit": "", "attributeColor": "" },
+                { "name": "fw", "displayName": "Firmware", "type": "STRING", "description": "", "unit": "", "attributeColor": "" }
+            ],
+            "aggregateTypes": []
+        }
+    ],
+    "commands": [
+        { "name": "LED On", "command": "led-on", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
+        { "name": "LED Off", "command": "led-off", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
+        { "name": "LED Toggle", "command": "led-toggle", "requiredParam": false, "requiredAck": false, "isOTACommand": false }
+    ],
+    "messageVersion": "2.1",
+    "capability": "0",
+    "c2dOnDemand": 0,
+    "properties": {
+        "description": null,
+        "dataFrequency": "10",
+        "fileSupport": false,
+        "certRenewalDay": 0,
+        "enableCSR": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}

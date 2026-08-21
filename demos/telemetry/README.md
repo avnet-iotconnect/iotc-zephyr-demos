@@ -13,9 +13,16 @@ the app in `iotc-zephyr-sdk/samples/telemetry` and adds this demo's own
 | Board | Bearer | Overlay |
 |---|---|---|
 | `frdm_mcxn947/mcxn947/cpu0` | Ethernet (ENET-QoS + LAN8741) | `boards/frdm_mcxn947_mcxn947_cpu0.{conf,overlay}` |
+| `frdm_rw612` | Wi-Fi (onboard 802.11ax, runtime `wifi cred` provisioning) | `boards/frdm_rw612.conf` |
 
 Add a board = drop a `boards/<board>.conf` (+ `.overlay` if the bearer needs
 devicetree) — no code changes.
+
+On `frdm_rw612` the board config also enables the NVS identity store and the
+provisioning shell, so the published binary carries no credentials at all:
+Wi-Fi and device identity are both provisioned at the console, exactly as in
+the [quickstart](../quickstart). A device provisioned once runs every demo on
+this board.
 
 ## Build & run
 

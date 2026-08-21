@@ -12,11 +12,14 @@ Demonstrates the C2D command path of the SDK (command callback + ACK).
 | Board | LED | Bearer |
 |---|---|---|
 | `frdm_mcxn947/mcxn947/cpu0` | `led0` (red) | Ethernet |
+| `frdm_rw612` | `led0` (green) | Wi-Fi (runtime `wifi cred` + on-device identity, as in quickstart) |
 
 ## Commands
 
-Create a command on your IOTCONNECT device template; the command name (text) is
-matched case-insensitively:
+Import [templates/c2d-led-template.json](../../templates/c2d-led-template.json)
+(code `zephc2dled`: `led` heartbeat attribute, device vitals, and the three
+LED commands), or create a command on your own device template; the command
+name (text) is matched case-insensitively:
 
 | Contains | Action |
 |---|---|

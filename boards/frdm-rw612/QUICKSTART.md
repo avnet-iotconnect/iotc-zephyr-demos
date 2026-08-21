@@ -1,0 +1,105 @@
+# FRDM-RW612 Quickstart
+
+This guide provisions an NXP FRDM-RW612 to Avnet /IOTCONNECT over Wi-Fi using
+a prebuilt binary. Nothing device- or network-specific is compiled into the
+image: the Wi-Fi credentials are entered at the serial prompt and stored in
+flash, and the device generates its own key and certificate on-chip. One
+binary works on any network and any IOTCONNECT account.
+
+| | |
+|---|---|
+| SoC | RW612 (Cortex-M33 at 260 MHz, tri-radio: Wi-Fi 6 + BLE + 802.15.4) |
+| Build target | `frdm_rw612` |
+| Connectivity | Onboard 2.4/5 GHz 802.11ax Wi-Fi, DHCP |
+| Debug probe / console | Onboard MCU-Link (CMSIS-DAP), USB VCom at 115200 8N1 |
+
+## Requirements
+
+- FRDM-RW612 and a USB-C cable to the MCU-Link port.
+- A 2.4 or 5 GHz WPA2-PSK (or open) Wi-Fi network.
+- A flashing tool: NXP LinkServer, MCUXpresso, or a J-Link (the MCU-Link can
+  be reflashed with J-Link firmware). No Zephyr toolchain is required to use
+  the prebuilt binary.
+- A serial terminal at 115200 8N1.
+
+## Flashing
+
+```sh
+LinkServer flash RW612:FRDM-RW612 load zephyr.hex
+# or, from a Zephyr workspace:
+west flash -d build/quickstart_rw612
+```
+
+The prebuilt artifact is `build/quickstart_rw612/zephyr/zephyr.hex` (or
+`.bin`) from [demos/quickstart](../../demos/quickstart).
+
+## Provisioning
+
+Open the MCU-Link VCom port. On first boot the device prints a provisioning
+guide. Then:
+
+1. Store the Wi-Fi credentials (they persist in flash and survive both
+   reboots and application reflashes):
+   ```
+   wifi cred add -s "<ssid>" -k 1 -p "<passphrase>"
+   ```
+   (`-k 1` is WPA2-PSK; use `-k 0` and no `-p` for an open network.) The
+   device associates within a few seconds and acquires an address via DHCP —
+   `wifi status` shows the link.
+2. Generate the device identity on the device:
+   ```
+   iotcprov provision <your-duid>
+   ```
+   The device generates an EC P-256 key and self-signed certificate on-chip
+   and prints the certificate.
+3. In /IOTCONNECT, select Devices, then Create Device. Set the Unique ID to
+   your chosen DUID, select Self-Signed authentication, and paste the printed
+   certificate.
+4. Download `iotcDeviceConfig.json` from the device's Info panel, then paste
+   it at the prompt:
+   ```
+   iotc config
+   { ...paste the JSON block... }
+   ```
+5. Reboot to connect:
+   ```
+   kernel reboot cold
+   ```
+   The board associates, gets an address, and comes up as your device
+   streaming telemetry.
+
+## Building (optional)
+
+Only needed if you are not using the prebuilt binary. The RW612 Wi-Fi
+firmware ships as an NXP binary blob linked into the application; fetch it
+once per workspace:
+
+```sh
+west blobs fetch hal_nxp
+west build -p always -b frdm_rw612 -d build/quickstart_rw612 demos/quickstart \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
+```
+
+## Board notes
+
+- No devicetree overlay is needed for Wi-Fi: the SoC's `nxp,wifi` node is
+  enabled by default. The demo board config selects the driver, the stored-
+  credential auto-connect, and DHCP.
+- Wi-Fi credentials and the cloud identity both live in the flash storage
+  partition: provision once, then any of this board's demo binaries
+  (quickstart, telemetry, c2d-led) connects as the same device.
+- `wifi cred list` shows the stored networks; `wifi cred delete -s "<ssid>"`
+  forgets one. `wifi status` and `net iface` show the live link state.
+- Key protection is software-only on this build: the device key is stored in
+  NVS on the external FlexSPI flash and the debug port is open. The RW612's
+  EdgeLock/TrustZone hardware is not yet wired up in upstream Zephyr for this
+  target; see the SDK
+  [key-protection matrix](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
+- The Wi-Fi firmware blob (`rw61x_sb_wifi_a2.bin`) adds roughly 700 KB to the
+  image; the board's 64 MB FlexSPI flash has ample room.
+
+## Demonstrations for this board
+
+See the demonstration list and verification status in
+[README_NXP.md](../../README_NXP.md#frdm-rw612).
