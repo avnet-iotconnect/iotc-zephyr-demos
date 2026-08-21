@@ -1,5 +1,7 @@
 # FRDM-RW612 Quickstart
 
+<img src="media/frdm-rw612.jpg" width="480" alt="NXP FRDM-RW612">
+
 This guide provisions an NXP FRDM-RW612 to Avnet /IOTCONNECT over Wi-Fi using
 a prebuilt binary. Nothing device- or network-specific is compiled into the
 image: the Wi-Fi credentials are entered at the serial prompt and stored in
@@ -15,14 +17,19 @@ binary works on any network and any IOTCONNECT account.
 
 ## Requirements
 
-- FRDM-RW612 and a USB-C cable to the MCU-Link port.
+- FRDM-RW612 and a USB-C cable to the MCU-Link port (`J10`, the USB-C
+  connector nearest the RESET button).
 - A 2.4 or 5 GHz WPA2-PSK (or open) Wi-Fi network.
+- An [IOTCONNECT](https://www.iotconnect.io/) account (a free trial works).
 - A flashing tool: NXP LinkServer, MCUXpresso, or a J-Link (the MCU-Link can
   be reflashed with J-Link firmware). No Zephyr toolchain is required to use
   the prebuilt binary.
-- A serial terminal at 115200 8N1.
+- A serial terminal at 115200 8N1 (Tera Term, PuTTY, `screen`, ...). The
+  MCU-Link enumerates as a USB serial port when the board is plugged in.
 
 ## Flashing
+
+The image is `zephyr.hex` (flash addresses embedded — no load address needed):
 
 ```sh
 LinkServer flash RW612:FRDM-RW612 load zephyr.hex
@@ -30,13 +37,14 @@ LinkServer flash RW612:FRDM-RW612 load zephyr.hex
 west flash -d build/quickstart_rw612
 ```
 
-The prebuilt artifact is `build/quickstart_rw612/zephyr/zephyr.hex` (or
-`.bin`) from [demos/quickstart](../../demos/quickstart).
+Use a released `zephyr.hex` for [demos/quickstart](../../demos/quickstart),
+or build it from source (see [Building](#building-optional) below — the
+artifact lands in `build/quickstart_rw612/zephyr/zephyr.hex`).
 
 ## Provisioning
 
-Open the MCU-Link VCom port. On first boot the device prints a provisioning
-guide. Then:
+Open the MCU-Link serial port. On first boot the device prints this guide on
+its console. Then:
 
 1. Store the Wi-Fi credentials (they persist in flash and survive both
    reboots and application reflashes):
@@ -52,9 +60,14 @@ guide. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-3. In /IOTCONNECT, select Devices, then Create Device. Set the Unique ID to
-   your chosen DUID, select Self-Signed authentication, and paste the printed
-   certificate.
+3. In /IOTCONNECT, first import a device template if you have none: Devices,
+   then Templates, then Import, and select
+   [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json)
+   (for the c2d-led demonstration use
+   [templates/c2d-led-template.json](../../templates/c2d-led-template.json)).
+   Then select Devices, then Create Device: set the Unique ID to your chosen
+   DUID, pick the imported template, select Self-Signed authentication, and
+   paste the printed certificate.
 4. Download `iotcDeviceConfig.json` from the device's Info panel, then paste
    it at the prompt:
    ```
@@ -81,6 +94,11 @@ west build -p always -b frdm_rw612 -d build/quickstart_rw612 demos/quickstart \
      -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 ```
 
+In a workspace created from this repository's manifest
+(`west init -m <repository URL> && west update`, per the
+[repository README](../../README.md)), the SDK modules are already present
+and the two `-D` flags are unnecessary.
+
 ## Board notes
 
 - No devicetree overlay is needed for Wi-Fi: the SoC's `nxp,wifi` node is
@@ -89,7 +107,7 @@ west build -p always -b frdm_rw612 -d build/quickstart_rw612 demos/quickstart \
 - Wi-Fi credentials and the cloud identity both live in the flash storage
   partition: provision once, then any of this board's demo binaries
   (quickstart, telemetry, c2d-led) connects as the same device.
-- `wifi cred list` shows the stored networks; `wifi cred delete -s "<ssid>"`
+- `wifi cred list` shows the stored networks; `wifi cred delete "<ssid>"`
   forgets one. `wifi status` and `net iface` show the live link state.
 - Key protection is software-only on this build: the device key is stored in
   NVS on the external FlexSPI flash and the debug port is open. The RW612's

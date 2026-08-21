@@ -51,9 +51,12 @@ guide. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-2. In /IOTCONNECT, select Devices, then Create Device. Set the Unique ID to
-   your chosen DUID, select Self-Signed authentication, and paste the printed
-   certificate.
+2. In /IOTCONNECT, first import a device template if you have none: Devices,
+   then Templates, then Import, and select
+   [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json).
+   Then select Devices, then Create Device: set the Unique ID to your chosen
+   DUID, pick the imported template, select Self-Signed authentication, and
+   paste the printed certificate.
 3. Download `iotcDeviceConfig.json` from the device's Info panel, then paste
    it at the prompt:
    ```

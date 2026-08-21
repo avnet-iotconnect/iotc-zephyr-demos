@@ -152,7 +152,10 @@ uart:~$ iotcprov provision <your-duid>
 
 The device generates the key and certificate, persists the identity to the
 eMMC, and prints the certificate. In /IOTCONNECT, create the device
-(Self-Signed authentication, paste the certificate), download
+(import
+[templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json)
+first if you have no template; Self-Signed authentication, paste the
+certificate), download
 `iotcDeviceConfig.json`, and paste it at the `iotc config` prompt.
 
 To connect, power-cycle the board. (`kernel reboot cold` has no effect on
