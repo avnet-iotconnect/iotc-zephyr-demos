@@ -1,0 +1,6 @@
+r
+h
+loadfile build/uart_src_mcxw72/zephyr/zephyr.elf
+r
+g
+q

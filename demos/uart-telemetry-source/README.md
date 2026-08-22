@@ -39,13 +39,13 @@ Point the build at `iotc-c-lib` (this demo skips the SDK module). Pass it as a
 ```sh
 # FRDM-MCXE31B (Cortex-M7, onboard MCU-Link -> LinkServer runner):
 west build -p always -b frdm_mcxe31b -d build/uart_src_mcxe31b \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/uart-telemetry-source \
-  -- -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  demos/uart-telemetry-source \
+  -- -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 
 # FRDM-MCXW72 (Cortex-M33, onboard J-Link OB):
 west build -p always -b frdm_mcxw72 -d build/uart_src_mcxw72 \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/uart-telemetry-source \
-  -- -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  demos/uart-telemetry-source \
+  -- -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 ```
 
 ## Flash & run
@@ -61,13 +61,18 @@ west flash -d build/uart_src_mcxe31b       # LinkServer runner
 to drive `JLink.exe` directly (flash `zephyr.elf` at `0x10000000`):
 
 ```sh
-& "C:/Program Files/SEGGER/JLink_V874a/JLink.exe" -nogui 1 -if SWD -speed 4000 \
+JLink -nogui 1 -if SWD -speed 4000 \
   -device MCXW727 -AutoConnect 1 -ExitOnError 1 -CommanderScript flash.jlink
-# flash.jlink: r / h / loadfile build/uart_src_mcxw72/zephyr/zephyr.elf / r / g / q
+# flash.jlink ships in this directory; it loads build/uart_src_mcxw72/zephyr/zephyr.elf
 ```
 
 Open the board's VCom at **115200 8N1** and you should see an `IOTC-TELEMETRY:`
 line every 5 seconds.
+
+These boards need no IOTCONNECT device of their own — the JSON is forwarded
+by a gateway. The [gateway demo](../gateway/README.md) consumes it with
+template [templates/gateway-template.json](../../templates/gateway-template.json),
+tag `uartsrc`, child device ids `frdmmcxe31b01` / `frdmmcxw7201`.
 
 ## Getting this board onto IOTCONNECT for real
 

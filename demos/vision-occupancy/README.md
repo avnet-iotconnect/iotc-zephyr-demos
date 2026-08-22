@@ -1,5 +1,6 @@
 # Vision occupancy — edge person detection (MIMXRT1170-EVKB)
 
+> **[QUICKSTART.md](QUICKSTART.md)** is the step-by-step bring-up;
 > **[DEMO.md](DEMO.md)** walks the demo end to end — each step's observable
 > behavior and what the device and platform are doing underneath.
 
@@ -54,9 +55,9 @@ Then build with the camera shield:
 
 ```sh
 west build -p always -b mimxrt1170_evk/mimxrt1176/cm7 --shield nxp_btb44_ov5640 \
-  -d build/vision_occ C:/dev/zephyr/iotc-zephyr-demos/demos/vision-occupancy \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  -d build/vision_occ demos/vision-occupancy \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 west flash -d build/vision_occ      # onboard MCU-Link (LinkServer)
 ```
 

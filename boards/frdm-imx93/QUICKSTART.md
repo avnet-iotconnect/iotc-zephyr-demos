@@ -152,9 +152,11 @@ uart:~$ iotcprov provision <your-duid>
 
 The device generates the key and certificate, persists the identity to the
 eMMC, and prints the certificate. In /IOTCONNECT, create the device
-(import
+(import the demonstration's template first if you have none:
 [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json)
-first if you have no template; Self-Signed authentication, paste the
+for quickstart/telemetry,
+[templates/gateway-template.json](../../templates/gateway-template.json)
+for the gateway; Self-Signed authentication, paste the
 certificate), download
 `iotcDeviceConfig.json`, and paste it at the `iotc config` prompt.
 

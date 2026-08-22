@@ -18,9 +18,9 @@ offline store-and-forward. Full background: [README.md](README.md) and
 
 ```sh
 west build -p always -b frdm_imx93/mimx9352/a55 -d build/gateway \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/gateway \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  demos/gateway \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 ```
 
 Write the image to the boot SD per the board quickstart

@@ -83,23 +83,33 @@ each ACKed via `iotcl_mqtt_send_cmd_ack`.
 
 ## Build
 
-```sh
-python C:/dev/zephyr/creds/gen_creds_header.py   # once (cpu0 path only)
+For the `cpu0` (baked-in identity) build, first generate the credentials
+header and fill `CONFIG_IOTCONNECT_CPID/ENV/DUID` in `prj.conf` — the steps
+are in the
+[telemetry demo README](../telemetry/README.md#device-identity-two-ways).
+The `/ns` and `frdm_rw612` builds need no header (runtime identity).
 
+```sh
 # cpu0 (software TLS, baked-in identity):
 west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/click_cpu0 \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/click-telemetry \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  demos/click-telemetry \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 
-# /ns (TF-M, hardware-sealed key) -- needs the module edits in
-# iotc-zephyr-sdk/patches/README.md (mbedTLS premaster + the RAM rebalance):
+# /ns (TF-M, hardware-sealed key) -- needs the one-time module patches shown
+# in the FRDM-MCXN947 quickstart (../../boards/frdm-mcxn947/QUICKSTART.md,
+# "Hardware-backed key protection"):
 west build -p always -b frdm_mcxn947/mcxn947/cpu0/ns -d build/click_ns \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/click-telemetry \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  demos/click-telemetry \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 west flash -d build/click_ns          # flashes build/click_ns/zephyr/tfm_merged.hex
 ```
+
+(In a workspace created from this repo's manifest the two `-D` flags are
+unnecessary.) A `same54_xpro` board config + overlay also exist
+(`boards/same54_xpro.{conf,overlay}`, mikroBUS-equipped; compiled-identity
+path like `cpu0`).
 
 The `/ns` build reuses the identity already sealed in TF-M Protected Storage by
 the [quickstart](../quickstart) flow — no baked-in device key. Provision once

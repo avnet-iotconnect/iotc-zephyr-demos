@@ -46,9 +46,17 @@ guide. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-2. In /IOTCONNECT, first import a device template if you have none: Devices,
-   then Templates, then Import, and select
-   [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json).
+2. In /IOTCONNECT, first import the device template for the demonstration
+   you flashed (Devices, then Templates, then Import) — the template is
+   fixed when the device is created:
+
+   | Demonstration | Template |
+   |---|---|
+   | quickstart, telemetry | [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json) |
+   | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
+   | click-telemetry | [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON) |
+   | ml-model-update | [templates/ml-model-update-template.json](../../templates/ml-model-update-template.json) |
+
    Then select Devices, then Create Device: set the Unique ID to your chosen
    DUID, pick the imported template, select Self-Signed authentication, and
    paste the printed certificate.
@@ -79,7 +87,7 @@ guide. Then:
 - Key protection is software-only on this board. The E54 is a Cortex-M4F
   without TrustZone-M, so the device-generated key is stored in NVS. For
   hardware-sealed key storage, see the FRDM-MCXN947 and the SDK
-  [key-protection matrix](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
+  [key-protection matrix](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
 - Sensor wings attach to connector EXT1, whose I2C is SERCOM3 — a private
   bus, exposed by the demo overlays as `mikrobus_i2c`/`io1-i2c`. (EXT2 and
   EXT3 share SERCOM7 with the onboard EEPROM at 0x5E and ATECC508 at 0x60.)

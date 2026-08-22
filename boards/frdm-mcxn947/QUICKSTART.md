@@ -33,8 +33,10 @@ LinkServer flash MCXN947:FRDM-MCXN947 load --addr 0x10000000 zephyr.bin
 west flash -d build/quickstart_n947
 ```
 
-The prebuilt artifact is `build/quickstart_n947/zephyr/zephyr.hex` (or `.bin`)
-from [demos/quickstart](../../demos/quickstart).
+Check the [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
+for a prebuilt image; if none is published for this board yet, build
+[demos/quickstart](../../demos/quickstart) from source — the artifact lands in
+`build/quickstart_n947/zephyr/zephyr.hex` (or `.bin`).
 
 Known issue: if Ethernet fails to initialize with
 `eth_nxp_enet_qos_mac: Can't clear SWR` on the console, the PHY's RMII
@@ -55,9 +57,17 @@ guide. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-2. In /IOTCONNECT, first import a device template if you have none: Devices,
-   then Templates, then Import, and select
-   [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json).
+2. In /IOTCONNECT, first import the device template for the demonstration
+   you flashed (Devices, then Templates, then Import) — the template is
+   fixed when the device is created:
+
+   | Demonstration | Template |
+   |---|---|
+   | quickstart, telemetry | [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json) |
+   | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
+   | click-telemetry | [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON) |
+   | eiq-pdm-vibration | [templates/eiq-pdm-vibration-template.json](../../templates/eiq-pdm-vibration-template.json) |
+
    Then select Devices, then Create Device: set the Unique ID to your chosen
    DUID, pick the imported template, select Self-Signed authentication, and
    paste the printed certificate.
@@ -94,7 +104,7 @@ plaintext NVS. This path is hardware-verified end to end: the device
 provisions itself, seals the identity, survives reboot and reflash, and
 connects to AWS IoT Core with mutual TLS, with all cryptography running in the
 TF-M secure world. See the SDK
-[key-protection matrix](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
+[key-protection matrix](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
 
 Building the `/ns` image from source requires one-time host tooling and module
 patches (not needed to flash the prebuilt image):

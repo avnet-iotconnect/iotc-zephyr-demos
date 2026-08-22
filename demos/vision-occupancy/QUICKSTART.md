@@ -18,9 +18,9 @@ From a Zephyr v4.4.1 workspace (tflite-micro module enabled — see README):
 
 ```sh
 west build -p always -b mimxrt1170_evk/mimxrt1176/cm7 --shield nxp_btb44_ov5640 \
-  -d build/vision_occ C:/dev/zephyr/iotc-zephyr-demos/demos/vision-occupancy \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  -d build/vision_occ demos/vision-occupancy \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 west flash -d build/vision_occ
 ```
 

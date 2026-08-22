@@ -19,7 +19,7 @@ This demo reuses two things you already have in the workspace:
 
 - **Connectivity** — the IOTCONNECT Zephyr SDK (`iotc-zephyr-sdk`), same bearer
   bring-up as its `samples/telemetry`.
-- **The model glue** — `iotc-mcx-zephyr-demos/src/model/` (NXP's TFLM wrapper +
+- **The model glue** — [`iotc-mcx-zephyr-demos`](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos) `src/model/` (NXP's TFLM wrapper +
   the NPU/CPU op resolvers). It is *single-sourced via CMake*, not copied.
 
 ## How the acceleration switch works
@@ -54,8 +54,10 @@ wraps that call in a `k_cycle_get_32()` window and reports min/avg/max.
 ## ⚠️ Drop in the eIQ package (the one real prerequisite)
 
 The "eIQ package" here is NXP's MCUXpresso **TensorFlow Lite Micro middleware** —
-upstream Zephyr's `tflite-micro` does *not* carry the Neutron backend. The demos
-repo already pins the exact one in `iotc-mcx-zephyr-demos/west.yml`:
+upstream Zephyr's `tflite-micro` does *not* carry the Neutron backend. The
+[iotc-mcx-zephyr-demos](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos) repo (archived, but its
+sources remain available) pins the exact one in its `west.yml` — it is NOT in
+this repo's manifest, so clone it separately alongside this workspace:
 
 ```yaml
 - name: mcux-sdk-middleware-tensorflow      # github.com/nxp-mcuxpresso
@@ -107,7 +109,7 @@ MCUXpresso SDK for FRDM-MCXN947 (`<SDK>/middleware/eiq/tensorflow-lite/...`, sam
 tree). Override paths with `-DTFLITE_DIR=...` / `-DIOTC_MCX_DEMOS_DIR=...`. The
 build fails fast (CMake `FATAL_ERROR`) if the model glue path is wrong.
 
-- [ ] `src/device_credentials.h` generated for cloud builds (see **Credentials**)
+Cloud builds additionally need `src/device_credentials.h` (see **Credentials**).
 
 ## Build & run
 
@@ -152,8 +154,12 @@ This is the fastest way to confirm the eIQ artifacts are wired correctly.
 Cloud builds need per-device TLS credentials in a git-ignored
 `src/device_credentials.h` (defining `device_cert_pem`, `device_key_pem`,
 `broker_ca_pem`, `dra_ca_pem`) — generated the same way as the SDK telemetry
-sample (`creds/gen_creds_header.py` from your IOTCONNECT device package + the
-AWS/GoDaddy roots). Device identity (CPID/env/DUID/AWS) is in `prj.conf`.
+sample:
+
+```sh
+python <path>/iotc-zephyr-sdk/tools/gen_device_credentials.py     device-cert.pem device-key.pem -o vendor/nxp/npu-benchmark/src/device_credentials.h
+```
+ Device identity (CPID/env/DUID/AWS) is in `prj.conf`.
 
 ## Layout
 
@@ -173,8 +179,7 @@ npu-benchmark/
 
 ## Where this fits
 
-Per [docs/demos-repo-structure.md](../../../../docs/demos-repo-structure.md),
-the portable connectivity demos live in `demos/` and stay vendor-neutral; an
+The portable connectivity demos live in `demos/` and stay vendor-neutral; an
 eIQ/Neutron-NPU showcase is inherently NXP-specific, so it belongs here under
 `vendor/nxp/`. It still consumes the same vendor-neutral SDK for connectivity —
 only the model build is NXP.
@@ -190,4 +195,3 @@ only the model build is NXP.
 - **CPU-path model data** — `model_sw` carries its own (smaller) model; for a
   strict apples-to-apples comparison, build both paths from the same source
   `.tflite` (NPU via the Neutron converter, CPU as plain int8).
-```

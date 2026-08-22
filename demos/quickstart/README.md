@@ -16,8 +16,11 @@ only the public CA roots are compiled into the binary.
 | MIMXRT1170-EVKB | `mimxrt1170_evk/mimxrt1176/cm7` | `zephyr.bin` / `.hex` |
 | FRDM-MCXN947 | `frdm_mcxn947/mcxn947/cpu0` | `zephyr.hex` |
 | FRDM-RW612 | `frdm_rw612` | `zephyr.hex` / `.bin` |
+| FRDM-i.MX93 | `frdm_imx93/mimx9352/a55` | SPSDK `flash.bin` SD image |
+| SAM E54 Xplained Pro | `same54_xpro` | `zephyr.hex` / `.bin` |
 
-The RT1170 and MCXN947 connect over Ethernet (DHCP) — plug in the RJ45. The
+All boards except the RW612 connect over Ethernet (DHCP) — plug in the RJ45
+(the i.MX93 boots from an SD image; see its board quickstart). The
 FRDM-RW612 connects over Wi-Fi: credentials are entered at the prompt
 (`wifi cred add -s "<ssid>" -k 1 -p "<passphrase>"`) and stored in flash, so
 the same prebuilt binary works on any network — see the
@@ -69,7 +72,7 @@ itself.
 - *Current limitation:* the on-device key is exported into NVS (in the clear).
   The hardening step keeps it **non-exportable in PSA Protected Storage** with
   TLS using the PSA key id directly — see the SDK's
-  [docs/provisioning-nvs.md](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md).
+  [docs/provisioning-nvs.md](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md).
 
 ## Building it yourself
 
@@ -85,5 +88,5 @@ provisioned at runtime.
 
 ## Full command reference
 
-See [docs/provisioning-nvs.md](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md)
+See [docs/provisioning-nvs.md](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md)
 for every `iotc` / `iotcprov` command and the manual (PC-generated-key) path.

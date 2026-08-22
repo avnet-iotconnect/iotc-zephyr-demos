@@ -10,42 +10,57 @@ the app in `iotc-zephyr-sdk/samples/telemetry` and adds this demo's own
 
 ## Supported boards
 
-| Board | Bearer | Overlay |
+| Board | Bearer | Board files |
 |---|---|---|
 | `frdm_mcxn947/mcxn947/cpu0` | Ethernet (ENET-QoS + LAN8741) | `boards/frdm_mcxn947_mcxn947_cpu0.{conf,overlay}` |
+| `mimxrt1170_evk/mimxrt1176/cm7` | Ethernet (100M ENET, onboard PHY) | `boards/mimxrt1170_evk_mimxrt1176_cm7.conf` |
 | `frdm_rw612` | Wi-Fi (onboard 802.11ax, runtime `wifi cred` provisioning) | `boards/frdm_rw612.conf` |
+| `frdm_imx93/mimx9352/a55` | Gigabit Ethernet (bare-metal A55) | `boards/frdm_imx93_mimx9352_a55.{conf,overlay}` |
+| `same54_xpro` | Ethernet (GMAC + KSZ8091) | `boards/same54_xpro.conf` |
 
 Add a board = drop a `boards/<board>.conf` (+ `.overlay` if the bearer needs
 devicetree) — no code changes.
 
-On `frdm_rw612` the board config also enables the NVS identity store and the
-provisioning shell, so the published binary carries no credentials at all:
-Wi-Fi and device identity are both provisioned at the console, exactly as in
-the [quickstart](../quickstart). A device provisioned once runs every demo on
-this board.
+## Device identity: two ways
+
+- **Runtime (recommended where enabled)** — on `frdm_rw612` the board config
+  enables the NVS identity store and the provisioning shell, so the binary
+  carries no credentials: Wi-Fi and device identity are both provisioned at
+  the console, exactly as in the [quickstart](../quickstart). A device
+  provisioned once runs every demo on this board.
+- **Compiled-in** — the other boards bake the identity into the binary:
+  1. Create the device in IOTCONNECT (import
+     [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json),
+     any auth type that gives you a certificate + private key PEM pair —
+     e.g. Self-Signed with a locally generated key).
+  2. Generate the credentials header from the PEM pair:
+     ```sh
+     python <path>/iotc-zephyr-sdk/tools/gen_device_credentials.py \
+         device-cert.pem device-key.pem
+     ```
+  3. Set the identity in this demo's `prj.conf` (they ship empty):
+     `CONFIG_IOTCONNECT_CPID`, `CONFIG_IOTCONNECT_ENV`,
+     `CONFIG_IOTCONNECT_DUID` — CPID and environment are shown under
+     Settings → Key Vault in IOTCONNECT, or in the device's
+     `iotcDeviceConfig.json`.
 
 ## Build & run
 
+From a Zephyr 4.4 workspace, with this repo and the two SDK modules checked
+out (`west init -m <this repo>` puts everything in place — then the two `-D`
+flags below are unnecessary):
+
 ```sh
-# 1. Provision device credentials (writes the git-ignored device_credentials.h)
-python C:/dev/zephyr/creds/gen_creds_header.py
-
-# 2. Build (against an existing Zephyr 4.4 workspace)
 west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/demo_telemetry \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/telemetry \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
-
-# 3. Flash + watch serial (LPUART5 @115200)
-bash C:/dev/zephyrproject/flash_and_monitor.sh   # adjust the build dir inside
+  demos/telemetry \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
+west flash -d build/demo_telemetry
 ```
 
+Open the board's serial console at 115200 8N1 (see the board quickstart in
+[boards/](../../boards/) for the port and flashing specifics).
+
 Expected console flow: DHCP lease → DRA discovery/identity → MQTT/TLS connect →
-`telemetry` publishes every few seconds.
-
-## Configuration
-
-Device identity is in `prj.conf` (`CONFIG_IOTCONNECT_CPID/ENV/DUID`,
-`CONFIG_IOTCONNECT_DRA_DISCOVERY_HOST`). Credentials are PEM blobs in the
-generated `device_credentials.h` (never committed). See the SDK sample README
-for the credential roles (device cert/key, broker CA, DRA CA).
+`Telemetry sent: ...` every few seconds, `message delivered` acks, and the
+data arriving under the device in IOTCONNECT.

@@ -43,7 +43,7 @@ west flash -d build/quickstart_rw612
 
 Download `frdm_rw612_quickstart.hex` from the
 [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
-(prebuilt images for all three of this board's demonstrations, with
+(prebuilt images for all four of this board's demonstrations, with
 checksums), or build from source (see [Building](#building-optional) below —
 the artifact lands in `build/quickstart_rw612/zephyr/zephyr.hex`).
 
@@ -126,7 +126,7 @@ and the two `-D` flags are unnecessary.
   NVS on the external FlexSPI flash and the debug port is open. The RW612's
   EdgeLock/TrustZone hardware is not yet wired up in upstream Zephyr for this
   target; see the SDK
-  [key-protection matrix](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
+  [key-protection matrix](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
 - The Wi-Fi firmware blob (`rw61x_sb_wifi_a2.bin`) adds roughly 700 KB to the
   image; the board's 64 MB FlexSPI flash has ample room.
 

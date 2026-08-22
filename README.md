@@ -31,6 +31,22 @@ The fastest path needs no Zephyr toolchain:
 Each page lists the supported boards, the demonstrations available for them,
 verification status, and links to the board quickstart guides.
 
+## Demonstration index
+
+| Demonstration | What it shows |
+|---|---|
+| [quickstart](demos/quickstart) | Flash-and-provision baseline: on-device keygen, runtime identity, telemetry |
+| [telemetry](demos/telemetry) | Portable periodic telemetry with device vitals |
+| [c2d-led](demos/c2d-led) | Cloud-to-device commands driving the board LED |
+| [click-telemetry](demos/click-telemetry) | Auto-detected MikroE Click sensors on the mikroBUS/Shuttle bus |
+| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | eIQ-trained vibration classifier from a PDM microphone |
+| [vision-occupancy](demos/vision-occupancy) | Camera + TFLM person detection with cloud snapshots |
+| [gateway](demos/gateway) | i.MX93 gateway: UART child ingest, store-and-forward spool |
+| [uart-telemetry-source](demos/uart-telemetry-source) | Radio-less boards emitting telemetry JSON for a gateway |
+| [ml-model-update](demos/ml-model-update) | Cloud-pushed ML model updates |
+| [npu-benchmark](vendor/nxp/npu-benchmark) | eIQ Neutron NPU vs CPU inference benchmark |
+| [face-detect](vendor/nxp/face-detect) | Camera face detection with LCD overlay and cellular uplink |
+
 ## Repository layout
 
 | Directory | Contents |

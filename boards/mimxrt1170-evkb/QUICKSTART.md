@@ -36,8 +36,10 @@ LinkServer flash MIMXRT1176xxxxx:MIMXRT1170-EVKB \
 west flash -d build/quickstart_rt1170
 ```
 
-The prebuilt artifact is `build/quickstart_rt1170/zephyr/zephyr.bin` (or
-`.hex`) from [demos/quickstart](../../demos/quickstart).
+Check the [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
+for a prebuilt image; if none is published for this board yet, build
+[demos/quickstart](../../demos/quickstart) from source — the artifact lands in
+`build/quickstart_rt1170/zephyr/zephyr.bin` (or `.hex`).
 
 ## Provisioning
 
@@ -50,9 +52,16 @@ guide. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-2. In /IOTCONNECT, first import a device template if you have none: Devices,
-   then Templates, then Import, and select
-   [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json).
+2. In /IOTCONNECT, first import the device template for the demonstration
+   you flashed (Devices, then Templates, then Import) — the template is
+   fixed when the device is created:
+
+   | Demonstration | Template |
+   |---|---|
+   | quickstart, telemetry | [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json) |
+   | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
+   | vision-occupancy | [templates/vision-occupancy-template.json](../../templates/vision-occupancy-template.json) |
+
    Then select Devices, then Create Device: set the Unique ID to your chosen
    DUID, pick the imported template, select Self-Signed authentication, and
    paste the printed certificate.
@@ -81,7 +90,7 @@ guide. Then:
   without TrustZone-M, so there is no TF-M target and the device-generated key
   is stored in NVS. For hardware-sealed key storage, see the FRDM-MCXN947 and
   the SDK
-  [key-protection matrix](../../../iotc-zephyr-sdk/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
+  [key-protection matrix](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md#key-protection--tf-m-capability-per-board).
 - click-telemetry requires a mikroBUS-to-Arduino adapter; the board has no
   mikroBUS socket.
 

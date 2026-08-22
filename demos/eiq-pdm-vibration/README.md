@@ -45,7 +45,9 @@ so it is never held at continuous full power.
 
 ```sh
 west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/eiq_vib \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/eiq-pdm-vibration
+  demos/eiq-pdm-vibration \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 west flash -d build/eiq_vib      # onboard MCU-Link (LinkServer)
 ```
 
@@ -103,7 +105,7 @@ export ZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 export EXTRA_CONF_FILE=connect.conf
 export EXTRA_DTC_OVERLAY_FILE=connect.overlay
 west build -p always -b frdm_mcxn947/mcxn947/cpu0 -d build/eiq_vib_connect \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/eiq-pdm-vibration
+  demos/eiq-pdm-vibration
 west flash -d build/eiq_vib_connect
 ```
 

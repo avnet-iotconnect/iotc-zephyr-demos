@@ -79,8 +79,9 @@ failed ack with a reason — commands are never silently dropped.
 - **Command matching is template-driven on the platform side:** the device
   matches substrings, so the IOTCONNECT template can name the commands
   anything containing `on`/`off`/`toggle`. The template needs a numeric
-  `led` telemetry attribute and the three commands; no template JSON ships
-  with this demo.
+  `led` telemetry attribute and the three commands —
+  [templates/c2d-led-template.json](../../templates/c2d-led-template.json)
+  ships exactly that.
 - **Credentials:** the build compiles in per-device X.509 credentials from
   the shared, git-ignored `device_credentials.h` (generated once from an
   IOTCONNECT device package). CPID/environment/DUID come from Kconfig.

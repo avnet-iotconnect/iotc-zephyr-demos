@@ -82,6 +82,13 @@ iotc config                        # paste iotcDeviceConfig.json
 kernel reboot cold
 ```
 
+## Expected result
+
+On boot the console prints the camera format, then a detection line per
+frame (`faces=N` with box coordinates) and the LCD shows the live preview
+with overlay boxes. With connectivity up, detection telemetry appears under
+the device in IOTCONNECT (attributes below) on each publish cycle.
+
 ## Telemetry
 
 | Attribute | Meaning |

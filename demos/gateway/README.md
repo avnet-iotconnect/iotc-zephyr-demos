@@ -55,11 +55,12 @@ FRDM-MCXW72  ──UART──▶│  gateway (A55) │              gateway + 2 
 
 ```sh
 west build -p always -b frdm_imx93/mimx9352/a55 -d build/gateway \
-  C:/dev/zephyr/iotc-zephyr-demos/demos/gateway \
-  -- -DZEPHYR_EXTRA_MODULES=C:/dev/zephyr/iotc-zephyr-sdk \
-     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=C:/dev/zephyr/iotc-c-lib
+  demos/gateway \
+  -- -DZEPHYR_EXTRA_MODULES=<path>/iotc-zephyr-sdk \
+     -DZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib
 ```
 
+A step-by-step bring-up walkthrough is in [QUICKSTART.md](QUICKSTART.md).
 Needs the `aarch64-zephyr-elf` toolchain; for a bootable `flash.bin` add
 `-DUSE_NXP_SPSDK_IMAGE=y` (see the
 [board quickstart](../../boards/frdm-imx93/QUICKSTART.md) for SD imaging).
