@@ -24,8 +24,12 @@ binary works on any network and any IOTCONNECT account.
 - A flashing tool: NXP LinkServer, MCUXpresso, or a J-Link (the MCU-Link can
   be reflashed with J-Link firmware). No Zephyr toolchain is required to use
   the prebuilt binary.
-- A serial terminal at 115200 8N1 (Tera Term, PuTTY, `screen`, ...). The
-  MCU-Link enumerates as a USB serial port when the board is plugged in.
+- A serial terminal at 115200 8N1. The MCU-Link enumerates as a USB serial
+  port when the board is plugged in.
+
+Starting from a machine with neither installed? [HOST-SETUP.md](../HOST-SETUP.md)
+walks through installing LinkServer and opening the serial console on Windows
+and Linux, including verifying the probe with `LinkServer probes`.
 
 ## Flashing
 

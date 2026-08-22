@@ -22,7 +22,7 @@ verification status, and links to the board quickstart guides.
 |---|---|
 | `demos/` | Portable demonstrations. Application code resides in the SDK's `samples/` tree; each demonstration folder contains the per-board configuration and documentation. Support for an additional board is added through a `boards/<board>.conf`/`.overlay` pair. |
 | `vendor/<manufacturer>/` | Demonstrations built around manufacturer-specific silicon capabilities. |
-| `boards/` | Per-board quickstart guides covering flashing and device provisioning. |
+| `boards/` | Per-board quickstart guides covering flashing and device provisioning, plus [HOST-SETUP.md](boards/HOST-SETUP.md) for preparing a Windows or Linux machine from scratch (LinkServer install, serial console). |
 | `templates/` | IOTCONNECT device templates used by the demonstrations. |
 
 ## Building

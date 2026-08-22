@@ -21,6 +21,10 @@ stored on the host PC or compiled into the binary.
   is required to use the prebuilt binary.
 - A serial terminal at 115200 8N1.
 
+Starting from a machine with neither installed? [HOST-SETUP.md](../HOST-SETUP.md)
+walks through installing LinkServer and opening the serial console on Windows
+and Linux.
+
 ## Flashing
 
 ```sh

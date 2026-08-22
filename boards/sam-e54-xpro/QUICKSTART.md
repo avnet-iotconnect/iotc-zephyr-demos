@@ -20,7 +20,8 @@ credentials are stored on the host PC or compiled into the binary.
 - A flashing tool: OpenOCD (the default `west flash` runner, which drives the
   onboard EDBG) or a J-Link on the 10-pin Cortex header. No Zephyr toolchain
   is required to use the prebuilt binary.
-- A serial terminal at 115200 8N1.
+- A serial terminal at 115200 8N1 (see the serial-console section of
+  [HOST-SETUP.md](../HOST-SETUP.md) for Windows/Linux specifics).
 
 ## Flashing
 
