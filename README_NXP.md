@@ -101,7 +101,10 @@ W72 is 802.15.4-only), so both run
 [uart-telemetry-source](demos/uart-telemetry-source): the device builds
 IOTCONNECT telemetry JSON locally and emits it over UART for a gateway (such
 as the i.MX93 gateway demo) to forward. Hardware-verified on both boards.
-Flash the W72 with the `jlink` runner — its onboard debugger is J-Link OB.
+
+Quickstarts: [boards/frdm-mcxe31b/QUICKSTART.md](boards/frdm-mcxe31b/QUICKSTART.md),
+[boards/frdm-mcxw72/QUICKSTART.md](boards/frdm-mcxw72/QUICKSTART.md) (the
+W72's onboard debugger is J-Link OB — flash with J-Link, not LinkServer).
 
 ## Building
 

@@ -19,8 +19,10 @@ This demo reuses two things you already have in the workspace:
 
 - **Connectivity** — the IOTCONNECT Zephyr SDK (`iotc-zephyr-sdk`), same bearer
   bring-up as its `samples/telemetry`.
-- **The model glue** — [`iotc-mcx-zephyr-demos`](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos) `src/model/` (NXP's TFLM wrapper +
-  the NPU/CPU op resolvers). It is *single-sourced via CMake*, not copied.
+- **The model glue** — NXP's TFLM wrapper + the NPU/CPU op resolvers + the
+  quantized model data, vendored in-tree under [`model/`](model/)
+  (Apache-2.0, originally from the archived
+  [`iotc-mcx-zephyr-demos`](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos)).
 
 ## How the acceleration switch works
 
@@ -54,10 +56,10 @@ wraps that call in a `k_cycle_get_32()` window and reports min/avg/max.
 ## ⚠️ Drop in the eIQ package (the one real prerequisite)
 
 The "eIQ package" here is NXP's MCUXpresso **TensorFlow Lite Micro middleware** —
-upstream Zephyr's `tflite-micro` does *not* carry the Neutron backend. The
-[iotc-mcx-zephyr-demos](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos) repo (archived, but its
-sources remain available) pins the exact one in its `west.yml` — it is NOT in
-this repo's manifest, so clone it separately alongside this workspace:
+upstream Zephyr's `tflite-micro` does *not* carry the Neutron backend. It is NOT in
+this repo's manifest — clone NXP's middleware separately and point
+`-DTFLITE_DIR` at it (the archived
+[iotc-mcx-zephyr-demos](https://github.com/avnet-iotconnect/iotc-mcx-zephyr-demos) pinned this exact revision):
 
 ```yaml
 - name: mcux-sdk-middleware-tensorflow      # github.com/nxp-mcuxpresso
@@ -106,7 +108,7 @@ modules/lib/tflite-micro/
 
 If the prebuilt `.a` blobs aren't in the standalone repo, copy them from the
 MCUXpresso SDK for FRDM-MCXN947 (`<SDK>/middleware/eiq/tensorflow-lite/...`, same
-tree). Override paths with `-DTFLITE_DIR=...` / `-DIOTC_MCX_DEMOS_DIR=...`. The
+tree). Override paths with `-DTFLITE_DIR=...` / `-DMODEL_DIR=...`. The
 build fails fast (CMake `FATAL_ERROR`) if the model glue path is wrong.
 
 Cloud builds additionally need `src/device_credentials.h` (see **Credentials**).

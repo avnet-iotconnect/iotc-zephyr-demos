@@ -17,26 +17,35 @@ cmake_minimum_required(VERSION 3.20.0)
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(iotc_npu_benchmark)
 
-# --- Reused eIQ/Neutron model glue (override with -DIOTC_MCX_DEMOS_DIR=...) ---
-if(NOT DEFINED IOTC_MCX_DEMOS_DIR)
-  set(IOTC_MCX_DEMOS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../iotc-mcx-zephyr-demos)
+# --- eIQ/Neutron model glue (in-tree; override with -DMODEL_DIR=...) ---------
+# NXP's TFLM interpreter wrapper + NPU/CPU op resolvers + the quantized model
+# data, vendored from the (archived) iotc-mcx-zephyr-demos repo. Apache-2.0.
+if(NOT DEFINED MODEL_DIR)
+  set(MODEL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/model)
 endif()
-set(MODEL_DIR ${IOTC_MCX_DEMOS_DIR}/src/model)
 
 # --- eIQ-augmented TensorFlow Lite Micro (NXP Neutron build) -----------------
 # This is the "eIQ package": NXP's mcux-sdk-middleware-tensorflow repo
-# (github.com/nxp-mcuxpresso, tag MCUX_2.16.000 -- pinned in
-# iotc-mcx-zephyr-demos/west.yml). It carries the Neutron kernel + prebuilt
-# libtflm.a / libNeutron*.a that upstream tflite-micro lacks. west-update or
-# clone it to <workspace>/modules/lib/tflite-micro. See README -> "Drop in".
+# (github.com/nxp-mcuxpresso, tag MCUX_2.16.000). It carries the Neutron
+# kernel + prebuilt libtflm.a / libNeutron*.a that upstream tflite-micro
+# lacks -- clone it and point TFLITE_DIR at it. See README -> "Drop in".
 if(NOT DEFINED TFLITE_DIR)
-  set(TFLITE_DIR ${IOTC_MCX_DEMOS_DIR}/../modules/lib/tflite-micro)
+  set(TFLITE_DIR ${ZEPHYR_BASE}/../modules/lib/tflite-micro)
 endif()
 
 if(NOT EXISTS ${MODEL_DIR}/model.cpp)
   message(FATAL_ERROR
-    "Model glue not found at ${MODEL_DIR}. Set -DIOTC_MCX_DEMOS_DIR to your "
-    "iotc-mcx-zephyr-demos checkout (see README -> 'eIQ artifact prerequisites').")
+    "Model glue not found at ${MODEL_DIR} (vendored under this demo's model/; "
+    "override with -DMODEL_DIR=...).")
+endif()
+
+if(NOT EXISTS ${TFLITE_DIR}/lib)
+  message(FATAL_ERROR
+    "NXP eIQ TFLM middleware not found at ${TFLITE_DIR} -- upstream "
+    "tflite-micro lacks the Neutron backend and the prebuilt libtflm.a. "
+    "Clone github.com/nxp-mcuxpresso/mcux-sdk-middleware-tensorflow "
+    "(tag MCUX_2.16.000) and pass -DTFLITE_DIR=<path to it>. "
+    "See README -> 'Drop in the eIQ package'.")
 endif()
 
 # --- App sources -------------------------------------------------------------

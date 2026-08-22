@@ -32,8 +32,10 @@ openocd -f board/microchip_same54_xplained_pro.cfg \
     -c "program zephyr.hex verify reset exit"
 ```
 
-The prebuilt artifact is `build/quickstart_e54/zephyr/zephyr.hex` from
-[demos/quickstart](../../demos/quickstart).
+Download `same54_xpro_quickstart.hex` from the
+[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases),
+or build [demos/quickstart](../../demos/quickstart) from source — the
+artifact lands in `build/<name>/zephyr/zephyr.hex`.
 
 ## Provisioning
 

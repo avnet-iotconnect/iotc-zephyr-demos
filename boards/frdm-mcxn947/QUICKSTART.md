@@ -33,10 +33,10 @@ LinkServer flash MCXN947:FRDM-MCXN947 load --addr 0x10000000 zephyr.bin
 west flash -d build/quickstart_n947
 ```
 
-Check the [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
-for a prebuilt image; if none is published for this board yet, build
-[demos/quickstart](../../demos/quickstart) from source — the artifact lands in
-`build/quickstart_n947/zephyr/zephyr.hex` (or `.bin`).
+Download `frdm_mcxn947_quickstart.hex` from the
+[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases),
+or build [demos/quickstart](../../demos/quickstart) from source — the
+artifact lands in `build/<name>/zephyr/zephyr.hex`.
 
 Known issue: if Ethernet fails to initialize with
 `eth_nxp_enet_qos_mac: Can't clear SWR` on the console, the PHY's RMII

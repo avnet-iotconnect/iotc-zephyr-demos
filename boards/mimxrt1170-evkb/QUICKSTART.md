@@ -36,10 +36,10 @@ LinkServer flash MIMXRT1176xxxxx:MIMXRT1170-EVKB \
 west flash -d build/quickstart_rt1170
 ```
 
-Check the [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
-for a prebuilt image; if none is published for this board yet, build
-[demos/quickstart](../../demos/quickstart) from source — the artifact lands in
-`build/quickstart_rt1170/zephyr/zephyr.bin` (or `.hex`).
+Download `mimxrt1170_evkb_quickstart.hex` from the
+[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases),
+or build [demos/quickstart](../../demos/quickstart) from source — the
+artifact lands in `build/<name>/zephyr/zephyr.hex` (or `.bin`).
 
 ## Provisioning
 
