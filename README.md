@@ -8,6 +8,21 @@ demonstrations are written once and gain board support through devicetree
 overlays, while manufacturer-specific demonstrations showcase capabilities
 unique to a given silicon family.
 
+## Getting started
+
+The fastest path needs no Zephyr toolchain:
+
+1. Pick your board on a manufacturer page below and open its quickstart
+   guide ([HOST-SETUP.md](boards/HOST-SETUP.md) first if your machine has no
+   flashing tool yet).
+2. Flash a prebuilt image from the
+   [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
+   for the demonstration you want to run.
+3. Provision the device from its serial console following the quickstart —
+   network credentials and the device identity are entered at the prompt,
+   never compiled into the image. Import the demonstration's device template
+   (from [templates/](templates/)) when creating the device in IOTCONNECT.
+
 ## Demonstrations by manufacturer
 
 - [NXP](README_NXP.md)

@@ -18,9 +18,17 @@ Runs on the FRDM-RW612 over Wi-Fi, and two ways on the FRDM-MCXN947:
   **HW-verified** streaming 4 Clicks to AWS IoT Core.
 
 On the **`frdm_rw612`** the demo is fully runtime-provisioned like the other
-Wi-Fi builds: `wifi cred add` for the network, quickstart flow for the
-identity (NVS), no credentials in the binary. The board's mikroBUS socket
-carries the Shuttle directly.
+Wi-Fi builds — no credentials in the binary, and no toolchain needed:
+
+1. Flash `frdm_rw612_click-telemetry.hex` from the
+   [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases).
+2. Provision at the console per the
+   [board quickstart](../../boards/frdm-rw612/QUICKSTART.md) (`wifi cred add`,
+   `iotcprov provision`, `iotc config`) — create the device from
+   [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON)
+   so the sensor attributes display.
+3. Fit Clicks (directly in the mikroBUS socket, or on a Shuttle) and reboot —
+   the boot log prints RECOGNIZED per detected Click.
 
 ## How recognition works
 
@@ -42,21 +50,22 @@ and is skipped.
 
 ## Click coverage (in-app raw-I2C readers)
 
-Addresses and conversions come from the proven Microchip WFI32-IoT reference
-(not the parts catalog). Every Click below is read directly over I2C — no Zephyr
-sensor drivers or DT sensor nodes.
+Addresses and conversions come from the Microchip WFI32-IoT reference (not
+the parts catalog); each reader's real proof is the hardware-verified column.
+Every Click below is read directly over I2C — no Zephyr sensor drivers or DT
+sensor nodes.
 
-| Click | IC | Addr | Telemetry keys |
-|---|---|---|---|
-| Temp&Hum 14 | TE HTU31D | 0x40 | temperature_c, humidity_pct |
-| Altitude 2 | TE MS5607 | 0x76 | pressure_mbar, temperature_c, altitude_m |
-| Altitude 4 | baro (0xAC) | 0x27 | pressure_hpa, temperature_c, altitude_m |
-| Ultra-Low Press | diff-press | 0x6C | pressure_pa, temperature_c |
-| VAV Press | diff-press | 0x5C | pressure_pa, temperature_c |
-| Air quality 7 | Amphenol MiCS-VZ-89TE | 0x70 | co2eq_ppm, tvoc_ppb |
-| T6713 CO2 | Amphenol T6713 | 0x15 | co2_ppm |
-| T9602 | Amphenol T9602 | 0x28 | humidity_pct, temperature_c |
-| PHT | TE MS8607 | 0x40 + 0x76 | pressure + temperature + humidity |
+| Click | IC | Addr | Telemetry keys | HW-verified on |
+|---|---|---|---|---|
+| Temp&Hum 14 | TE HTU31D | 0x40 | temperature_c, humidity_pct | MCXN947, RW612 |
+| Altitude 2 | TE MS5607 | 0x76 / 0x77 (CSB jumper) | pressure_mbar, temperature_c, altitude_m | RW612 |
+| Altitude 4 | baro (0xAC) | 0x27 | pressure_hpa, temperature_c, altitude_m | MCXN947 |
+| Ultra-Low Press | diff-press | 0x6C | pressure_pa, temperature_c | MCXN947, RW612 |
+| VAV Press | TE LMIS025BB3 | 0x5C | pressure_pa, temperature_c | RW612 |
+| Air quality 7 | Amphenol MiCS-VZ-89TE | 0x70 | co2eq_ppm, tvoc_ppb | MCXN947 |
+| T6713 CO2 | Amphenol T6713 | 0x15 | co2_ppm | — |
+| T9602 | Amphenol T9602 | 0x28 | humidity_pct, temperature_c | — |
+| PHT | TE MS8607 | 0x40 + 0x76 | via altitude_2 (pressure, temperature) | RW612 |
 
 **Address collisions (don't co-bus):** PHT uses 0x40 (clashes with Temp&Hum 14)
 and 0x76 (clashes with Altitude 2). Telemetry keys are nested per Click, e.g.

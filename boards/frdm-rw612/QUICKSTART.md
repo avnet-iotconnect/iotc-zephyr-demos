@@ -66,11 +66,17 @@ its console. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-3. In /IOTCONNECT, first import a device template if you have none: Devices,
-   then Templates, then Import, and select
-   [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json)
-   (for the c2d-led demonstration use
-   [templates/c2d-led-template.json](../../templates/c2d-led-template.json)).
+3. In /IOTCONNECT, first import the device template for the demonstration
+   you flashed (Devices, then Templates, then Import) — the template is
+   fixed when the device is created, so pick the one matching the
+   demonstration you will run:
+
+   | Demonstration | Template |
+   |---|---|
+   | quickstart, telemetry | [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json) |
+   | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
+   | click-telemetry | [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON) |
+
    Then select Devices, then Create Device: set the Unique ID to your chosen
    DUID, pick the imported template, select Self-Signed authentication, and
    paste the printed certificate.

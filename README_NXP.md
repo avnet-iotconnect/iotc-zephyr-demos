@@ -72,7 +72,7 @@ Quickstart: [boards/frdm-rw612/QUICKSTART.md](boards/frdm-rw612/QUICKSTART.md)
 | [quickstart](demos/quickstart) | hardware-verified end to end over Wi-Fi (runtime `wifi cred` provisioning, on-device keygen, DHCP, discovery, MQTT telemetry) |
 | [telemetry](demos/telemetry) | hardware-verified over Wi-Fi with the NVS-provisioned identity (credential-free binary) |
 | [c2d-led](demos/c2d-led) | hardware-verified end to end over Wi-Fi, including cloud LED commands (credential-free binary) |
-| [click-telemetry](demos/click-telemetry) | builds (mikroBUS socket onboard; Clicks on a Shuttle, shared I2C) |
+| [click-telemetry](demos/click-telemetry) | hardware-verified over Wi-Fi with live Clicks (Temp&Hum 14, Ultra-Low Press, VAV Press, Altitude 2, PHT); onboard mikroBUS socket, internal I2C pull-ups suffice |
 
 All binaries are credential-free: provision Wi-Fi and identity once at
 the console (see the quickstart) and every demo connects as the same device.
