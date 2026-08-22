@@ -28,8 +28,8 @@ binary works on any network and any IOTCONNECT account.
   port when the board is plugged in.
 
 Starting from a machine with neither installed? [HOST-SETUP.md](../HOST-SETUP.md)
-walks through installing LinkServer and opening the serial console on Windows
-and Linux, including verifying the probe with `LinkServer probes`.
+helps you choose between LinkServer and J-Link, install either on Windows or
+Linux, verify the probe, and open the serial console.
 
 ## Flashing
 
