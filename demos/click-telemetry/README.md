@@ -30,8 +30,15 @@ app walks a registry and marks each Click present by a raw I2C probe, then reads
 every recognized Click each cycle. The boot log prints `RECOGNIZED` / `absent`
 per Click, and each publish logs e.g. `Published telemetry from 4 Click(s): ...`.
 
-The FRDM mikroBUS has **no onboard I2C pull-ups** — add external ~4.7 kΩ, or use
-a Click that supplies them (e.g. Air quality 7).
+The FRDM-MCXN947 mikroBUS has **no onboard I2C pull-ups** — add external
+~4.7 kΩ, or use a Click that supplies them (e.g. Air quality 7). The
+FRDM-RW612 enables the SoC's internal pull-ups on the I2C pins, which are
+sufficient at 100 kHz.
+
+A lone **PHT Click** surfaces as `altitude_2`: its MS8607 pressure/temperature
+die speaks the same protocol as the Altitude 2's MS5607 (so real readings are
+published under that name), while its humidity die is not HTU31-compatible
+and is skipped.
 
 ## Click coverage (in-app raw-I2C readers)
 
