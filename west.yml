@@ -53,7 +53,7 @@ manifest:
       # demos here wrap, plus IOTCONNECT_WIFI_AUTOCONNECT and the
       # credential-free sample builds (FRDM-RW612). Move to the next release
       # tag when one is cut.
-      revision: d3da82892155d9d55a892fdf0de36e532387280a
+      revision: 024e181d42dd76d3890f3137ca866bdc6f10dea9
       path: modules/lib/iotc-zephyr-sdk
 
     - name: iotc-c-lib
