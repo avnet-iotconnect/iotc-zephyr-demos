@@ -112,7 +112,8 @@ and the two `-D` flags are unnecessary.
   credential auto-connect, and DHCP.
 - Wi-Fi credentials and the cloud identity both live in the flash storage
   partition: provision once, then any of this board's demo binaries
-  (quickstart, telemetry, c2d-led) connects as the same device.
+  (quickstart, telemetry, c2d-led, click-telemetry) connects as the same
+  device.
 - `wifi cred list` shows the stored networks; `wifi cred delete "<ssid>"`
   forgets one. `wifi status` and `net iface` show the live link state.
 - Key protection is software-only on this build: the device key is stored in

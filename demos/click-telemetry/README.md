@@ -8,7 +8,7 @@ one mikroBUS socket) and stream their readings to Avnet /IOTCONNECT. Clicks are
 **recognized on power-up** and every recognized Click is read each publish cycle
 into one nested-object telemetry record.
 
-Runs two ways on the FRDM-MCXN947:
+Runs on the FRDM-RW612 over Wi-Fi, and two ways on the FRDM-MCXN947:
 
 - **`frdm_mcxn947/mcxn947/cpu0`** — software TLS, identity from the compiled-in
   creds header (or NVS). Simplest to build.
@@ -16,6 +16,11 @@ Runs two ways on the FRDM-MCXN947:
   key lives in TF-M Protected Storage (provisioned once via the quickstart), the
   binary carries only public CA roots, and crypto runs in the secure world.
   **HW-verified** streaming 4 Clicks to AWS IoT Core.
+
+On the **`frdm_rw612`** the demo is fully runtime-provisioned like the other
+Wi-Fi builds: `wifi cred add` for the network, quickstart flow for the
+identity (NVS), no credentials in the binary. The board's mikroBUS socket
+carries the Shuttle directly.
 
 ## How recognition works
 

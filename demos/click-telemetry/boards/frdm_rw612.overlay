@@ -1,0 +1,16 @@
+/*
+ * FRDM-RW612 overlay for the Click telemetry demo.
+ *
+ * Connectivity is onboard Wi-Fi (no devicetree needed); this overlay only
+ * slows the mikroBUS I2C to 100 kHz for the shared MikroE Shuttle bus. All
+ * Clicks are read via raw I2C in the app (no Zephyr sensor drivers), so no
+ * per-Click DT nodes are needed -- the app's registry probes each address.
+ * The board routes mikrobus_i2c to flexcomm2, which also carries the onboard
+ * P3T1755 temperature sensor at 0x48 -- avoid fitting a Click that uses that
+ * address.
+ */
+
+&mikrobus_i2c {
+	status = "okay";
+	clock-frequency = <100000>;
+};
