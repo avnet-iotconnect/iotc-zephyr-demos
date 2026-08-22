@@ -75,6 +75,8 @@ Quickstart: [boards/frdm-rw612/QUICKSTART.md](boards/frdm-rw612/QUICKSTART.md)
 
 All three binaries are credential-free: provision Wi-Fi and identity once at
 the console (see the quickstart) and every demo connects as the same device.
+Prebuilt images for all three are on the
+[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases).
 
 ### FRDM-IMX93
 

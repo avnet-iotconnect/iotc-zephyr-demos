@@ -37,9 +37,11 @@ LinkServer flash RW612:FRDM-RW612 load zephyr.hex
 west flash -d build/quickstart_rw612
 ```
 
-Use a released `zephyr.hex` for [demos/quickstart](../../demos/quickstart),
-or build it from source (see [Building](#building-optional) below — the
-artifact lands in `build/quickstart_rw612/zephyr/zephyr.hex`).
+Download `frdm_rw612_quickstart.hex` from the
+[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
+(prebuilt images for all three of this board's demonstrations, with
+checksums), or build from source (see [Building](#building-optional) below —
+the artifact lands in `build/quickstart_rw612/zephyr/zephyr.hex`).
 
 ## Provisioning
 
