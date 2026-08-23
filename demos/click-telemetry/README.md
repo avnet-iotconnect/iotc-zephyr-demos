@@ -125,8 +125,18 @@ template defines the attributes. Import
 
 ![MCXN947 Click telemetry dashboard](docs/images/dashboard.png)
 
-A ready-made dashboard export ships in
-[dashboard/mcxn947-click-telemetry_dashboard_export.json](dashboard/mcxn947-click-telemetry_dashboard_export.json)
+Two ready-made dashboard exports ship in [dashboard/](dashboard/):
+
+- [rw612-click-telemetry_dashboard_export.json](dashboard/rw612-click-telemetry_dashboard_export.json)
+  - built for the FRDM-RW612 and designed to stay presentable with **no
+  Clicks fitted**: the hero band runs on always-live device vitals (CPU and
+  heap gauges, uptime/firmware tiles) plus the LED and reboot controls,
+  while Click data sits in labeled per-Click tile columns that simply read
+  empty until a Click is inserted. Composed for 67% browser zoom (86
+  columns). Its header banner
+  ([docs/images/rw612_click_header.png](docs/images/rw612_click_header.png))
+  is hosted on S3.
+- [mcxn947-click-telemetry_dashboard_export.json](dashboard/mcxn947-click-telemetry_dashboard_export.json)
 — status icons for air quality / airflow / pressure with live thresholds,
 gauges for every sensor (temperature, humidity, absolute pressure, tVOC,
 eCO₂, ULP differential pressure), sensor-trend charts, vitals + telemetry
