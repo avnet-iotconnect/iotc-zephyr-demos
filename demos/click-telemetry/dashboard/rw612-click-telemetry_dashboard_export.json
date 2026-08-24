@@ -1176,28 +1176,6 @@
                                     "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
                                     "gatewayUpdatedDate": "NA",
                                     "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "2B3CE232-5E35-4A91-88D5-9C2FE620CBD7",
-                                    "attributeName": "sys.reset_cause",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "STRING",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "A3E4053A-0EF9-4E3A-932A-37191ED671E7",
-                                    "attributeName": "sys.fw",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "STRING",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
                                 }
                             ]
                         },
@@ -2547,28 +2525,6 @@
                                     "displayName": "",
                                     "checked": "false",
                                     "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "2B3CE232-5E35-4A91-88D5-9C2FE620CBD7",
-                                    "attributeName": "sys.reset_cause",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "STRING",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "A3E4053A-0EF9-4E3A-932A-37191ED671E7",
-                                    "attributeName": "sys.fw",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "STRING",
                                     "attributeLatestValue": "",
                                     "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
                                     "gatewayUpdatedDate": "NA",
