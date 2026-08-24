@@ -10,6 +10,12 @@ device creation — import the one matching the demonstration you will run
 (Devices → Templates → Import in /IOTCONNECT), from
 [templates/](templates/).
 
+Troubleshooting: if cloud-to-device commands later fail with a generic
+"Internal server error" while telemetry flows normally, recreate the
+template directly in the platform UI (same attributes and commands) and
+rebind the device — JSON-imported templates have produced broken command
+records on some platform environments.
+
 ## Portable demonstrations
 
 | Demonstration | Shows | Boards | Template | Prebuilt image |
