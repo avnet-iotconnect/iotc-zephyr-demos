@@ -154,30 +154,6 @@
             }
         },
         {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#1c355e",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "24",
-                "title": "Device Vitals & Control",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "0",
-                "y": "6",
-                "w": "86",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
-            }
-        },
-        {
             "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
             "widgetProperties": {
                 "i": "gauge",
@@ -233,7 +209,7 @@
             },
             "properties": {
                 "x": "0",
-                "y": "8",
+                "y": "6",
                 "w": "10",
                 "h": "12",
                 "i": "gauge",
@@ -242,6 +218,64 @@
                 "isStatic": "false",
                 "maxW": "16",
                 "maxH": "15"
+            }
+        },
+        {
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+            "widgetProperties": {
+                "i": "Live",
+                "background": "#fff",
+                "fontColor": "#00aa00",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "20",
+                "title": "Uptime (s)",
+                "titleAlign": "",
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "sys.uptime_s",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "sys.uptime_s",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
+                            "deviceUniqueId": "rw612zeph"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "E479CC38-97C9-45A4-8188-9B755AA5BC37",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
+            },
+            "properties": {
+                "x": "0",
+                "y": "18",
+                "w": "10",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
+                "isStatic": "false",
+                "maxW": "20",
+                "maxH": "4"
             }
         },
         {
@@ -300,7 +334,7 @@
             },
             "properties": {
                 "x": "10",
-                "y": "8",
+                "y": "6",
                 "w": "10",
                 "h": "12",
                 "i": "gauge",
@@ -309,6 +343,64 @@
                 "isStatic": "false",
                 "maxW": "16",
                 "maxH": "15"
+            }
+        },
+        {
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+            "widgetProperties": {
+                "i": "Live",
+                "background": "#fff",
+                "fontColor": "#455a64",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "20",
+                "title": "Firmware",
+                "titleAlign": "",
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "sys.fw",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "sys.fw",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
+                            "deviceUniqueId": "rw612zeph"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "A3E4053A-0EF9-4E3A-932A-37191ED671E7",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "",
+                                    "checked": "true",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
+            },
+            "properties": {
+                "x": "10",
+                "y": "18",
+                "w": "10",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
+                "isStatic": "false",
+                "maxW": "20",
+                "maxH": "4"
             }
         },
         {
@@ -662,129 +754,13 @@
             },
             "properties": {
                 "x": "20",
-                "y": "8",
+                "y": "6",
                 "w": "12",
                 "h": "12",
                 "i": "Transformation",
                 "minW": "7",
                 "minH": "4",
                 "isStatic": "false"
-            }
-        },
-        {
-            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
-            "widgetProperties": {
-                "i": "Live",
-                "background": "#fff",
-                "fontColor": "#00aa00",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "Uptime (s)",
-                "titleAlign": "",
-                "contents": {
-                    "attributeValue": {
-                        "attributeName": "sys.uptime_s",
-                        "key": "attributeValue"
-                    },
-                    "attributeTime": {
-                        "attributeName": "sys.uptime_s",
-                        "key": "attributeTime"
-                    },
-                    "live": {
-                        "device": {
-                            "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
-                            "deviceUniqueId": "rw612zeph"
-                        },
-                        "attributes": {
-                            "attribute": [
-                                {
-                                    "attributeGuid": "E479CC38-97C9-45A4-8188-9B755AA5BC37",
-                                    "attributeName": "sys.uptime_s",
-                                    "displayName": "",
-                                    "checked": "true",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                }
-                            ]
-                        },
-                        "rules": "",
-                        "attrType": "1",
-                        "key": "live"
-                    }
-                }
-            },
-            "properties": {
-                "x": "32",
-                "y": "8",
-                "w": "13",
-                "h": "4",
-                "i": "Live",
-                "minW": "7",
-                "minH": "4",
-                "isStatic": "false",
-                "maxW": "20",
-                "maxH": "4"
-            }
-        },
-        {
-            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
-            "widgetProperties": {
-                "i": "Live",
-                "background": "#fff",
-                "fontColor": "#455a64",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "Firmware",
-                "titleAlign": "",
-                "contents": {
-                    "attributeValue": {
-                        "attributeName": "sys.fw",
-                        "key": "attributeValue"
-                    },
-                    "attributeTime": {
-                        "attributeName": "sys.fw",
-                        "key": "attributeTime"
-                    },
-                    "live": {
-                        "device": {
-                            "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
-                            "deviceUniqueId": "rw612zeph"
-                        },
-                        "attributes": {
-                            "attribute": [
-                                {
-                                    "attributeGuid": "A3E4053A-0EF9-4E3A-932A-37191ED671E7",
-                                    "attributeName": "sys.fw",
-                                    "displayName": "",
-                                    "checked": "true",
-                                    "dataType": "STRING",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                }
-                            ]
-                        },
-                        "rules": "",
-                        "attrType": "1",
-                        "key": "live"
-                    }
-                }
-            },
-            "properties": {
-                "x": "32",
-                "y": "12",
-                "w": "13",
-                "h": "4",
-                "i": "Live",
-                "minW": "7",
-                "minH": "4",
-                "isStatic": "false",
-                "maxW": "20",
-                "maxH": "4"
             }
         },
         {
@@ -833,9 +809,9 @@
                 }
             },
             "properties": {
-                "x": "32",
-                "y": "16",
-                "w": "13",
+                "x": "20",
+                "y": "18",
+                "w": "12",
                 "h": "4",
                 "i": "Live",
                 "minW": "7",
@@ -896,30 +872,30 @@
                 }
             },
             "properties": {
-                "x": "45",
-                "y": "8",
+                "x": "32",
+                "y": "6",
                 "w": "15",
-                "h": "12",
+                "h": "16",
                 "i": "DeviceLatestValue",
                 "minW": "15",
-                "minH": "12",
+                "minH": "16",
                 "isStatic": "false",
                 "maxW": "15",
                 "maxH": "16"
             }
         },
         {
-            "widgetGuid": "8BF5A2DF-51FA-479B-B5D8-8413DC425CFF",
+            "widgetGuid": "467C0822-E1C7-4F0F-8361-DEC065A9FB1B",
             "widgetProperties": {
-                "i": "LiveLineChart",
+                "i": "bar",
                 "background": "#fff",
                 "fontColor": "#000000",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "18",
-                "title": "Click Temperatures (auto-detected)",
+                "title": "Altitude (m)",
                 "titleAlign": "",
                 "contents": {
-                    "LiveLineChart": {
+                    "bar": {
                         "device": {
                             "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
                             "deviceUniqueId": "rw612zeph"
@@ -930,13 +906,12 @@
                                     "attributeGuid": "96393D4F-D260-4151-BBB9-31638AFBCDF1",
                                     "attributeName": "temp_hum_14.temperature_c",
                                     "displayName": "",
-                                    "checked": "true",
+                                    "checked": "false",
                                     "dataType": "DECIMAL",
                                     "attributeLatestValue": "",
                                     "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
                                     "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA",
-                                    "attributeColor": "#4a90e2"
+                                    "attributeValue": "NA"
                                 },
                                 {
                                     "attributeGuid": "F818D9B2-C322-4B48-95CB-A4BD20DACADE",
@@ -964,13 +939,12 @@
                                     "attributeGuid": "0F61A11C-CBB3-4DB2-84BF-08AB8E1507A1",
                                     "attributeName": "altitude_2.temperature_c",
                                     "displayName": "",
-                                    "checked": "true",
+                                    "checked": "false",
                                     "dataType": "DECIMAL",
                                     "attributeLatestValue": "",
                                     "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
                                     "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA",
-                                    "attributeColor": "#f5a623"
+                                    "attributeValue": "NA"
                                 },
                                 {
                                     "attributeGuid": "E429B05A-C995-484E-B84B-B3FB3022D3A4",
@@ -1053,13 +1027,12 @@
                                     "attributeGuid": "6926A998-F94B-405B-9747-A809B5C846B3",
                                     "attributeName": "vav_press.temperature_c",
                                     "displayName": "",
-                                    "checked": "true",
+                                    "checked": "false",
                                     "dataType": "DECIMAL",
                                     "attributeLatestValue": "",
                                     "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
                                     "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA",
-                                    "attributeColor": "#00d474"
+                                    "attributeValue": "NA"
                                 },
                                 {
                                     "attributeGuid": "0BB9DA36-5234-4D2E-A95A-A8B06BE68929",
@@ -1228,71 +1201,29 @@
                                 }
                             ]
                         },
+                        "barAttr": {
+                            "barAttributeGuid": "E429B05A-C995-484E-B84B-B3FB3022D3A4",
+                            "barAttributeName": "altitude_2.altitude_m",
+                            "barAttributeColor": "#f5a623"
+                        },
+                        "barColor": "#00cc00",
+                        "showCount": "true",
+                        "barCount": "5",
                         "attrType": "1",
-                        "key": "LiveLineChart",
-                        "recentEndPoints": "30"
+                        "key": "bar",
+                        "recentEndPoints": 10
                     }
                 }
             },
             "properties": {
-                "x": "60",
-                "y": "8",
-                "w": "26",
-                "h": "12",
-                "i": "LiveLineChart",
-                "minW": "12",
+                "x": "47",
+                "y": "6",
+                "w": "39",
+                "h": "16",
+                "i": "bar",
+                "minW": "16",
                 "minH": "12",
-                "isStatic": "false",
-                "maxW": "60",
-                "maxH": "30"
-            }
-        },
-        {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#00695c",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "24",
-                "title": "Click Sensors - Auto-Detected (empty tiles = Click not fitted)",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "0",
-                "y": "20",
-                "w": "86",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
-            }
-        },
-        {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "Temp&Hum 14",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "0",
-                "y": "22",
-                "w": "14",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
+                "isStatic": "false"
             }
         },
         {
@@ -1303,7 +1234,7 @@
                 "fontColor": "#cc8800",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Temperature C",
+                "title": "Temp&Hum 14 - Temperature C",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1342,7 +1273,7 @@
             },
             "properties": {
                 "x": "0",
-                "y": "24",
+                "y": "22",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1361,7 +1292,7 @@
                 "fontColor": "#0088cc",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Humidity %",
+                "title": "Temp&Hum 14 - Humidity %",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1400,7 +1331,7 @@
             },
             "properties": {
                 "x": "0",
-                "y": "28",
+                "y": "26",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1412,30 +1343,6 @@
             }
         },
         {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "Altitude 2 / PHT",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "14",
-                "y": "22",
-                "w": "14",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
-            }
-        },
-        {
             "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
             "widgetProperties": {
                 "i": "Live",
@@ -1443,7 +1350,7 @@
                 "fontColor": "#00695c",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Pressure mbar",
+                "title": "Altitude 2/PHT - Pressure mbar",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1482,7 +1389,7 @@
             },
             "properties": {
                 "x": "14",
-                "y": "24",
+                "y": "22",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1501,7 +1408,7 @@
                 "fontColor": "#6a1b9a",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Altitude m",
+                "title": "Altitude 2/PHT - Altitude m",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1540,7 +1447,7 @@
             },
             "properties": {
                 "x": "14",
-                "y": "28",
+                "y": "26",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1552,30 +1459,6 @@
             }
         },
         {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "VAV Press",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "28",
-                "y": "22",
-                "w": "14",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
-            }
-        },
-        {
             "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
             "widgetProperties": {
                 "i": "Live",
@@ -1583,7 +1466,7 @@
                 "fontColor": "#00695c",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Diff. Pressure Pa",
+                "title": "VAV Press - Diff. Pa",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1622,7 +1505,7 @@
             },
             "properties": {
                 "x": "28",
-                "y": "24",
+                "y": "22",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1641,7 +1524,7 @@
                 "fontColor": "#cc8800",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Temperature C",
+                "title": "VAV Press - Temperature C",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1680,7 +1563,7 @@
             },
             "properties": {
                 "x": "28",
-                "y": "28",
+                "y": "26",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1692,30 +1575,6 @@
             }
         },
         {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "Air Quality 7",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "42",
-                "y": "22",
-                "w": "14",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
-            }
-        },
-        {
             "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
             "widgetProperties": {
                 "i": "Live",
@@ -1723,7 +1582,7 @@
                 "fontColor": "#cc0000",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "eCO2 ppm",
+                "title": "Air Quality 7 - eCO2 ppm",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1762,7 +1621,7 @@
             },
             "properties": {
                 "x": "42",
-                "y": "24",
+                "y": "22",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1781,7 +1640,7 @@
                 "fontColor": "#6a1b9a",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "tVOC ppb",
+                "title": "Air Quality 7 - tVOC ppb",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1820,7 +1679,7 @@
             },
             "properties": {
                 "x": "42",
-                "y": "28",
+                "y": "26",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1829,30 +1688,6 @@
                 "isStatic": "false",
                 "maxW": "20",
                 "maxH": "4"
-            }
-        },
-        {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
-            "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "20",
-                "title": "Ultra-Low Press",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "56",
-                "y": "22",
-                "w": "14",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
             }
         },
         {
@@ -1863,7 +1698,7 @@
                 "fontColor": "#00695c",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "Diff. Pressure Pa",
+                "title": "Ultra-Low Press - Diff. Pa",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1902,7 +1737,7 @@
             },
             "properties": {
                 "x": "56",
-                "y": "24",
+                "y": "22",
                 "w": "14",
                 "h": "4",
                 "i": "Live",
@@ -1914,27 +1749,61 @@
             }
         },
         {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
             "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
+                "i": "Live",
+                "background": "#fff",
+                "fontColor": "#cc8800",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "T6713 CO2",
+                "title": "Alt 2/PHT - Temperature C",
                 "titleAlign": "",
-                "contents": {}
+                "contents": {
+                    "attributeValue": {
+                        "attributeName": "altitude_2.temperature_c",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "altitude_2.temperature_c",
+                        "key": "attributeTime"
+                    },
+                    "live": {
+                        "device": {
+                            "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
+                            "deviceUniqueId": "rw612zeph"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "0F61A11C-CBB3-4DB2-84BF-08AB8E1507A1",
+                                    "attributeName": "altitude_2.temperature_c",
+                                    "displayName": "",
+                                    "checked": "true",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "rules": "",
+                        "attrType": "1",
+                        "key": "live"
+                    }
+                }
             },
             "properties": {
-                "x": "70",
-                "y": "22",
-                "w": "16",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
+                "x": "56",
+                "y": "26",
+                "w": "14",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
                 "isStatic": "false",
-                "maxH": "2"
+                "maxW": "20",
+                "maxH": "4"
             }
         },
         {
@@ -1945,7 +1814,7 @@
                 "fontColor": "#cc0000",
                 "fontFamily": "Proxima Nova",
                 "fontSize": "20",
-                "title": "CO2 ppm",
+                "title": "T6713 - CO2 ppm",
                 "titleAlign": "",
                 "contents": {
                     "attributeValue": {
@@ -1984,7 +1853,7 @@
             },
             "properties": {
                 "x": "70",
-                "y": "24",
+                "y": "22",
                 "w": "16",
                 "h": "4",
                 "i": "Live",
@@ -1996,41 +1865,25 @@
             }
         },
         {
-            "widgetGuid": "F66A9747-6C71-40E5-8639-9F53233494D2",
+            "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
             "widgetProperties": {
-                "i": "Label",
-                "background": "#455a64",
-                "fontColor": "#ffffff",
-                "fontFamily": "Proxima Nova",
-                "fontSize": "24",
-                "title": "Air Quality Trend & Raw Telemetry",
-                "titleAlign": "",
-                "contents": {}
-            },
-            "properties": {
-                "x": "0",
-                "y": "32",
-                "w": "86",
-                "h": "2",
-                "i": "Label",
-                "minW": "6",
-                "minH": "2",
-                "isStatic": "false",
-                "maxH": "2"
-            }
-        },
-        {
-            "widgetGuid": "8BF5A2DF-51FA-479B-B5D8-8413DC425CFF",
-            "widgetProperties": {
-                "i": "LiveLineChart",
+                "i": "Live",
                 "background": "#fff",
-                "fontColor": "#000000",
+                "fontColor": "#455a64",
                 "fontFamily": "Proxima Nova",
-                "fontSize": "18",
-                "title": "CO2 (ppm)",
+                "fontSize": "20",
+                "title": "System - Heap Used",
                 "titleAlign": "",
                 "contents": {
-                    "LiveLineChart": {
+                    "attributeValue": {
+                        "attributeName": "sys.heap_used",
+                        "key": "attributeValue"
+                    },
+                    "attributeTime": {
+                        "attributeName": "sys.heap_used",
+                        "key": "attributeTime"
+                    },
+                    "live": {
                         "device": {
                             "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
                             "deviceUniqueId": "rw612zeph"
@@ -2038,299 +1891,11 @@
                         "attributes": {
                             "attribute": [
                                 {
-                                    "attributeGuid": "96393D4F-D260-4151-BBB9-31638AFBCDF1",
-                                    "attributeName": "temp_hum_14.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "F818D9B2-C322-4B48-95CB-A4BD20DACADE",
-                                    "attributeName": "temp_hum_14.humidity_pct",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "F9D17D00-DABE-471E-A939-E11B09E88482",
-                                    "attributeName": "altitude_2.pressure_mbar",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "0F61A11C-CBB3-4DB2-84BF-08AB8E1507A1",
-                                    "attributeName": "altitude_2.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "E429B05A-C995-484E-B84B-B3FB3022D3A4",
-                                    "attributeName": "altitude_2.altitude_m",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "575C63B9-01BB-4FFC-8FDF-54D31ED64C6A",
-                                    "attributeName": "altitude_4.pressure_hpa",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "43F06A6A-BF95-4D56-B1D5-73894ED5B2E0",
-                                    "attributeName": "altitude_4.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "565A157D-5AB2-4867-8F69-73BADB93935D",
-                                    "attributeName": "altitude_4.altitude_m",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "34FAEC81-1016-46E7-94AF-0C5DB57303E9",
-                                    "attributeName": "ultra_low_press.pressure_pa",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "B6DF871D-E3EA-412C-977F-71995DBC41F1",
-                                    "attributeName": "ultra_low_press.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "9F122CA3-62B4-4B35-B362-D6D09E12C99D",
-                                    "attributeName": "vav_press.pressure_pa",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "6926A998-F94B-405B-9747-A809B5C846B3",
-                                    "attributeName": "vav_press.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "0BB9DA36-5234-4D2E-A95A-A8B06BE68929",
-                                    "attributeName": "air_quality_7.co2eq_ppm",
-                                    "displayName": "",
-                                    "checked": "true",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA",
-                                    "attributeColor": "#f5a623"
-                                },
-                                {
-                                    "attributeGuid": "D2BAF926-EA31-40EB-A400-85A218BBB9A8",
-                                    "attributeName": "air_quality_7.tvoc_ppb",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "CEF8D319-F17F-41D9-A701-003B4503E710",
-                                    "attributeName": "t6713.co2_ppm",
-                                    "displayName": "",
-                                    "checked": "true",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA",
-                                    "attributeColor": "#d0021b"
-                                },
-                                {
-                                    "attributeGuid": "77C1951B-212A-464D-A73B-0ADE3C583DA9",
-                                    "attributeName": "t9602.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "31314027-9DC2-4529-A945-A6BE6EAFAB5D",
-                                    "attributeName": "t9602.humidity_pct",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "9387F612-242F-482F-AC69-F9278F169076",
-                                    "attributeName": "pht.pressure_mbar",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "F9FD8F36-3D92-4645-935C-73219309133A",
-                                    "attributeName": "pht.temperature_c",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "1BEDFBE6-57E9-4368-8AC9-C36CF72A4EF6",
-                                    "attributeName": "pht.humidity_pct",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "E5A87BA5-BC46-4520-A9E3-BE13A90E4503",
-                                    "attributeName": "sys.cpu_pct",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "6FC0C959-0BA7-47A1-9434-85F7608B79B1",
-                                    "attributeName": "sys.freq_mhz",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
                                     "attributeGuid": "A3592CA9-8DD4-40EB-A166-01A36FDEF21A",
                                     "attributeName": "sys.heap_used",
                                     "displayName": "",
-                                    "checked": "false",
+                                    "checked": "true",
                                     "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "50C6F1ED-D611-473D-B07B-442D2AB09C7A",
-                                    "attributeName": "sys.heap_free",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "E479CC38-97C9-45A4-8188-9B755AA5BC37",
-                                    "attributeName": "sys.uptime_s",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "DECIMAL",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "2B3CE232-5E35-4A91-88D5-9C2FE620CBD7",
-                                    "attributeName": "sys.reset_cause",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "STRING",
-                                    "attributeLatestValue": "",
-                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
-                                    "gatewayUpdatedDate": "NA",
-                                    "attributeValue": "NA"
-                                },
-                                {
-                                    "attributeGuid": "A3E4053A-0EF9-4E3A-932A-37191ED671E7",
-                                    "attributeName": "sys.fw",
-                                    "displayName": "",
-                                    "checked": "false",
-                                    "dataType": "STRING",
                                     "attributeLatestValue": "",
                                     "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
                                     "gatewayUpdatedDate": "NA",
@@ -2338,23 +1903,23 @@
                                 }
                             ]
                         },
+                        "rules": "",
                         "attrType": "1",
-                        "key": "LiveLineChart",
-                        "recentEndPoints": "30"
+                        "key": "live"
                     }
                 }
             },
             "properties": {
-                "x": "0",
-                "y": "34",
-                "w": "43",
-                "h": "12",
-                "i": "LiveLineChart",
-                "minW": "12",
-                "minH": "12",
+                "x": "70",
+                "y": "26",
+                "w": "16",
+                "h": "4",
+                "i": "Live",
+                "minW": "7",
+                "minH": "4",
                 "isStatic": "false",
-                "maxW": "60",
-                "maxH": "30"
+                "maxW": "20",
+                "maxH": "4"
             }
         },
         {
@@ -2682,9 +2247,9 @@
                 }
             },
             "properties": {
-                "x": "43",
-                "y": "34",
-                "w": "43",
+                "x": "0",
+                "y": "30",
+                "w": "60",
                 "h": "12",
                 "i": "Telemetry",
                 "minW": "15",
@@ -2692,6 +2257,348 @@
                 "isStatic": "false",
                 "maxW": "60",
                 "maxH": "30"
+            }
+        },
+        {
+            "widgetGuid": "467C0822-E1C7-4F0F-8361-DEC065A9FB1B",
+            "widgetProperties": {
+                "i": "bar",
+                "background": "#fff",
+                "fontColor": "#000000",
+                "fontFamily": "Proxima Nova",
+                "fontSize": "18",
+                "title": "CO2 (ppm)",
+                "titleAlign": "",
+                "contents": {
+                    "bar": {
+                        "device": {
+                            "deviceGuid": "92FB50EB-CDE2-41C3-B44E-EF00D614ECCA",
+                            "deviceUniqueId": "rw612zeph"
+                        },
+                        "attributes": {
+                            "attribute": [
+                                {
+                                    "attributeGuid": "96393D4F-D260-4151-BBB9-31638AFBCDF1",
+                                    "attributeName": "temp_hum_14.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "F818D9B2-C322-4B48-95CB-A4BD20DACADE",
+                                    "attributeName": "temp_hum_14.humidity_pct",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "F9D17D00-DABE-471E-A939-E11B09E88482",
+                                    "attributeName": "altitude_2.pressure_mbar",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "0F61A11C-CBB3-4DB2-84BF-08AB8E1507A1",
+                                    "attributeName": "altitude_2.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "E429B05A-C995-484E-B84B-B3FB3022D3A4",
+                                    "attributeName": "altitude_2.altitude_m",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "575C63B9-01BB-4FFC-8FDF-54D31ED64C6A",
+                                    "attributeName": "altitude_4.pressure_hpa",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "43F06A6A-BF95-4D56-B1D5-73894ED5B2E0",
+                                    "attributeName": "altitude_4.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "565A157D-5AB2-4867-8F69-73BADB93935D",
+                                    "attributeName": "altitude_4.altitude_m",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "34FAEC81-1016-46E7-94AF-0C5DB57303E9",
+                                    "attributeName": "ultra_low_press.pressure_pa",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "B6DF871D-E3EA-412C-977F-71995DBC41F1",
+                                    "attributeName": "ultra_low_press.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "9F122CA3-62B4-4B35-B362-D6D09E12C99D",
+                                    "attributeName": "vav_press.pressure_pa",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "6926A998-F94B-405B-9747-A809B5C846B3",
+                                    "attributeName": "vav_press.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "0BB9DA36-5234-4D2E-A95A-A8B06BE68929",
+                                    "attributeName": "air_quality_7.co2eq_ppm",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "D2BAF926-EA31-40EB-A400-85A218BBB9A8",
+                                    "attributeName": "air_quality_7.tvoc_ppb",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "CEF8D319-F17F-41D9-A701-003B4503E710",
+                                    "attributeName": "t6713.co2_ppm",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "77C1951B-212A-464D-A73B-0ADE3C583DA9",
+                                    "attributeName": "t9602.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "31314027-9DC2-4529-A945-A6BE6EAFAB5D",
+                                    "attributeName": "t9602.humidity_pct",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "9387F612-242F-482F-AC69-F9278F169076",
+                                    "attributeName": "pht.pressure_mbar",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "F9FD8F36-3D92-4645-935C-73219309133A",
+                                    "attributeName": "pht.temperature_c",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "1BEDFBE6-57E9-4368-8AC9-C36CF72A4EF6",
+                                    "attributeName": "pht.humidity_pct",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "E5A87BA5-BC46-4520-A9E3-BE13A90E4503",
+                                    "attributeName": "sys.cpu_pct",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "6FC0C959-0BA7-47A1-9434-85F7608B79B1",
+                                    "attributeName": "sys.freq_mhz",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "A3592CA9-8DD4-40EB-A166-01A36FDEF21A",
+                                    "attributeName": "sys.heap_used",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "50C6F1ED-D611-473D-B07B-442D2AB09C7A",
+                                    "attributeName": "sys.heap_free",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "E479CC38-97C9-45A4-8188-9B755AA5BC37",
+                                    "attributeName": "sys.uptime_s",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "DECIMAL",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "2B3CE232-5E35-4A91-88D5-9C2FE620CBD7",
+                                    "attributeName": "sys.reset_cause",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                },
+                                {
+                                    "attributeGuid": "A3E4053A-0EF9-4E3A-932A-37191ED671E7",
+                                    "attributeName": "sys.fw",
+                                    "displayName": "",
+                                    "checked": "false",
+                                    "dataType": "STRING",
+                                    "attributeLatestValue": "",
+                                    "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+                                    "gatewayUpdatedDate": "NA",
+                                    "attributeValue": "NA"
+                                }
+                            ]
+                        },
+                        "barAttr": {
+                            "barAttributeGuid": "CEF8D319-F17F-41D9-A701-003B4503E710",
+                            "barAttributeName": "t6713.co2_ppm",
+                            "barAttributeColor": "#d0021b"
+                        },
+                        "barColor": "#00cc00",
+                        "showCount": "true",
+                        "barCount": "5",
+                        "attrType": "1",
+                        "key": "bar",
+                        "recentEndPoints": 10
+                    }
+                }
+            },
+            "properties": {
+                "x": "60",
+                "y": "30",
+                "w": "26",
+                "h": "12",
+                "i": "bar",
+                "minW": "16",
+                "minH": "12",
+                "isStatic": "false"
             }
         }
     ]
