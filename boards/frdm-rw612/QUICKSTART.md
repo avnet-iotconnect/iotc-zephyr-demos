@@ -119,6 +119,7 @@ its console. Then:
       list).
 
       <img src="../media/iotconnect/device-name.png" width="495">
+      
       <img src="../media/iotconnect/select-entity.png" width="250">
 
    7. In **Device Certificate**, choose **Use my certificate** and paste the
@@ -126,6 +127,7 @@ its console. Then:
       lines), then click **Save and View**.
 
       <img src="../media/iotconnect/use-my-cert.png" width="280">
+      
       <img src="../media/iotconnect/save-and-view.png" width="600">
 
 4. On the device's page, click the paper-and-cog icon (top right, above
@@ -133,7 +135,7 @@ its console. Then:
    its entire contents.
 
    <img src="../media/iotconnect/paper-and-cog.png" width="165">
-   <img src="../media/iotconnect/config.png" width="355">
+
 
    Then paste it at the board's prompt:
    ```
