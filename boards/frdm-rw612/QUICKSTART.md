@@ -149,6 +149,25 @@ its console. Then:
    The board associates, gets an address, and comes up as your device
    streaming telemetry.
 
+## Dashboard
+
+A ready-made dashboard ships for the click-telemetry demonstration — it
+also works with no Clicks fitted (the vitals, LED control, and charts run
+on always-live data; sensor tiles stay empty until a Click is inserted):
+
+<img src="../../demos/click-telemetry/docs/images/rw612-dashboard.png" width="700">
+
+To import it:
+
+1. Download
+   [rw612-click-telemetry_dashboard_export.json](../../demos/click-telemetry/dashboard/rw612-click-telemetry_dashboard_export.json)
+   (on GitHub, use the download button on the file page).
+2. In /IOTCONNECT, select **Dashboards** → **Create Dashboard** →
+   **Import dashboard**, give it a name, choose the JSON file, and when
+   prompted select your device's **template** and your **device**.
+3. The widgets bind to your device on import. If a widget shows no data,
+   open its settings (the "..." menu) and re-select the device once.
+
 ## Building (optional)
 
 Only needed if you are not using the prebuilt binary. The RW612 Wi-Fi
