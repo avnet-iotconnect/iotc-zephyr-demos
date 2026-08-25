@@ -125,15 +125,17 @@ template defines the attributes. Import
 
 ![MCXN947 Click telemetry dashboard](docs/images/dashboard.png)
 
+![FRDM-RW612 Click telemetry dashboard](docs/images/rw612-dashboard.png)
+
 Two ready-made dashboard exports ship in [dashboard/](dashboard/):
 
 - [rw612-click-telemetry_dashboard_export.json](dashboard/rw612-click-telemetry_dashboard_export.json)
-  - built for the FRDM-RW612 and designed to stay presentable with **no
-  Clicks fitted**: the hero band runs on always-live device vitals (CPU and
-  heap gauges, uptime/firmware tiles) plus the LED and reboot controls,
-  while Click data sits in labeled per-Click tile columns that simply read
-  empty until a Click is inserted. Composed for 67% browser zoom (86
-  columns). Its header banner
+  - built for the FRDM-RW612 (shown above) and designed to stay presentable
+  with **no Clicks fitted**: the hero band runs on always-live device vitals
+  (CPU and heap gauges, latest-value grid, live chart) plus the LED control,
+  while Click values sit in per-Click tiles that simply read empty until a
+  Click is inserted. Hardware-verified end to end, including the cloud LED
+  command. Its header banner
   ([docs/images/rw612_click_header.png](docs/images/rw612_click_header.png))
   is hosted on S3.
 - [mcxn947-click-telemetry_dashboard_export.json](dashboard/mcxn947-click-telemetry_dashboard_export.json)

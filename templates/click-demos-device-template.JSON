@@ -1,143 +1,364 @@
 {
-    "code": "click4zep",
-    "name": "Zephyr Click Demo",
+    "code": "MXCRF612ck",
+    "name": "MXCRF612 Click",
     "authType": 2,
     "attributes": [
         {
-            "name": "temp_hum_14",
-            "displayName": "Temp&Hum 14 (HTU31D)",
+            "name": "sys",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE Temp&Hum 14 @0x40",
+            "description": "",
             "childs": [
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
-                { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
+                {
+                    "name": "cpu_pct",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "freq_mhz",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "heap_used",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "heap_free",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "uptime_s",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "reset_cause",
+                    "displayName": "",
+                    "type": "STRING",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "fw",
+                    "displayName": "",
+                    "type": "STRING",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "temp_hum_14",
+            "displayName": "",
+            "type": "OBJECT",
+            "description": "",
+            "childs": [
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "humidity_pct",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "altitude_2",
-            "displayName": "Altitude 2 (MS5607)",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE Altitude 2 @0x76",
+            "description": "",
             "childs": [
-                { "name": "pressure_mbar", "displayName": "", "type": "DECIMAL", "description": "", "unit": "mbar", "attributeColor": "" },
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
-                { "name": "altitude_m", "displayName": "", "type": "DECIMAL", "description": "", "unit": "m", "attributeColor": "" }
+                {
+                    "name": "pressure_mbar",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "altitude_m",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "altitude_4",
-            "displayName": "Altitude 4",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE Altitude 4 @0x27",
+            "description": "",
             "childs": [
-                { "name": "pressure_hpa", "displayName": "", "type": "DECIMAL", "description": "", "unit": "hPa", "attributeColor": "" },
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
-                { "name": "altitude_m", "displayName": "", "type": "DECIMAL", "description": "", "unit": "m", "attributeColor": "" }
+                {
+                    "name": "pressure_hpa",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "altitude_m",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "ultra_low_press",
-            "displayName": "Ultra-Low Press",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE Ultra-Low Press @0x6C",
+            "description": "",
             "childs": [
-                { "name": "pressure_pa", "displayName": "", "type": "DECIMAL", "description": "", "unit": "Pa", "attributeColor": "" },
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" }
+                {
+                    "name": "pressure_pa",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "vav_press",
-            "displayName": "VAV Press",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE VAV Press @0x5C",
+            "description": "",
             "childs": [
-                { "name": "pressure_pa", "displayName": "", "type": "DECIMAL", "description": "", "unit": "Pa", "attributeColor": "" },
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" }
+                {
+                    "name": "pressure_pa",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "air_quality_7",
-            "displayName": "Air quality 7 (MiCS-VZ-89TE)",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE Air quality 7 @0x70",
+            "description": "",
             "childs": [
-                { "name": "co2eq_ppm", "displayName": "", "type": "DECIMAL", "description": "", "unit": "ppm", "attributeColor": "" },
-                { "name": "tvoc_ppb", "displayName": "", "type": "DECIMAL", "description": "", "unit": "ppb", "attributeColor": "" }
+                {
+                    "name": "co2eq_ppm",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "tvoc_ppb",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "t6713",
-            "displayName": "T6713 CO2",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE CO2 Click (T6713) @0x15",
+            "description": "",
             "childs": [
-                { "name": "co2_ppm", "displayName": "", "type": "DECIMAL", "description": "", "unit": "ppm", "attributeColor": "" }
+                {
+                    "name": "co2_ppm",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "t9602",
-            "displayName": "T9602 Temp/Hum",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "Amphenol T9602 @0x28",
+            "description": "",
             "childs": [
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
-                { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "humidity_pct",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         },
         {
             "name": "pht",
-            "displayName": "PHT (MS8607)",
+            "displayName": "",
             "type": "OBJECT",
-            "description": "MIKROE PHT @0x40+0x76",
+            "description": "",
             "childs": [
-                { "name": "pressure_mbar", "displayName": "", "type": "DECIMAL", "description": "", "unit": "mbar", "attributeColor": "" },
-                { "name": "temperature_c", "displayName": "", "type": "DECIMAL", "description": "", "unit": "C", "attributeColor": "" },
-                { "name": "humidity_pct", "displayName": "", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" }
-            ],
-            "aggregateTypes": []
-        },
-        {
-            "name": "sys",
-            "displayName": "Device Vitals",
-            "type": "OBJECT",
-            "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
-            "childs": [
-                { "name": "cpu_pct", "displayName": "CPU load", "type": "DECIMAL", "description": "", "unit": "%", "attributeColor": "" },
-                { "name": "freq_mhz", "displayName": "Core clock", "type": "DECIMAL", "description": "", "unit": "MHz", "attributeColor": "" },
-                { "name": "heap_used", "displayName": "Heap used", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
-                { "name": "heap_free", "displayName": "Heap free", "type": "DECIMAL", "description": "", "unit": "B", "attributeColor": "" },
-                { "name": "uptime_s", "displayName": "Uptime", "type": "DECIMAL", "description": "", "unit": "s", "attributeColor": "" },
-                { "name": "reset_cause", "displayName": "Reset cause", "type": "STRING", "description": "", "unit": "", "attributeColor": "" },
-                { "name": "fw", "displayName": "Firmware", "type": "STRING", "description": "", "unit": "", "attributeColor": "" }
+                {
+                    "name": "pressure_mbar",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "temperature_c",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "humidity_pct",
+                    "displayName": "",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
             ],
             "aggregateTypes": []
         }
     ],
     "commands": [
-        { "name": "LED On", "command": "led-on", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
-        { "name": "LED Off", "command": "led-off", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
-        { "name": "LED Toggle", "command": "led-toggle", "requiredParam": false, "requiredAck": false, "isOTACommand": false },
-        { "name": "Set Reporting Interval", "command": "set-reporting-interval", "requiredParam": true, "requiredAck": false, "isOTACommand": false },
-        { "name": "Reboot", "command": "reboot", "requiredParam": false, "requiredAck": false, "isOTACommand": false }
+        {
+            "name": "set-reporting-interval",
+            "command": "set-reporting-interval",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "LED Off",
+            "command": "led-off",
+            "requiredParam": false,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "reboot",
+            "command": "reboot",
+            "requiredParam": false,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "LED Toggle",
+            "command": "led-toggle",
+            "requiredParam": false,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "LED On",
+            "command": "led-on",
+            "requiredParam": false,
+            "requiredAck": true,
+            "isOTACommand": false
+        }
     ],
     "messageVersion": "2.1",
-    "msgCode": "XG4EPTV",
+    "msgCode": "XG4EZVK",
     "capability": "0",
     "c2dOnDemand": 0,
+    "enableGeoLocation": "false",
     "properties": {
         "description": null,
-        "dataFrequency": "10",
+        "dataFrequency": "5",
         "fileSupport": false,
         "certRenewalDay": 0,
-        "enableCSR": false
+        "enableCSR": false,
+        "enableGeoLocation": false
     },
     "_meta": {
         "version": "2.0"
