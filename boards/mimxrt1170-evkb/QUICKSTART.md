@@ -17,6 +17,12 @@ credentials are stored on the host PC or compiled into the binary.
 
 - MIMXRT1170-EVKB, a USB-C cable to the MCU-Link port, and an Ethernet
   connection with DHCP.
+- An /IOTCONNECT account. Free trials are available:
+  [via AWS Marketplace](https://github.com/avnet-iotconnect/avnet-iotconnect.github.io/blob/main/documentation/iotconnect/subscription/iotconnect_aws_marketplace.md)
+  (60 days, AWS account required) or
+  [via iotconnect.io](https://subscription.iotconnect.io/subscribe?cloud=aws)
+  (30 days, no credit card). Check your spam folder for the temporary
+  password after registering.
 - A flashing tool: NXP LinkServer, MCUXpresso, or a J-Link. No Zephyr
   toolchain is required to use the prebuilt binary.
 - A serial terminal at 115200 8N1.
@@ -53,8 +59,15 @@ guide. Then:
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
 2. In /IOTCONNECT, first import the device template for the demonstration
-   you flashed (Devices, then Templates, then Import) — the template is
-   fixed when the device is created:
+   you flashed — the template is fixed when the device is created. In
+   [console.iotconnect.io](https://console.iotconnect.io): hover the
+   processor icon, select **Device**, open the **Templates** tab, then
+   **Create Template** → **Import** the file and save.
+
+   <img src="../media/iotconnect/templates-button.png" width="400">
+   <img src="../media/iotconnect/import-button.png" width="400">
+
+   Templates for this board's demonstrations:
 
    | Demonstration | Template |
    |---|---|
@@ -62,11 +75,20 @@ guide. Then:
    | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
    | vision-occupancy | [templates/vision-occupancy-template.json](../../templates/vision-occupancy-template.json) |
 
-   Then select Devices, then Create Device: set the Unique ID to your chosen
-   DUID, pick the imported template, select Self-Signed authentication, and
-   paste the printed certificate.
-3. Download `iotcDeviceConfig.json` from the device's Info panel, then paste
-   it at the prompt:
+   Then open the **Devices** tab → **Create Device**: set the Unique ID
+   (and Device Name) to your chosen DUID, pick the imported template,
+   choose **Use my certificate**, paste the certificate the board
+   printed (including the BEGIN/END lines), and click **Save and View**.
+
+   <img src="../media/iotconnect/create-device-button.png" width="400">
+   <img src="../media/iotconnect/use-my-cert.png" width="500">
+   <img src="../media/iotconnect/save-and-view.png" width="500">
+3. On the device's page, click the paper-and-cog icon (top right, above
+   "Connection Info") to download `iotcDeviceConfig.json`, then paste
+   its contents at the prompt:
+
+   <img src="../media/iotconnect/paper-and-cog.png" width="400">
+
    ```
    iotc config
    { ...paste the JSON block... }

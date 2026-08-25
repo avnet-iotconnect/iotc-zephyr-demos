@@ -20,7 +20,12 @@ binary works on any network and any IOTCONNECT account.
 - FRDM-RW612 and a USB-C cable to the MCU-Link port (`J10`, the USB-C
   connector nearest the RESET button).
 - A 2.4 or 5 GHz WPA2-PSK (or open) Wi-Fi network.
-- An [IOTCONNECT](https://www.iotconnect.io/) account (a free trial works).
+- An /IOTCONNECT account. Free trials are available:
+  [via AWS Marketplace](https://github.com/avnet-iotconnect/avnet-iotconnect.github.io/blob/main/documentation/iotconnect/subscription/iotconnect_aws_marketplace.md)
+  (60 days, AWS account required) or
+  [via iotconnect.io](https://subscription.iotconnect.io/subscribe?cloud=aws)
+  (30 days, no credit card). Check your spam folder for the temporary
+  password after registering.
 - A flashing tool: NXP LinkServer, MCUXpresso, or a J-Link (the MCU-Link can
   be reflashed with J-Link firmware). No Zephyr toolchain is required to use
   the prebuilt binary.
@@ -33,19 +38,28 @@ Linux, verify the probe, and open the serial console.
 
 ## Flashing
 
-The image is `zephyr.hex` (flash addresses embedded — no load address needed):
+1. Open the repository's
+   [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
+   and, under the latest release's **Assets**, click the image for the
+   demonstration you want — `frdm_rw612_quickstart.hex`,
+   `frdm_rw612_telemetry.hex`, `frdm_rw612_c2d-led.hex`, or
+   `frdm_rw612_click-telemetry.hex` (`SHA256SUMS.txt` has the checksums).
+   Your browser saves it to your Downloads folder.
+2. Flash it. The flash addresses are embedded in the `.hex`, so no load
+   address is needed — just pass the file's full path:
 
-```sh
-LinkServer flash RW612:FRDM-RW612 load zephyr.hex
-# or, from a Zephyr workspace:
-west flash -d build/quickstart_rw612
-```
-
-Download `frdm_rw612_quickstart.hex` from the
-[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
-(prebuilt images for all four of this board's demonstrations, with
-checksums), or build from source (see [Building](#building-optional) below —
-the artifact lands in `build/quickstart_rw612/zephyr/zephyr.hex`).
+   Windows:
+   ```
+   LinkServer flash RW612:FRDM-RW612 load "C:\Users\<you>\Downloads\frdm_rw612_quickstart.hex"
+   ```
+   Linux:
+   ```sh
+   LinkServer flash RW612:FRDM-RW612 load ~/Downloads/frdm_rw612_quickstart.hex
+   ```
+   With a J-Link instead, use `loadfile <same path>` at the J-Link
+   Commander prompt; from a source build tree,
+   `west flash -d build/quickstart_rw612` (the built artifact lands in
+   `build/quickstart_rw612/zephyr/zephyr.hex`).
 
 ## Provisioning
 
@@ -66,22 +80,62 @@ its console. Then:
    ```
    The device generates an EC P-256 key and self-signed certificate on-chip
    and prints the certificate.
-3. In /IOTCONNECT, first import the device template for the demonstration
-   you flashed (Devices, then Templates, then Import) — the template is
-   fixed when the device is created, so pick the one matching the
-   demonstration you will run:
+3. Onboard the device in /IOTCONNECT (screenshots at each step):
 
-   | Demonstration | Template |
-   |---|---|
-   | quickstart, telemetry | [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json) |
-   | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
-   | click-telemetry | [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON) |
+   1. In a browser, open [console.iotconnect.io](https://console.iotconnect.io)
+      and log in.
 
-   Then select Devices, then Create Device: set the Unique ID to your chosen
-   DUID, pick the imported template, select Self-Signed authentication, and
-   paste the printed certificate.
-4. Download `iotcDeviceConfig.json` from the device's Info panel, then paste
-   it at the prompt:
+      <img src="../media/iotconnect/console.iotconnect.io-url.png" width="600">
+
+   2. In the left toolbar, hover over the processor icon and select
+      **Device**, then click the **Templates** tab at the bottom of the page.
+
+      <img src="../media/iotconnect/device-page.png" width="300">
+      <img src="../media/iotconnect/templates-button.png" width="400">
+
+   3. Download the template for the demonstration you flashed — the template
+      is fixed when the device is created:
+
+      | Demonstration | Template |
+      |---|---|
+      | quickstart, telemetry | [templates/zephyr-telemetry-template.json](../../templates/zephyr-telemetry-template.json) |
+      | c2d-led | [templates/c2d-led-template.json](../../templates/c2d-led-template.json) |
+      | click-telemetry | [templates/click-demos-device-template.JSON](../../templates/click-demos-device-template.JSON) |
+
+   4. Click **Create Template**, then **Import**, select the downloaded
+      template file, and save.
+
+      <img src="../media/iotconnect/create-template-button.png" width="400">
+      <img src="../media/iotconnect/import-button.png" width="400">
+
+   5. Click the **Devices** tab, then **Create Device**.
+
+      <img src="../media/iotconnect/devices-button.png" width="400">
+      <img src="../media/iotconnect/create-device-button.png" width="400">
+
+   6. Set **Unique ID** (and Device Name) to the DUID you provisioned in
+      step 2, pick an Entity (organizational only), and select the imported
+      template from the **Template** dropdown.
+
+      <img src="../media/iotconnect/device-name.png" width="400">
+      <img src="../media/iotconnect/select-entity.png" width="400">
+      <img src="../media/iotconnect/template-name.png" width="400">
+
+   7. In **Device Certificate**, choose **Use my certificate** and paste the
+      certificate the board printed in step 2 (including the BEGIN and END
+      lines), then click **Save and View**.
+
+      <img src="../media/iotconnect/use-my-cert.png" width="500">
+      <img src="../media/iotconnect/save-and-view.png" width="500">
+
+4. On the device's page, click the paper-and-cog icon (top right, above
+   "Connection Info") to download `iotcDeviceConfig.json`; open it and copy
+   its entire contents.
+
+   <img src="../media/iotconnect/paper-and-cog.png" width="400">
+   <img src="../media/iotconnect/config.png" width="400">
+
+   Then paste it at the board's prompt:
    ```
    iotc config
    { ...paste the JSON block... }

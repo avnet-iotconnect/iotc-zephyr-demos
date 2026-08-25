@@ -101,6 +101,11 @@ MQTT, and telemetry flow as the other boards.
 
 ## Quickstart variant: runtime provisioning with eMMC persistence
 
+An /IOTCONNECT account is required — free trials:
+[via AWS Marketplace](https://github.com/avnet-iotconnect/avnet-iotconnect.github.io/blob/main/documentation/iotconnect/subscription/iotconnect_aws_marketplace.md)
+(60 days) or [via iotconnect.io](https://subscription.iotconnect.io/subscribe?cloud=aws)
+(30 days, no credit card).
+
 The [quickstart](../../demos/quickstart) demonstration is the releasable
 image for this board: no compiled-in device identity (only public CA roots),
 on-device EC P-256 key generation, and the `iotcprov`/`iotc` provisioning
@@ -157,7 +162,8 @@ eMMC, and prints the certificate. In /IOTCONNECT, create the device
 for quickstart/telemetry,
 [templates/gateway-template.json](../../templates/gateway-template.json)
 for the gateway; Self-Signed authentication, paste the
-certificate), download
+certificate; the platform steps are illustrated in the
+[FRDM-RW612 quickstart](../frdm-rw612/QUICKSTART.md#provisioning)), download
 `iotcDeviceConfig.json`, and paste it at the `iotc config` prompt.
 
 To connect, power-cycle the board. (`kernel reboot cold` has no effect on
