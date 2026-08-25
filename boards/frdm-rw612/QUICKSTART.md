@@ -74,7 +74,9 @@ its console. Then:
    (`-k 1` is WPA2-PSK; use `-k 0` and no `-p` for an open network.) The
    device associates within a few seconds and acquires an address via DHCP —
    `wifi status` shows the link.
-2. Generate the device identity on the device:
+2. Generate the device identity on the device. Choose a DUID (Device Unique ID) for the board — you invent this
+   yourself: up to 10 characters, letters and digits only, and it must
+   start with a letter (e.g. `rw612a`). Then:
    ```
    iotcprov provision <your-duid>
    ```
@@ -85,13 +87,11 @@ its console. Then:
    1. In a browser, open [console.iotconnect.io](https://console.iotconnect.io)
       and log in.
 
-      <img src="../media/iotconnect/console.iotconnect.io-url.png" width="600">
-
    2. In the left toolbar, hover over the processor icon and select
       **Device**, then click the **Templates** tab at the bottom of the page.
 
       <img src="../media/iotconnect/device-page.png" width="300">
-      <img src="../media/iotconnect/templates-button.png" width="400">
+      <img src="../media/iotconnect/templates-button.png" width="510">
 
    3. Download the template for the demonstration you flashed — the template
       is fixed when the device is created:
@@ -105,35 +105,35 @@ its console. Then:
    4. Click **Create Template**, then **Import**, select the downloaded
       template file, and save.
 
-      <img src="../media/iotconnect/create-template-button.png" width="400">
-      <img src="../media/iotconnect/import-button.png" width="400">
+      <img src="../media/iotconnect/create-template-button.png" width="165">
+      <img src="../media/iotconnect/import-button.png" width="295">
 
    5. Click the **Devices** tab, then **Create Device**.
 
-      <img src="../media/iotconnect/devices-button.png" width="400">
-      <img src="../media/iotconnect/create-device-button.png" width="400">
+      <img src="../media/iotconnect/devices-button.png" width="495">
+      <img src="../media/iotconnect/create-device-button.png" width="260">
 
    6. Set **Unique ID** (and Device Name) to the DUID you provisioned in
       step 2, pick an Entity (organizational only), and select the imported
-      template from the **Template** dropdown.
+      template from the **Template** dropdown (begin typing to filter the
+      list).
 
-      <img src="../media/iotconnect/device-name.png" width="400">
-      <img src="../media/iotconnect/select-entity.png" width="400">
-      <img src="../media/iotconnect/template-name.png" width="400">
+      <img src="../media/iotconnect/device-name.png" width="495">
+      <img src="../media/iotconnect/select-entity.png" width="250">
 
    7. In **Device Certificate**, choose **Use my certificate** and paste the
       certificate the board printed in step 2 (including the BEGIN and END
       lines), then click **Save and View**.
 
-      <img src="../media/iotconnect/use-my-cert.png" width="500">
-      <img src="../media/iotconnect/save-and-view.png" width="500">
+      <img src="../media/iotconnect/use-my-cert.png" width="280">
+      <img src="../media/iotconnect/save-and-view.png" width="600">
 
 4. On the device's page, click the paper-and-cog icon (top right, above
    "Connection Info") to download `iotcDeviceConfig.json`; open it and copy
    its entire contents.
 
-   <img src="../media/iotconnect/paper-and-cog.png" width="400">
-   <img src="../media/iotconnect/config.png" width="400">
+   <img src="../media/iotconnect/paper-and-cog.png" width="165">
+   <img src="../media/iotconnect/config.png" width="355">
 
    Then paste it at the board's prompt:
    ```

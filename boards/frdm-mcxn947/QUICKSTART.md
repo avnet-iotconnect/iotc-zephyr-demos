@@ -57,7 +57,9 @@ failure is easily misread as a software problem.
 Open the MCU-Link VCom port. On first boot the device prints a provisioning
 guide. Then:
 
-1. Generate the device identity on the device:
+1. Generate the device identity on the device. Choose a DUID (Device Unique ID) for the board — you invent this
+   yourself: up to 10 characters, letters and digits only, and it must
+   start with a letter (e.g. `n947a`). Then:
    ```
    iotcprov provision <your-duid>
    ```
@@ -69,8 +71,8 @@ guide. Then:
    processor icon, select **Device**, open the **Templates** tab, then
    **Create Template** → **Import** the file and save.
 
-   <img src="../media/iotconnect/templates-button.png" width="400">
-   <img src="../media/iotconnect/import-button.png" width="400">
+   <img src="../media/iotconnect/templates-button.png" width="510">
+   <img src="../media/iotconnect/import-button.png" width="295">
 
    Templates for this board's demonstrations:
 
@@ -86,14 +88,14 @@ guide. Then:
    choose **Use my certificate**, paste the certificate the board
    printed (including the BEGIN/END lines), and click **Save and View**.
 
-   <img src="../media/iotconnect/create-device-button.png" width="400">
-   <img src="../media/iotconnect/use-my-cert.png" width="500">
-   <img src="../media/iotconnect/save-and-view.png" width="500">
+   <img src="../media/iotconnect/create-device-button.png" width="260">
+   <img src="../media/iotconnect/use-my-cert.png" width="280">
+   <img src="../media/iotconnect/save-and-view.png" width="600">
 3. On the device's page, click the paper-and-cog icon (top right, above
    "Connection Info") to download `iotcDeviceConfig.json`, then paste
    its contents at the prompt:
 
-   <img src="../media/iotconnect/paper-and-cog.png" width="400">
+   <img src="../media/iotconnect/paper-and-cog.png" width="165">
 
    ```
    iotc config

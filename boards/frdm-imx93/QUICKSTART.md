@@ -151,6 +151,9 @@ Build as above, pointing at `demos/quickstart`, and write the resulting
 `flash.bin` to the SD card. The device boots unprovisioned and prints a
 guide:
 
+Choose a DUID (Device Unique ID) yourself: up to 10 characters, letters
+and digits only, starting with a letter (e.g. `imx93a`).
+
 ```text
 uart:~$ iotcprov provision <your-duid>
 ```

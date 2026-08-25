@@ -46,9 +46,10 @@ the board quickstart):
 
 1. **Wi-Fi boards only** — store the network credentials:
    `wifi cred add -s "<ssid>" -k 1 -p "<passphrase>"`
-2. Generate the device identity on-chip: `iotcprov provision <your-duid>`
-   — the private key never leaves the device; only the certificate is
-   printed.
+2. Generate the device identity on-chip: `iotcprov provision <your-duid>`.
+   The DUID (Device Unique ID) is a name you invent: up to 10 characters,
+   letters and digits only, starting with a letter. The private key never
+   leaves the device; only the certificate is printed.
 3. In /IOTCONNECT, import the device template for the demonstration you
    flashed (Devices → Templates → Import; the template is fixed at device
    creation — see the table in [DEMOS.md](DEMOS.md)), then Create Device:
