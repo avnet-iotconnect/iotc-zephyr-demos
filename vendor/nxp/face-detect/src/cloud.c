@@ -144,12 +144,6 @@ void iotc_thread(void *config, void *fifo, void *dummy3)
 		return;
 	}
 
-	ret = iotc_time_sync(CONFIG_IOTCONNECT_SNTP_SERVER,
-			     CONFIG_IOTCONNECT_SNTP_TIMEOUT_MS);
-	if (ret) {
-		LOG_WRN("SNTP sync failed (%d); continuing", ret);
-	}
-
 	IotConnectClientConfig cfg;
 
 	iotconnect_sdk_init_config(&cfg);
@@ -168,10 +162,23 @@ void iotc_thread(void *config, void *fifo, void *dummy3)
 	cfg.auth_info.data.cert_info.device_key_len = id.device_key_len;
 	cfg.verbose = true;
 
-	ret = iotconnect_sdk_init(&cfg);
-	if (ret) {
-		LOG_ERR("iotconnect_sdk_init failed (%d)", ret);
-		return;
+	/* Retry forever: right after PPP comes up, DNS and routing can lag,
+	 * and cellular links drop. Never exit the thread on failure.
+	 */
+	while (true) {
+		ret = iotc_time_sync(CONFIG_IOTCONNECT_SNTP_SERVER,
+				     CONFIG_IOTCONNECT_SNTP_TIMEOUT_MS);
+		if (ret) {
+			LOG_WRN("SNTP sync failed (%d); continuing", ret);
+		}
+
+		ret = iotconnect_sdk_init(&cfg);
+		if (ret == 0) {
+			break;
+		}
+		LOG_ERR("iotconnect_sdk_init failed (%d); retrying in 30 s",
+			ret);
+		k_sleep(K_SECONDS(30));
 	}
 
 	while (true) {

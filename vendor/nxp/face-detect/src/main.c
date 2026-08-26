@@ -32,6 +32,7 @@
 LOG_MODULE_REGISTER(facedet, LOG_LEVEL_INF);
 
 #include <zephyr/kernel.h>
+#include <zephyr/linker/devicetree_regions.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/device.h>
 #include <zephyr/random/random.h>
@@ -44,8 +45,13 @@ LOG_MODULE_REGISTER(facedet, LOG_LEVEL_INF);
 
 
 #include "iotc_thread.h"
-#define IOTC_INF_STACKSIZE 4096
-K_THREAD_STACK_DEFINE(iotc_thread_stack_area, IOTC_INF_STACKSIZE);
+/* Both large thread stacks live in the SRAMX carve (with the model input
+ * buffer) to leave main RAM for the heaps; main RAM is otherwise full.
+ */
+#define FACEDET_SRAMX_SECTION \
+	Z_GENERIC_SECTION(LINKER_DT_NODE_REGION_NAME(DT_CHOSEN(zephyr_modelbuf)))
+Z_KERNEL_STACK_DEFINE_IN(iotc_thread_stack_area, CONFIG_IOTC_INF_STACKSIZE,
+			 FACEDET_SRAMX_SECTION);
 static struct k_thread iotc_thread_data;
 struct k_fifo iotc_fifo;
 
@@ -92,7 +98,8 @@ volatile static uint32_t __attribute((aligned(4))) vbuf_idx = 0;
 
 #include "model.h"
 
-K_THREAD_STACK_DEFINE(inf_thread_stack_area, THREAD_INF_STACKSIZE);
+Z_KERNEL_STACK_DEFINE_IN(inf_thread_stack_area, THREAD_INF_STACKSIZE,
+			 FACEDET_SRAMX_SECTION);
 static struct k_thread inf_thread_data;
 
 struct k_fifo inf_fifo;  /* FIFO for buffers to inference */

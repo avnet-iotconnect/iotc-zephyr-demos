@@ -68,6 +68,23 @@
 };
 
 &pinctrl {
+	/* LP_FLEXCOMM1 runs in combined UART+I2C mode: the LPUART's
+	 * TXD/RXD are routed to the FC1_P2/P3 pads (P0_27/P0_26) only
+	 * while the LPI2C function occupies FC1_P0/P1 (P0_24/P0_25).
+	 * With the UART alone, its data pins stay on P0/P1 and
+	 * P0_26/P0_27 never toggle -- so the I2C node below must remain
+	 * enabled even though nothing is attached to it.
+	 */
+	pinmux_flexcomm1_lpi2c: pinmux_flexcomm1_lpi2c {
+		group0 {
+			pinmux = <FC1_P0_PIO0_24>, <FC1_P1_PIO0_25>;
+			slew-rate = "fast";
+			drive-strength = "low";
+			input-enable;
+			bias-pull-up;
+			drive-open-drain;
+		};
+	};
 	pinmux_flexcomm1_lpuart: pinmux_flexcomm1_lpuart {
 		group0 {
 			pinmux = <FC1_P3_PIO0_27>, <FC1_P2_PIO0_26>;
@@ -76,6 +93,13 @@
 			input-enable;
 		};
 	};
+};
+
+&flexcomm1_lpi2c1 {
+	status = "okay";
+	pinctrl-0 = <&pinmux_flexcomm1_lpi2c>;
+	pinctrl-names = "default";
+	clock-frequency = <100000>;
 };
 
 &flexcomm1_lpspi1 {
@@ -87,6 +111,15 @@
 	current-speed = <115200>;
 	pinctrl-0 = <&pinmux_flexcomm1_lpuart>;
 	pinctrl-names = "default";
+
+	/* eDMA channels for the async UART backend (LP_FLEXCOMM1 rx/tx
+	 * request lines 0x47/0x48, TRM p7367). Without DMA the backend
+	 * drops bytes under CMUX load (AT + PPP multiplexed): periodic
+	 * chat scripts time out and the driver endlessly restarts the
+	 * modem.
+	 */
+	dmas = <&edma0 8 0x47>, <&edma0 9 0x48>;
+	dma-names = "rx", "tx";
 
 	/* LTE IoT 12 Click (SIMCom SIM7672, an A76xx-family part). The
 	 * simcom,a76xx profile matches its power-key timing -- these modems
