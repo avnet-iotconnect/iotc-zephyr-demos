@@ -14,7 +14,7 @@ unique to a given silicon family.
 |---|---|
 | **[QUICKSTART.md](QUICKSTART.md)** | Get a board onto /IOTCONNECT with a downloaded image — no toolchain. Flash, provision at the serial console, see live data. |
 | **[DEMOS.md](DEMOS.md)** | Choose a demonstration: what each shows, its boards, its device template, and its documentation. |
-| **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)** | Build from source: workspace setup, board targets, the two device-identity models, adding boards, releasing images. |
+| **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)** | Build from source: workspace setup, board targets, the two device-identity models, OTA firmware updates, adding boards, releasing images. |
 | **[boards/HOST-SETUP.md](boards/HOST-SETUP.md)** | Prepare a bare Windows or Linux machine: flashing tool (LinkServer or J-Link) and serial console. |
 
 ## Demonstrations by manufacturer

@@ -111,6 +111,57 @@ Demos are written once; boards join through configuration only:
    expected result — [boards/frdm-rw612](boards/frdm-rw612/QUICKSTART.md)
    is the model).
 
+## Firmware updates over the air (FOTA)
+
+The SDK ships an OTA-to-MCUboot module
+(`CONFIG_IOTCONNECT_OTA_MCUBOOT`, enabled by default whenever the image is
+built under MCUboot). An OTA push from IOTCONNECT is downloaded over HTTPS
+into the MCUboot secondary slot, the device reboots into a *test* swap, and
+the new firmware confirms itself and reports success once it has
+reconnected to the platform. If the new image fails to come up, MCUboot
+reverts to the previous firmware on the next boot and the failure is
+reported from there. Verified end-to-end on the FRDM-RW612.
+
+Build the demo as an MCUboot chain with sysbuild (the RW612 board files
+already carry MCUboot-compatible flash partitions):
+
+```sh
+export ZEPHYR_IOTC_C_LIB_MODULE_DIR=<path>/iotc-c-lib   # env var, not -D
+west build --sysbuild -p always -b frdm_rw612 -d build/qs_fota demos/quickstart -- \
+    -DSB_CONFIG_BOOTLOADER_MCUBOOT=y \
+    -Dquickstart_CONFIG_MCUBOOT_IMGTOOL_SIGN_VERSION=\"1.0.0+0\"
+```
+
+Flash both images once over the debug probe (`west flash`, or J-Link:
+`mcuboot/zephyr/zephyr.bin` at the flash base plus
+`quickstart/zephyr/zephyr.signed.hex`). From then on the board updates
+itself.
+
+To publish an update, rebuild with a higher
+`CONFIG_MCUBOOT_IMGTOOL_SIGN_VERSION`, upload
+`build/<name>/quickstart/zephyr/zephyr.signed.bin` as a Firmware entry in
+IOTCONNECT (**Firmware** under your device's template; hardware version =
+template major), and push it to the device. The console logs each stage:
+
+```
+iotc_ota: OTA requested from host ...s3.us-east-1.amazonaws.com
+iotc_ota: OTA: downloading (HTTP 200)
+iotc_ota: OTA image downloaded: 1002552 bytes
+iotc_ota: OTA image staged; rebooting into MCUboot test swap
+...
+iotc_ota: OTA image confirmed; reporting success
+```
+
+Notes:
+
+- The payload is always the **signed application image**
+  (`zephyr.signed.bin`), never the hex and never the MCUboot binary.
+- `ZEPHYR_IOTC_C_LIB_MODULE_DIR` must be exported as an environment
+  variable for sysbuild — custom `-D` cache variables do not forward to
+  the sysbuild images.
+- The download shares TLS credentials with the broker/DRA connections; no
+  extra certificates are needed for the platform's S3 download host.
+
 ## Releasing prebuilt images
 
 Release images must be credential-free:
