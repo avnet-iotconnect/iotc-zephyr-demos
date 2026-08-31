@@ -113,6 +113,14 @@ Demos are written once; boards join through configuration only:
 
 ## Firmware updates over the air (FOTA)
 
+To try FOTA on the FRDM-RW612 without building anything, use the prebuilt
+artifacts from the
+[latest release](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases/latest):
+flash `frdm_rw612_quickstart_fota_base_v1.0.0.hex` once over the probe,
+provision, then push the `..._fota_v1.0.1.signed.bin` payload from
+/IOTCONNECT (and `v1.0.2` after it) and watch telemetry's `sys.fw` follow
+the updates.
+
 The SDK ships an OTA-to-MCUboot module
 (`CONFIG_IOTCONNECT_OTA_MCUBOOT`, enabled by default whenever the image is
 built under MCUboot). An OTA push from IOTCONNECT is downloaded over HTTPS
