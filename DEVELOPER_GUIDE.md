@@ -162,6 +162,42 @@ Notes:
 - The download shares TLS credentials with the broker/DRA connections; no
   extra certificates are needed for the platform's S3 download host.
 
+### Signing keys
+
+MCUboot only boots images whose signature verifies against the public key
+compiled into the bootloader — that is what prevents a corrupted download
+(or an image from anyone else) from ever running. The commands above sign
+with MCUboot's **bundled development key**, which is public: fine for
+evaluation, never for production, because anyone can sign an image your
+bootloader will accept.
+
+For a real deployment, generate your own key pair once and keep the
+private key in your build/release infrastructure (never in the repo or on
+devices):
+
+```sh
+imgtool keygen -k my-signing-key.pem -t ecdsa-p256
+```
+
+Then point the sysbuild at it so MCUboot embeds the matching public key
+and the application image is signed with it:
+
+```sh
+west build --sysbuild -p always -b frdm_rw612 -d build/qs_fota demos/quickstart -- \
+    -DSB_CONFIG_BOOTLOADER_MCUBOOT=y \
+    -DSB_CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256=y \
+    -DSB_CONFIG_BOOT_SIGNATURE_KEY_FILE=\"/abs/path/my-signing-key.pem\" \
+    -Dquickstart_CONFIG_MCUBOOT_IMGTOOL_SIGN_VERSION=\"1.0.0+0\"
+```
+
+Every OTA payload must be signed with the same key as the bootloader on
+the target devices — an image signed with a different key downloads and
+stages normally but is rejected at the next boot and the device stays on
+its current firmware (the failure is reported to the platform). That also
+means the key decision is effectively permanent for a fleet: changing it
+requires reflashing the bootloader over the debug probe, so choose and
+protect the production key before devices ship.
+
 ## Releasing prebuilt images
 
 Release images must be credential-free:
