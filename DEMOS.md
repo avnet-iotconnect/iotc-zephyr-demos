@@ -25,7 +25,7 @@ or fix the duplicates, keep one template per msgCode, and resend.
 | [telemetry](demos/telemetry) | Portable periodic telemetry with device vitals | RW612, MCXN947, RT1170, i.MX93, SAM E54 | `zephyr-telemetry-template.json` | RW612 |
 | [c2d-led](demos/c2d-led) | Cloud-to-device commands driving the board LED | RW612, MCXN947, RT1170, SAM E54 | `c2d-led-template.json` | RW612 |
 | [click-telemetry](demos/click-telemetry) | Auto-detected MikroE Click sensors on the mikroBUS/Shuttle I2C bus | RW612, MCXN947 (+TF-M), SAM E54 | `click-demos-device-template.JSON` | RW612 |
-| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | eIQ-trained vibration classifier from a PDM microphone, with cloud fault injection | MCXN947 | `eiq-pdm-vibration-template.json` | — |
+| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | eIQ-trained vibration classifier from a PDM microphone, with cloud fault injection | MCXN947 | `eiq-pdm-vibration-template.json` | `frdm_mcxn947_eiq-pdm-vibration.hex` |
 | [vision-occupancy](demos/vision-occupancy) | Camera + TFLM person detection with cloud snapshots and model push | RT1170 (OV5640 shield) | `vision-occupancy-template.json` | — |
 | [gateway](demos/gateway) | i.MX93 gateway: UART child ingest, store-and-forward spool on eMMC | i.MX93 | `gateway-template.json` | — |
 | [uart-telemetry-source](demos/uart-telemetry-source) | Radio-less boards emitting IOTCONNECT telemetry JSON over UART for a gateway | MCXE31B, MCXW72 | none (children of `gateway-template.json`, tag `uartsrc`) | — |

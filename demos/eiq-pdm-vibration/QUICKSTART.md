@@ -23,6 +23,20 @@ A **pretrained model ships in [`model/`](model/)** and the training data in
 [`training/`](training/) — so you can go **straight to step 4** and only come
 back to capture/train (steps 2–3) when you want to reproduce or improve it.
 
+**No toolchain at all?** A ready-to-flash image with the pretrained model is on
+the [Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases/latest)
+— download `frdm_mcxn947_eiq-pdm-vibration.hex` and flash it over the MCU-Link
+USB port (see [HOST-SETUP](../../boards/HOST-SETUP.md) for installing
+LinkServer):
+
+```sh
+LinkServer flash MCXN947:FRDM-MCXN947 load "C:\Users\<you>\Downloads\frdm_mcxn947_eiq-pdm-vibration.hex"
+```
+
+Then do step 1 (hardware) and continue at **step 5** (provisioning) — the image
+is credential-free and provisions at the serial console like every prebuilt in
+this repository.
+
 ---
 
 ## 1. Hardware setup
