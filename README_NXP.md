@@ -26,7 +26,7 @@ Quickstart: [boards/frdm-mcxn947/QUICKSTART.md](boards/frdm-mcxn947/QUICKSTART.m
 | [telemetry](demos/telemetry) | hardware-verified |
 | [c2d-led](demos/c2d-led) | builds |
 | [click-telemetry](demos/click-telemetry) | hardware-verified with four Click sensors on a Shuttle, on the TF-M sealed-key build |
-| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | hardware-verified end to end (capture, eIQ training, on-device model, cloud fault injection) |
+| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | hardware-verified end to end (capture, eIQ training, on-device model, cloud fault injection); prebuilt release image verified as-flashed |
 | [npu-benchmark](vendor/nxp/npu-benchmark) | builds; needs the eIQ Neutron artifacts |
 | [face-detect](vendor/nxp/face-detect) | vision pipeline hardware-verified; cellular leg implemented, pending verification |
 

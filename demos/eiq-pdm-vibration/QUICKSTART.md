@@ -35,7 +35,8 @@ LinkServer flash MCXN947:FRDM-MCXN947 load "C:\Users\<you>\Downloads\frdm_mcxn94
 
 Then do step 1 (hardware) and continue at **step 5** (provisioning) — the image
 is credential-free and provisions at the serial console like every prebuilt in
-this repository.
+this repository. This artifact is hardware-verified exactly as published:
+flashed, provisioned, and connected on a FRDM-MCXN947 with the Click seated.
 
 ---
 
