@@ -145,11 +145,33 @@ Flash both images once over the debug probe (`west flash`, or J-Link:
 `quickstart/zephyr/zephyr.signed.hex`). From then on the board updates
 itself.
 
-To publish an update, rebuild with a higher
-`CONFIG_MCUBOOT_IMGTOOL_SIGN_VERSION`, upload
-`build/<name>/quickstart/zephyr/zephyr.signed.bin` as a Firmware entry in
-IOTCONNECT (**Firmware** under your device's template; hardware version =
-template major), and push it to the device. The console logs each stage:
+### Pushing an update from /IOTCONNECT
+
+The platform-side concepts are documented in the
+[/IOTCONNECT OTA guide](https://dev-docs.iotconnect.io/c2d-ota/); the
+concrete flow for these demos is:
+
+1. **Build the payload** — rebuild with a higher
+   `CONFIG_MCUBOOT_IMGTOOL_SIGN_VERSION`; the payload is
+   `build/<name>/quickstart/zephyr/zephyr.signed.bin` (or use the prebuilt
+   `..._fota_v1.0.x.signed.bin` payloads from the release).
+2. **Create the firmware entry** — in /IOTCONNECT, open the **Firmware**
+   section (under *Cloud to Device / OTA*), create a firmware against your
+   device's **template** with hardware version `1.0`.
+3. **Upload the software version** — add the `.signed.bin` as software
+   version `1.0.1` (the version must match the payload's signed image
+   version).
+4. **Push** — select the target (a device, a group, or everything on the
+   template) and release the update; delivery can also be scheduled.
+5. **Watch it land** — the device console logs every stage (below),
+   telemetry's `sys.fw` reports the new version after the swap, and the
+   **OTA Update History** page tracks each push. Note that the history can
+   show *Successful* as soon as the device acknowledges the download — the
+   authoritative end-to-end confirmation is the device's `sys.fw` value
+   changing, which only happens after MCUboot has swapped and the new
+   image has confirmed itself.
+
+The console log for a complete update:
 
 ```
 iotc_ota: OTA requested from host ...s3.us-east-1.amazonaws.com
