@@ -26,6 +26,14 @@
                     "attributeColor": ""
                 },
                 {
+                    "name": "temp_c",
+                    "displayName": "Die temperature",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "C",
+                    "attributeColor": ""
+                },
+                {
                     "name": "heap_used",
                     "displayName": "",
                     "type": "DECIMAL",
