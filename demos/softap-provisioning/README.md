@@ -1,61 +1,97 @@
 # Soft-AP Provisioning
 
-Out-of-box onboarding with **no serial console and no toolchain**: an
-unprovisioned device raises its own Wi-Fi access point and serves a
-one-page web portal where a phone or laptop completes the entire
-/IOTCONNECT onboarding. Provisioned devices skip the portal and run the
-normal quickstart telemetry loop.
+Onboard a device to /IOTCONNECT from a phone browser — **no serial
+console, no toolchain, no app install**. An unprovisioned device raises
+its own Wi-Fi access point and serves a one-page setup portal; a
+provisioned device skips the portal and runs the normal quickstart
+telemetry loop.
 
-This matches the commissioning model of consumer and industrial products
-(a meter, a thermostat): the installer never opens a terminal.
+> **Proof of concept.** The web portal demonstrates the mechanism:
+> everything needed to onboard a device — joining it, exchanging Wi-Fi
+> credentials, triggering on-device key generation, and delivering the
+> cloud configuration — works over a local connection with no console.
+> The same device-side endpoints, paired with the
+> [/IOTCONNECT REST API](https://docs.iotconnect.io/iotconnect/rest-api/)
+> for the account-side steps (device creation, config download), are how
+> a production **iOS/Android onboarding app** would do this end to end —
+> the app replaces both the browser and the manual portal steps.
 
-## Flow
+## How it works
 
-1. Flash and power the board. With no stored Wi-Fi credentials or
-   identity, it starts an **open access point** named `IOTC-RW612-XXXX`
-   and prints the same on the console.
-2. Connect a phone to that network and browse to **http://192.168.4.1**.
-3. The portal walks through the same four steps as the serial quickstart:
-   - **Home Wi-Fi** — SSID + passphrase, stored in flash
-     (`wifi_credentials`).
-   - **Device identity** — pick a Unique ID; the EC P-256 key pair is
-     generated **on the device** and never leaves it. The page shows the
-     device certificate to paste into /IOTCONNECT (Create Device,
-     Self-Signed).
-   - **Cloud account** — paste the `iotcDeviceConfig.json` downloaded
-     from the device's Info panel. The discovery host in the file is
-     stored too, so the same binary works on any /IOTCONNECT instance.
-   - **Finish** — the device reboots, joins the home network as a
-     station, and connects to /IOTCONNECT.
-4. Telemetry appears under the device (template
-   [`zephyr-telemetry-template.json`](../../templates/zephyr-telemetry-template.json)).
+```mermaid
+sequenceDiagram
+    participant P as Phone (browser)
+    participant D as Device (Soft-AP 192.168.4.1)
+    participant C as /IOTCONNECT
 
-The serial path (`iotcprov provision`, `iotc config`) remains available
-at every point.
+    Note over D: Unprovisioned: AP "IOTC-RW612-XXXX" + DHCP + portal
+    P->>D: join AP, GET /
+    P->>D: POST /api/wifi {ssid, psk}
+    P->>D: POST /api/provision {duid}
+    Note over D: EC P-256 key generated on-chip,<br/>private key never leaves the device
+    D-->>P: device certificate (PEM)
+    P->>C: Create Device (Self-Signed) + paste certificate
+    C-->>P: iotcDeviceConfig.json
+    P->>D: POST /api/config (the JSON)
+    P->>D: POST /api/finish
+    Note over D: reboot -> station mode
+    D->>C: discovery, identity, MQTT (mutual TLS)
+```
 
-## Boards
+## Device states
 
-| Board | Status |
-|---|---|
-| FRDM-RW612 (`frdm_rw612`) | builds; hardware verification pending |
+```mermaid
+stateDiagram-v2
+    [*] --> Portal : no Wi-Fi credentials or identity
+    [*] --> Station : fully provisioned
+    Portal --> Station : portal finished (reboot)
+    Station --> Portal : stored Wi-Fi unreachable\nfor 90 s (identity kept)
+    Station --> Station : telemetry + commands
+```
 
-Requires a Wi-Fi driver with Soft-AP support (`CONFIG_NXP_WIFI_SOFTAP_SUPPORT`
-on the RW612).
+The fallback arrow is the field case: if the stored network cannot be
+joined for **90 seconds** (replaced router, changed passphrase, moved
+device), the setup AP comes back on its own so the Wi-Fi can be
+corrected from a phone — identity and cloud configuration are kept, so
+only step 1 is needed. The console narrates exactly this on hardware —
+the stored network failing authentication, then the setup AP returning:
 
-## Build
+<img src="docs/images/fallback-console.png" alt="Console: stored Wi-Fi failing and the setup AP returning" width="700"/>
+
+Every portal step is also optional in isolation — the status line shows
+what is already stored.
+
+## The portal
+
+<img src="docs/images/portal-page.png" alt="Setup portal on a phone" width="300"/>
+
+Serial provisioning (`iotcprov provision`, `iotc config`) remains
+available at every point.
+
+## Run it
 
 ```sh
 west build -p always -b frdm_rw612 -d build/softap_prov demos/softap-provisioning
 west flash -d build/softap_prov
 ```
 
+1. Power the board unprovisioned — console prints the AP name.
+2. Phone → Wi-Fi `IOTC-RW612-XXXX` (open; tap "stay connected" if asked)
+   → browse **http://192.168.4.1**.
+3. Follow the four steps on the page; the device reboots and connects.
+   Telemetry appears under the device (template
+   [`zephyr-telemetry-template.json`](../../templates/zephyr-telemetry-template.json)).
+
+| Board | Status |
+|---|---|
+| FRDM-RW612 (`frdm_rw612`) | portal + Wi-Fi change hardware-verified; see notes |
+
 ## Security notes
 
-- The setup network is open and unencrypted by design (phones join it
-  without friction) and exists **only while the device is unprovisioned**;
-  everything sensitive that crosses it is either public (certificate,
-  cpid/env) or immediately at rest in flash (Wi-Fi passphrase). For
-  production, WPA2 on the setup AP with a per-device password printed on
-  the label is a small configuration change.
+- The setup AP is open by design and only exists while unprovisioned (or
+  unreachable); nothing secret crosses it — the certificate is public and
+  the Wi-Fi passphrase is immediately at rest in flash. For production,
+  WPA2 on the setup AP with a per-device label password is a small
+  configuration change.
 - The device private key is generated on-chip and never transits the
-  portal; only the public certificate is shown.
+  portal.
