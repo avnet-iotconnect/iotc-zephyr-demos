@@ -1,0 +1,13 @@
+# Soft-AP provisioning demo options.
+
+config SOFTAP_PROV_WIFI_FALLBACK_TIMEOUT
+	int "Seconds to wait for the stored Wi-Fi before reopening the portal"
+	default 90
+	help
+	  A provisioned device that cannot join its stored network within
+	  this time (moved device, replaced router, changed passphrase)
+	  reopens the setup access point so the Wi-Fi credentials can be
+	  updated from a phone. The device identity and cloud configuration
+	  are kept.
+
+source "Kconfig.zephyr"
