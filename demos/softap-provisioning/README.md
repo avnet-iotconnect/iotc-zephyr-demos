@@ -89,3 +89,9 @@ west flash -d build/softap_prov
   label password.
 - The device private key is generated on-chip and never leaves the
   device.
+
+## Dashboard
+
+This demo uses the telemetry template; import
+[demos/telemetry/dashboard/zephyr-telemetry_dashboard_export.json](../telemetry/dashboard/zephyr-telemetry_dashboard_export.json)
+and select your device.

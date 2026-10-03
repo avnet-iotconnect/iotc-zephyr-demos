@@ -64,3 +64,17 @@ Open the board's serial console at 115200 8N1 (see the board quickstart in
 Expected console flow: DHCP lease → DRA discovery/identity → MQTT/TLS connect →
 `Telemetry sent: ...` every few seconds, `message delivered` acks, and the
 data arriving under the device in IOTCONNECT.
+
+## Dashboard
+
+![Zephyr telemetry dashboard header](docs/images/zephyr_telemetry_header.png)
+
+A ready-made export ships in
+[dashboard/zephyr-telemetry_dashboard_export.json](dashboard/zephyr-telemetry_dashboard_export.json):
+CPU and heap gauges, a CPU trend chart, a vitals grid, raw telemetry, and
+tiles for firmware version, uptime, and reset cause. It works for any
+device on the `zephtelem` template, so the quickstart and
+softap-provisioning demos use it too.
+
+Import via **Dashboards -> Create Dashboard -> Import dashboard**, then
+select the Zephyr Telemetry template and your device.

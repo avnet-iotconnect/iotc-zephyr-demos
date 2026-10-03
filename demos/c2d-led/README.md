@@ -56,3 +56,17 @@ west flash -d build/demo_c2d_led
 unnecessary.) Then send a command from the IOTCONNECT console and watch
 `led0` change; the device also publishes `{"led": …}` on each change and
 every 10 s, visible under the device's live data.
+
+## Dashboard
+
+![C2D LED dashboard header](docs/images/c2d_led_header.png)
+
+A ready-made export ships in
+[dashboard/c2d-led_dashboard_export.json](dashboard/c2d-led_dashboard_export.json):
+a live LED state card, CPU gauge and trend, vitals, and raw telemetry.
+Import via **Dashboards -> Create Dashboard -> Import dashboard**, then
+select the C2D LED template and your device.
+
+Add a Control widget in the dashboard editor for the buttons (left:
+`led-on`, right: `led-off`); command widgets bind to your account's
+template and cannot ship in the export.

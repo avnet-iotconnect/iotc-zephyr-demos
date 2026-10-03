@@ -19,18 +19,18 @@ or fix the duplicates, keep one template per msgCode, and resend.
 
 ## Portable demonstrations
 
-| Demonstration | Shows | Boards | Template | Prebuilt image |
-|---|---|---|---|---|
-| [quickstart](demos/quickstart) | Flash-and-provision baseline: on-device keygen, runtime identity, telemetry | RW612, MCXN947 (+TF-M), RT1170, i.MX93, SAM E54 | `zephyr-telemetry-template.json` | RW612, MCXN947, RT1170, SAM E54 ([Releases](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)) |
-| [telemetry](demos/telemetry) | Portable periodic telemetry with device vitals | RW612, MCXN947, RT1170, i.MX93, SAM E54 | `zephyr-telemetry-template.json` | RW612 |
-| [c2d-led](demos/c2d-led) | Cloud-to-device commands driving the board LED | RW612, MCXN947, RT1170, SAM E54 | `c2d-led-template.json` | RW612 |
-| [softap-provisioning](demos/softap-provisioning) | Phone-browser onboarding: the device raises a setup Wi-Fi AP and a web portal provisions everything | RW612 | `zephyr-telemetry-template.json` | — |
-| [click-telemetry](demos/click-telemetry) | Auto-detected MikroE Click sensors on the mikroBUS/Shuttle I2C bus | RW612, MCXN947 (+TF-M), SAM E54 | `click-demos-device-template.JSON` | RW612 |
-| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | eIQ-trained vibration classifier from a PDM microphone, with cloud fault injection | MCXN947 | `eiq-pdm-vibration-template.json` | `frdm_mcxn947_eiq-pdm-vibration.hex` |
-| [vision-occupancy](demos/vision-occupancy) | Camera + TFLM person detection with cloud snapshots and model push | RT1170 (OV5640 shield) | `vision-occupancy-template.json` | — |
-| [gateway](demos/gateway) | i.MX93 gateway: UART child ingest, store-and-forward spool on eMMC | i.MX93 | `gateway-template.json` | — |
-| [uart-telemetry-source](demos/uart-telemetry-source) | Radio-less boards emitting IOTCONNECT telemetry JSON over UART for a gateway | MCXE31B, MCXW72 | none (children of `gateway-template.json`, tag `uartsrc`) | — |
-| [ml-model-update](demos/ml-model-update) | Cloud-pushed ML model updates | SAM E54 | `ml-model-update-template.json` | — |
+| Demonstration | Shows | Boards | Template | Prebuilt image | Dashboard |
+|---|---|---|---|---|---|
+| [quickstart](demos/quickstart) | Flash-and-provision baseline: on-device keygen, runtime identity, telemetry | RW612, MCXN947 (+TF-M), RT1170, i.MX93, SAM E54 | `zephyr-telemetry-template.json` | RW612, MCXN947, RT1170, SAM E54 ([Releases](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)) | `zephyr-telemetry` (shared) |
+| [telemetry](demos/telemetry) | Portable periodic telemetry with device vitals | RW612, MCXN947, RT1170, i.MX93, SAM E54 | `zephyr-telemetry-template.json` | RW612 | [`zephyr-telemetry`](demos/telemetry/dashboard) |
+| [c2d-led](demos/c2d-led) | Cloud-to-device commands driving the board LED | RW612, MCXN947, RT1170, SAM E54 | `c2d-led-template.json` | RW612 | [`c2d-led`](demos/c2d-led/dashboard) |
+| [softap-provisioning](demos/softap-provisioning) | Phone-browser onboarding: the device raises a setup Wi-Fi AP and a web portal provisions everything | RW612 | `zephyr-telemetry-template.json` | — | `zephyr-telemetry` (shared) |
+| [click-telemetry](demos/click-telemetry) | Auto-detected MikroE Click sensors on the mikroBUS/Shuttle I2C bus | RW612, MCXN947 (+TF-M), SAM E54 | `click-demos-device-template.JSON` | RW612 | [`click-telemetry`](demos/click-telemetry/dashboard) |
+| [eiq-pdm-vibration](demos/eiq-pdm-vibration) | eIQ-trained vibration classifier from a PDM microphone, with cloud fault injection | MCXN947 | `eiq-pdm-vibration-template.json` | `frdm_mcxn947_eiq-pdm-vibration.hex` | [`eiq-pdm-vibration`](demos/eiq-pdm-vibration/dashboard) |
+| [vision-occupancy](demos/vision-occupancy) | Camera + TFLM person detection with cloud snapshots and model push | RT1170 (OV5640 shield) | `vision-occupancy-template.json` | — | [`vision-occupancy`](demos/vision-occupancy/dashboard) |
+| [gateway](demos/gateway) | i.MX93 gateway: UART child ingest, store-and-forward spool on eMMC | i.MX93 | `gateway-template.json` | — | [`gateway`](demos/gateway/dashboard) |
+| [uart-telemetry-source](demos/uart-telemetry-source) | Radio-less boards emitting IOTCONNECT telemetry JSON over UART for a gateway | MCXE31B, MCXW72 | none (children of `gateway-template.json`, tag `uartsrc`) | — | (via gateway) |
+| [ml-model-update](demos/ml-model-update) | Cloud-pushed ML model updates | SAM E54 | `ml-model-update-template.json` | — | [`ml-model-update`](demos/ml-model-update/dashboard) |
 
 ## Vendor demonstrations
 

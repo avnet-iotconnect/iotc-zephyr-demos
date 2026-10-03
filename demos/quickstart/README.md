@@ -90,3 +90,11 @@ provisioned at runtime.
 
 See [docs/provisioning-nvs.md](https://github.com/avnet-iotconnect/iotc-zephyr-sdk/blob/main/docs/provisioning-nvs.md)
 for every `iotc` / `iotcprov` command and the manual (PC-generated-key) path.
+
+## Dashboard
+
+The telemetry demo's dashboard works for this demo (same template):
+import
+[demos/telemetry/dashboard/zephyr-telemetry_dashboard_export.json](../telemetry/dashboard/zephyr-telemetry_dashboard_export.json)
+via **Dashboards -> Create Dashboard -> Import dashboard** and select
+your device.

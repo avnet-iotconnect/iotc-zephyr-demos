@@ -1,0 +1,756 @@
+{
+ "ddType": 2,
+ "items": [
+  {
+   "widgetGuid": "A8CB394D-15B1-42C9-94FC-AD7BDC599E2A",
+   "widgetProperties": {
+    "i": "Image",
+    "background": "#0b1226",
+    "fontColor": "#ffffff",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "18",
+    "title": "",
+    "titleAlign": "",
+    "contents": {
+     "option": {
+      "imageUpload": "false",
+      "imageUrl": "true",
+      "imageDevice": "false",
+      "imageTelemetry": "false",
+      "key": "option",
+      "position": "center"
+     },
+     "upload": {
+      "imageurl": null,
+      "key": "upload"
+     },
+     "url": {
+      "imageurl": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/Zephyr-Demos/c2d_led_header.png",
+      "key": "url"
+     },
+     "device": {
+      "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+      "deviceName": null,
+      "imageurl": null,
+      "key": "device",
+      "deviceUniqueId": "rw612b"
+     },
+     "telemetry": {
+      "deviceGuid": null,
+      "deviceName": null,
+      "imageurl": null,
+      "key": "telemetry"
+     },
+     "classification": {
+      "showClassification": "false",
+      "key": "classification"
+     }
+    }
+   },
+   "properties": {
+    "x": "0",
+    "y": "0",
+    "w": "86",
+    "h": "6",
+    "i": "Image",
+    "minW": "5",
+    "minH": "5",
+    "isStatic": "false"
+   }
+  },
+  {
+   "widgetGuid": "6FEFF6B7-15C4-4095-A156-87A1B38D2FF5",
+   "widgetProperties": {
+    "i": "Transformation",
+    "background": "#0b1226",
+    "fontColor": "#ffffff",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "18",
+    "title": "LED State",
+    "titleAlign": "",
+    "contents": {
+     "Transformation": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": [
+        {
+         "attributeGuid": "led",
+         "attributeName": "led",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "INTEGER",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.cpu_pct",
+         "attributeName": "sys.cpu_pct",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.freq_mhz",
+         "attributeName": "sys.freq_mhz",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.temp_c",
+         "attributeName": "sys.temp_c",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.heap_used",
+         "attributeName": "sys.heap_used",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.heap_free",
+         "attributeName": "sys.heap_free",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.uptime_s",
+         "attributeName": "sys.uptime_s",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        }
+       ]
+      },
+      "attrType": "1",
+      "key": "Transformation",
+      "transformations": [
+       {
+        "condition": "eq",
+        "conditionValue": "1",
+        "type": "Url",
+        "errors": "",
+        "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/led_on.png",
+        "isShowLiveFontColor": "false"
+       },
+       {
+        "condition": "eq",
+        "conditionValue": "0",
+        "type": "Url",
+        "errors": "",
+        "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/led_off.png",
+        "isShowLiveFontColor": "false"
+       },
+       {
+        "condition": "ge",
+        "conditionValue": "0",
+        "type": "Url",
+        "errors": "",
+        "typeValue": "https://avnetpublicaccess.s3.us-east-1.amazonaws.com/images/NXP/zeph-RT-vision/led_off.png",
+        "isShowLiveFontColor": "false"
+       }
+      ],
+      "position": "center"
+     }
+    }
+   },
+   "properties": {
+    "x": "0",
+    "y": "6",
+    "w": "12",
+    "h": "12",
+    "i": "Transformation",
+    "minW": "7",
+    "minH": "4",
+    "isStatic": "false"
+   }
+  },
+  {
+   "widgetGuid": "21A18C90-2DBC-4283-89D2-B01E1B70E363",
+   "widgetProperties": {
+    "i": "gauge",
+    "background": "#000000",
+    "fontColor": "#ffffff",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "18",
+    "title": "CPU Load %",
+    "titleAlign": "",
+    "contents": {
+     "gauge": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": {
+        "attributeGuid": "sys.cpu_pct",
+        "attributeName": "sys.cpu_pct",
+        "displayName": null,
+        "checked": "true",
+        "dataType": "DECIMAL",
+        "attributeLatestValue": null,
+        "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+        "gatewayUpdatedDate": "NA",
+        "attributeValue": "NA"
+       }
+      },
+      "minValue": "0",
+      "maxValue": "100",
+      "version": "2.0",
+      "zones": [
+       {
+        "zoneColor": "#7ed321",
+        "zoneName": "OK",
+        "upToValue": "50"
+       },
+       {
+        "zoneColor": "#f5a623",
+        "zoneName": "Busy",
+        "upToValue": "80"
+       },
+       {
+        "zoneColor": "#d0021b",
+        "zoneName": "High",
+        "upToValue": "100"
+       }
+      ],
+      "attrType": "1",
+      "key": "gauge"
+     }
+    }
+   },
+   "properties": {
+    "x": "12",
+    "y": "6",
+    "w": "10",
+    "h": "12",
+    "i": "gauge",
+    "minW": "10",
+    "minH": "9",
+    "isStatic": "false",
+    "maxW": "16",
+    "maxH": "15"
+   }
+  },
+  {
+   "widgetGuid": "8BF5A2DF-51FA-479B-B5D8-8413DC425CFF",
+   "widgetProperties": {
+    "i": "LiveLineChart",
+    "background": "#fff",
+    "fontColor": "#343434",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "22",
+    "title": "LED Heartbeat (CPU %)",
+    "titleAlign": "",
+    "contents": {
+     "liveChart": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": [
+        {
+         "attributeGuid": "sys.cpu_pct",
+         "attributeName": "sys.cpu_pct",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.freq_mhz",
+         "attributeName": "sys.freq_mhz",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.temp_c",
+         "attributeName": "sys.temp_c",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.heap_used",
+         "attributeName": "sys.heap_used",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.heap_free",
+         "attributeName": "sys.heap_free",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.uptime_s",
+         "attributeName": "sys.uptime_s",
+         "displayName": null,
+         "checked": "false",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        }
+       ]
+      },
+      "attrType": "1",
+      "key": "liveChart",
+      "recentEndPoints": "30"
+     }
+    }
+   },
+   "properties": {
+    "x": "22",
+    "y": "6",
+    "w": "22",
+    "h": "16",
+    "i": "LiveLineChart",
+    "minW": "15",
+    "minH": "15",
+    "isStatic": "false",
+    "maxW": "60",
+    "maxH": "30"
+   }
+  },
+  {
+   "widgetGuid": "6A7BB4C8-1763-41EB-A490-0764F72A527F",
+   "widgetProperties": {
+    "i": "DeviceLatestValue",
+    "background": "#fff",
+    "fontColor": "#000000",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "22",
+    "title": "Device Vitals",
+    "titleAlign": "",
+    "contents": {
+     "devicelatestvalue": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "boxtypes": "3",
+      "attributes": {
+       "attribute": [
+        {
+         "attributeGuid": "sys.cpu_pct",
+         "attributeName": "sys.cpu_pct"
+        },
+        {
+         "attributeGuid": "sys.freq_mhz",
+         "attributeName": "sys.freq_mhz"
+        },
+        {
+         "attributeGuid": "sys.temp_c",
+         "attributeName": "sys.temp_c"
+        },
+        {
+         "attributeGuid": "sys.heap_used",
+         "attributeName": "sys.heap_used"
+        },
+        {
+         "attributeGuid": "sys.heap_free",
+         "attributeName": "sys.heap_free"
+        },
+        {
+         "attributeGuid": "sys.uptime_s",
+         "attributeName": "sys.uptime_s"
+        }
+       ]
+      },
+      "attrType": "1",
+      "key": "devicelatestvalue"
+     }
+    }
+   },
+   "properties": {
+    "x": "44",
+    "y": "6",
+    "w": "15",
+    "h": "16",
+    "i": "DeviceLatestValue",
+    "minW": "15",
+    "minH": "16",
+    "isStatic": "false",
+    "maxW": "15",
+    "maxH": "16"
+   }
+  },
+  {
+   "widgetGuid": "A0326788-ACC8-4C4C-8243-98112CAEB98B",
+   "widgetProperties": {
+    "i": "Telemetry",
+    "background": "#fff",
+    "fontColor": "#000000",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "18",
+    "title": "Raw Telemetry",
+    "titleAlign": "",
+    "contents": {
+     "telemetry": {
+      "showHeader": "true",
+      "showDate": "true",
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": [
+        {
+         "attributeGuid": "led",
+         "attributeName": "led",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "INTEGER",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.cpu_pct",
+         "attributeName": "sys.cpu_pct",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.uptime_s",
+         "attributeName": "sys.uptime_s",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "DECIMAL",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.fw",
+         "attributeName": "sys.fw",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "STRING",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        },
+        {
+         "attributeGuid": "sys.reset_cause",
+         "attributeName": "sys.reset_cause",
+         "displayName": null,
+         "checked": "true",
+         "dataType": "STRING",
+         "attributeLatestValue": null,
+         "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+         "gatewayUpdatedDate": "NA",
+         "attributeValue": "NA"
+        }
+       ]
+      },
+      "attrType": "1",
+      "key": "telemetry"
+     }
+    }
+   },
+   "properties": {
+    "x": "59",
+    "y": "6",
+    "w": "27",
+    "h": "16",
+    "i": "Telemetry",
+    "minW": "15",
+    "minH": "6",
+    "isStatic": "false",
+    "maxW": "60",
+    "maxH": "30"
+   }
+  },
+  {
+   "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+   "widgetProperties": {
+    "i": "Live",
+    "background": "#fff",
+    "fontColor": "#00aa00",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "20",
+    "title": "LED (0/1)",
+    "titleAlign": "",
+    "contents": {
+     "attributeValue": {
+      "attributeName": "led",
+      "key": "attributeValue"
+     },
+     "attributeTime": {
+      "attributeName": "led",
+      "key": "attributeTime"
+     },
+     "live": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": {
+        "attributeGuid": "led",
+        "attributeName": "led",
+        "displayName": null,
+        "checked": "true",
+        "dataType": "DECIMAL",
+        "attributeLatestValue": null,
+        "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+        "gatewayUpdatedDate": "NA",
+        "attributeValue": "NA"
+       }
+      },
+      "rules": null,
+      "attrType": "1",
+      "key": "live"
+     }
+    }
+   },
+   "properties": {
+    "x": "0",
+    "y": "18",
+    "w": "21",
+    "h": "4",
+    "i": "Live",
+    "minW": "7",
+    "minH": "4",
+    "isStatic": "false",
+    "maxW": "20",
+    "maxH": "4"
+   }
+  },
+  {
+   "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+   "widgetProperties": {
+    "i": "Live",
+    "background": "#fff",
+    "fontColor": "#0088cc",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "20",
+    "title": "Firmware (sys.fw)",
+    "titleAlign": "",
+    "contents": {
+     "attributeValue": {
+      "attributeName": "sys.fw",
+      "key": "attributeValue"
+     },
+     "attributeTime": {
+      "attributeName": "sys.fw",
+      "key": "attributeTime"
+     },
+     "live": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": {
+        "attributeGuid": "sys.fw",
+        "attributeName": "sys.fw",
+        "displayName": null,
+        "checked": "true",
+        "dataType": "DECIMAL",
+        "attributeLatestValue": null,
+        "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+        "gatewayUpdatedDate": "NA",
+        "attributeValue": "NA"
+       }
+      },
+      "rules": null,
+      "attrType": "1",
+      "key": "live"
+     }
+    }
+   },
+   "properties": {
+    "x": "21",
+    "y": "18",
+    "w": "21",
+    "h": "4",
+    "i": "Live",
+    "minW": "7",
+    "minH": "4",
+    "isStatic": "false",
+    "maxW": "20",
+    "maxH": "4"
+   }
+  },
+  {
+   "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+   "widgetProperties": {
+    "i": "Live",
+    "background": "#fff",
+    "fontColor": "#00aa00",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "20",
+    "title": "Uptime (s)",
+    "titleAlign": "",
+    "contents": {
+     "attributeValue": {
+      "attributeName": "sys.uptime_s",
+      "key": "attributeValue"
+     },
+     "attributeTime": {
+      "attributeName": "sys.uptime_s",
+      "key": "attributeTime"
+     },
+     "live": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": {
+        "attributeGuid": "sys.uptime_s",
+        "attributeName": "sys.uptime_s",
+        "displayName": null,
+        "checked": "true",
+        "dataType": "DECIMAL",
+        "attributeLatestValue": null,
+        "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+        "gatewayUpdatedDate": "NA",
+        "attributeValue": "NA"
+       }
+      },
+      "rules": null,
+      "attrType": "1",
+      "key": "live"
+     }
+    }
+   },
+   "properties": {
+    "x": "42",
+    "y": "18",
+    "w": "22",
+    "h": "4",
+    "i": "Live",
+    "minW": "7",
+    "minH": "4",
+    "isStatic": "false",
+    "maxW": "20",
+    "maxH": "4"
+   }
+  },
+  {
+   "widgetGuid": "F7979C1B-8637-4667-90A2-6961052C6E21",
+   "widgetProperties": {
+    "i": "Live",
+    "background": "#fff",
+    "fontColor": "#cc8800",
+    "fontFamily": "Proxima Nova",
+    "fontSize": "20",
+    "title": "Reset Cause",
+    "titleAlign": "",
+    "contents": {
+     "attributeValue": {
+      "attributeName": "sys.reset_cause",
+      "key": "attributeValue"
+     },
+     "attributeTime": {
+      "attributeName": "sys.reset_cause",
+      "key": "attributeTime"
+     },
+     "live": {
+      "device": {
+       "deviceGuid": "A13DAB1C-C1DF-4850-921F-76A9BC9412A0",
+       "deviceUniqueId": "rw612b"
+      },
+      "attributes": {
+       "attribute": {
+        "attributeGuid": "sys.reset_cause",
+        "attributeName": "sys.reset_cause",
+        "displayName": null,
+        "checked": "true",
+        "dataType": "DECIMAL",
+        "attributeLatestValue": null,
+        "deviceUpdatedDate": "1900-01-01T00:00:00.000Z",
+        "gatewayUpdatedDate": "NA",
+        "attributeValue": "NA"
+       }
+      },
+      "rules": null,
+      "attrType": "1",
+      "key": "live"
+     }
+    }
+   },
+   "properties": {
+    "x": "64",
+    "y": "18",
+    "w": "22",
+    "h": "4",
+    "i": "Live",
+    "minW": "7",
+    "minH": "4",
+    "isStatic": "false",
+    "maxW": "20",
+    "maxH": "4"
+   }
+  }
+ ]
+}
