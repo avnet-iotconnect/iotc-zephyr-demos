@@ -1,0 +1,16 @@
+/*
+ * Smart-meter demo: the external metrology board connects to the mikroBUS
+ * UART (FLEXCOMM0 -- header pins RX/TX/GND). The console stays on FLEXCOMM3
+ * (MCU-Link VCom).
+ */
+
+/ {
+	aliases {
+		meter-uart = &flexcomm0;
+	};
+};
+
+&flexcomm0 {
+	status = "okay";
+	current-speed = <115200>;
+};

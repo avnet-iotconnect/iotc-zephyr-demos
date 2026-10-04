@@ -54,7 +54,7 @@ manifest:
       # sample builds (FRDM-RW612), and the OTA-to-MCUboot module with the
       # S3-compatible TLS buffers. Move to the next release tag when one is
       # cut.
-      revision: 07b57beb954a4494b15acfca54855b0bddc1e0ea
+      revision: 7e3453d90dbd39ca396770a6ff049763fe362e0b
       path: modules/lib/iotc-zephyr-sdk
 
     - name: iotc-c-lib

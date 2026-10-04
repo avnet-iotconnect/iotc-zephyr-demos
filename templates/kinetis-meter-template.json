@@ -1,0 +1,213 @@
+{
+    "code": "kinetismtr",
+    "name": "Kinetis-M Meter",
+    "authType": 2,
+    "attributes": [
+        {
+            "name": "led",
+            "displayName": "led",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "temp_c",
+            "displayName": "temp_c",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "C",
+            "aggregateTypes": []
+        },
+        {
+            "name": "meter",
+            "displayName": "Meter",
+            "type": "OBJECT",
+            "description": "External metrology board over UART",
+            "childs": [
+                {
+                    "name": "va",
+                    "displayName": "va",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "V",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "vb",
+                    "displayName": "vb",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "V",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "ia",
+                    "displayName": "ia",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "A",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "ib",
+                    "displayName": "ib",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "A",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "ptot",
+                    "displayName": "ptot",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "W",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "kwh",
+                    "displayName": "kwh",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "kWh",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "freq",
+                    "displayName": "freq",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "Hz",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "frames",
+                    "displayName": "frames",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "online",
+                    "displayName": "online",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "sys",
+            "displayName": "Device Vitals",
+            "type": "OBJECT",
+            "description": "Operational metrics sidecar (CONFIG_IOTCONNECT_DEVICE_VITALS)",
+            "childs": [
+                {
+                    "name": "cpu_pct",
+                    "displayName": "CPU load",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "%",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "freq_mhz",
+                    "displayName": "Core clock",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "MHz",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "temp_c",
+                    "displayName": "Die temperature",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "C",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "heap_used",
+                    "displayName": "Heap used",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "B",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "heap_free",
+                    "displayName": "Heap free",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "B",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "uptime_s",
+                    "displayName": "Uptime",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "s",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "reset_cause",
+                    "displayName": "Reset cause",
+                    "type": "STRING",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "fw",
+                    "displayName": "Firmware",
+                    "type": "STRING",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
+            ],
+            "aggregateTypes": []
+        }
+    ],
+    "commands": [
+        {
+            "name": "LED On",
+            "command": "led-on",
+            "requiredParam": false,
+            "requiredAck": false,
+            "isOTACommand": false
+        },
+        {
+            "name": "LED Off",
+            "command": "led-off",
+            "requiredParam": false,
+            "requiredAck": false,
+            "isOTACommand": false
+        },
+        {
+            "name": "LED Toggle",
+            "command": "led-toggle",
+            "requiredParam": false,
+            "requiredAck": false,
+            "isOTACommand": false
+        }
+    ],
+    "messageVersion": "2.1",
+    "capability": "0",
+    "c2dOnDemand": 0,
+    "properties": {
+        "description": null,
+        "dataFrequency": "5",
+        "fileSupport": false,
+        "certRenewalDay": 0,
+        "enableCSR": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}
