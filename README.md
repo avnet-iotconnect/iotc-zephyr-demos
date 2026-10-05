@@ -10,6 +10,9 @@ unique to a given silicon family.
 
 ## Documentation
 
+All demos cap telemetry at **500 messages per boot** to protect your
+account quota (`iotc limit <n>` changes it at runtime).
+
 | Guide | Use it to |
 |---|---|
 | **[QUICKSTART.md](QUICKSTART.md)** | Get a board onto /IOTCONNECT with a downloaded image — no toolchain. Flash, provision at the serial console, see live data. |

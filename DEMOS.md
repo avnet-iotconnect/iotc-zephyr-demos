@@ -17,6 +17,13 @@ UNIQUE `msgCode` — duplicated msgCodes (typically from re-importing an
 edited template export without changing it) break command dispatch. Delete
 or fix the duplicates, keep one template per msgCode, and resend.
 
+> **Demo quota protection:** every demo stops publishing after **500
+> telemetry messages per boot** so an evaluation device cannot drain your
+> /IOTCONNECT message quota. The console announces the limit at connect
+> and when it is reached. Change it live with `iotc limit <n>` (0 =
+> unlimited), by reboot, or at build time via
+> `CONFIG_IOTCONNECT_DEMO_MSG_LIMIT`.
+
 ## Portable demonstrations
 
 | Demonstration | Shows | Boards | Template | Prebuilt image | Dashboard |

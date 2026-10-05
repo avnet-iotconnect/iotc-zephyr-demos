@@ -50,6 +50,10 @@ Board targets: `frdm_rw612`, `frdm_mcxn947/mcxn947/cpu0` (add `/ns` for the
 TF-M build), `mimxrt1170_evk/mimxrt1176/cm7`, `same54_xpro`,
 `frdm_imx93/mimx9352/a55`, `frdm_mcxe31b`, `frdm_mcxw72/mcxw727c/cpu0`.
 
+Demos limit telemetry to 500 messages per boot
+(`CONFIG_IOTCONNECT_DEMO_MSG_LIMIT`) to protect the account's message
+quota; `iotc limit <n>` adjusts it at runtime and 0 disables it.
+
 Per-board notes:
 
 - **FRDM-RW612 (Wi-Fi)** — fetch the radio firmware blob once per

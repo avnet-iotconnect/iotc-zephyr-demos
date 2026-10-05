@@ -80,6 +80,9 @@ west flash -d build/kinetis_meter
   and push; `sys.fw` reports the new version after the MCUboot swap.
   Full flow: [DEVELOPER_GUIDE — FOTA](../../DEVELOPER_GUIDE.md#firmware-updates-over-the-air-fota).
 
+**Quota note:** telemetry stops after 500 messages per boot (console
+says so); `iotc limit <n>` changes it, reboot resets the counter.
+
 ## 5. OTA images for this demo
 
 Built with sysbuild; three versions let the update be exercised twice:
