@@ -96,6 +96,14 @@
                     "description": "",
                     "unit": "",
                     "attributeColor": ""
+                },
+                {
+                    "name": "state",
+                    "displayName": "state",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
                 }
             ],
             "aggregateTypes": []

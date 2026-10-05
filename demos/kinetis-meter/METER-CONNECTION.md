@@ -28,17 +28,28 @@ be used at once.
 
 ### Meter data format
 
-The metrology firmware prints one JSON object per line at **115200 8N1**:
+Two formats are understood at **115200 8N1**, detected automatically:
+
+**NXP EasyEVSE (TWR-KM35), out of the box.** The host polls with `'0'`
+every 5 seconds (`CONFIG_METER_UART_POLL_CHAR` / `_INTERVAL`) and the
+EasyEVSE firmware replies:
+
+```
+<I_RMS>[1]<U_RMS>[2]<P>[3]<Status_Index>[4]
+```
+
+mapped to `meter.ia`, `meter.va`, `meter.ptot`, `meter.state`. No change
+to the EasyEVSE firmware is needed.
+
+**JSON lines**, for any other metering firmware:
 
 ```json
 {"va":119.8,"vb":120.1,"ia":0.81,"ib":0.79,"ptot":181.2,"kwh":22.244,"freq":60.01}
 ```
 
-Keys are optional per line; unknown keys are ignored. Any MCU that can
-print this line works — for the Kinetis-M reference design, add one
-`printf` of the measured values to its main loop. To try the demo with
-no meter at all, connect a USB-UART adapter instead and paste the line
-above into a terminal.
+Keys are optional per line; unknown keys are ignored. To try the demo
+with no meter at all, connect a USB-UART adapter and paste the JSON line
+into a terminal.
 
 ## 2. Create the template and device
 

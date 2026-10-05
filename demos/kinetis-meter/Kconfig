@@ -10,4 +10,16 @@ config SOFTAP_PROV_WIFI_FALLBACK_TIMEOUT
 	  updated from a phone. The device identity and cloud configuration
 	  are kept.
 
+config METER_UART_POLL_CHAR
+	string "Meter poll command character"
+	default "0"
+	help
+	  Sent on the meter UART every poll interval. The NXP EasyEVSE
+	  (TWR-KM35) firmware replies to '0' with all readings. Set empty
+	  to disable polling for free-running JSON meters.
+
+config METER_UART_POLL_INTERVAL
+	int "Meter poll interval (seconds)"
+	default 5
+
 source "Kconfig.zephyr"
