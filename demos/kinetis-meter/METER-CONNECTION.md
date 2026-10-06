@@ -8,7 +8,7 @@ full demo: phone onboarding, meter telemetry, LED commands, and OTA.
 | Item | Role |
 |---|---|
 | NXP FRDM-RW612 | Wi-Fi host, runs this firmware |
-| Metrology board (e.g. NXP Kinetis-M reference design) | Measures and streams meter data over UART |
+| Metrology board (e.g. NXP TWR-KM35 running the EasyEVSE metering firmware) | Measures and streams meter data over UART |
 | 3 jumper wires | UART cross-over + ground |
 | USB-C | Power (and optional console) for the FRDM-RW612 |
 
@@ -32,7 +32,11 @@ be used at once.
 
 Two formats are understood at **115200 8N1**, detected automatically:
 
-**NXP EasyEVSE (TWR-KM35), out of the box.** The host polls with `'0'`
+**NXP EasyEVSE (TWR-KM35), out of the box.** The TWR-KM35 metering
+firmware (project `TWRKM3575_EVSE`) ships with NXP's
+[EasyEVSE EV charging station development platform](https://www.nxp.com/design/design-center/development-boards-and-designs/CONNECTED-EV-CHARGING-STATION)
+([getting-started guide](https://www.nxp.com/document/guide/getting-started-with-nxps-easyevse-mcu-development-platform:GS-EVSE-EVCHARGING-FREERTOS));
+build and flash it with MCUXpresso. The host polls with `'0'`
 every 5 seconds (`CONFIG_METER_UART_POLL_CHAR` / `_INTERVAL`) and the
 EasyEVSE firmware replies:
 
@@ -61,21 +65,53 @@ into a terminal.
    7 characters.
 2. No device creation needed up front — the onboarding portal does it.
 
-## 3. Flash and onboard (no console needed)
+## 3. Flash and onboard
 
-Flash the firmware (or the FOTA base image from the release for the OTA
-exercise):
+Flash `frdm_rw612_kinetis-meter.hex` from
+[Releases](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases)
+(or `frdm_rw612_kinetis-meter_fota_base_v1.0.0.hex` for the OTA
+exercise), or build it:
 
 ```sh
 west build -p always -b frdm_rw612 -d build/kinetis_meter demos/kinetis-meter
 west flash -d build/kinetis_meter
 ```
 
+Then onboard either way:
+
+### Option A: phone (Soft-AP portal, no console needed)
+
 1. Power the board. It raises Wi-Fi network `IOTC-RW612-XXXX`.
 2. Phone -> join that network -> browse **http://192.168.4.1**.
 3. Follow the portal: home Wi-Fi, generate identity, create the device
    in /IOTCONNECT (template: **Kinetis-M Meter**), paste the
    config JSON, Finish.
+
+### Option B: serial terminal
+
+Open the MCU-Link console at 115200 8N1:
+
+1. Store the home Wi-Fi:
+   ```
+   wifi cred add -s "<ssid>" -k 1 -p "<passphrase>"
+   ```
+2. Generate the identity on-chip (prints the certificate):
+   ```
+   iotcprov provision <your-duid>
+   ```
+3. Create the device in /IOTCONNECT: Devices -> Create Device,
+   Unique ID = `<your-duid>`, template **Kinetis-M Meter**,
+   **Self-Signed**, paste the certificate from step 2.
+4. Download `iotcDeviceConfig.json` from the device's Info panel and
+   paste it:
+   ```
+   iotc config
+   { ...paste the whole json block... }
+   ```
+5. Reboot and connect:
+   ```
+   kernel reboot cold
+   ```
 
 ## 4. What to show
 
@@ -112,7 +148,9 @@ widget editor.
 
 ## 6. OTA images for this demo
 
-Built with sysbuild; three versions let the update be exercised twice:
+Built with sysbuild and published on the
+[Releases page](https://github.com/avnet-iotconnect/iotc-zephyr-demos/releases);
+three versions let the update be exercised twice:
 
 | Artifact | Role |
 |---|---|
