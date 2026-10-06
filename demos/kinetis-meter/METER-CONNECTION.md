@@ -26,6 +26,8 @@ be used at once.
 
 3.3 V logic levels. Both boards power from their own USB.
 
+![FRDM-RW612 wired to the TWR-KM35 metrology board](docs/images/kinetis_meter_setup.jpg)
+
 ### Meter data format
 
 Two formats are understood at **115200 8N1**, detected automatically:
@@ -94,7 +96,21 @@ west flash -d build/kinetis_meter
 **Quota note:** telemetry stops after 500 messages per boot (console
 says so); `iotc limit <n>` changes it, reboot resets the counter.
 
-## 5. OTA images for this demo
+## 5. Dashboard
+
+![Kinetis-M meter dashboard](docs/images/kinetis_meter_dashboard.png)
+
+A ready-made export ships in
+[dashboard/kinetis-meter_dashboard_export.json](dashboard/kinetis-meter_dashboard_export.json):
+meter link and LED state cards, phase gauges, power/voltage/current
+trends, board temperature, vitals, and a command console.
+
+Import via **Dashboards -> Create Dashboard -> Import dashboard**, then
+select the **Kinetis-M Meter** template and your device. If the LED or
+command-console widget imports unbound, re-select the command in the
+widget editor.
+
+## 6. OTA images for this demo
 
 Built with sysbuild; three versions let the update be exercised twice:
 
