@@ -53,7 +53,8 @@ the stored network failing and the setup AP returning:
 <img src="docs/images/fallback-console.png" alt="Console: stored Wi-Fi failing and the setup AP returning" width="700"/>
 
 Each portal step can also be used alone; the status line shows what is
-already stored.
+already stored. The device keeps up to two networks; when the store is
+full, the portal replaces the oldest one.
 
 ## The portal
 

@@ -93,8 +93,10 @@ Open the MCU-Link console at 115200 8N1:
 
 1. Store the home Wi-Fi:
    ```
-   wifi cred add -s "<ssid>" -k 1 -p "<passphrase>"
+   iotc wifi "<ssid>" "<passphrase>"
    ```
+   (Unlike `wifi cred add`, this replaces the oldest stored network
+   when the two credential slots are full.)
 2. Generate the identity on-chip (prints the certificate):
    ```
    iotcprov provision <your-duid>

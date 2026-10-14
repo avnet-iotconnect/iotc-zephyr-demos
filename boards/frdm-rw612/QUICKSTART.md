@@ -73,7 +73,9 @@ its console. Then:
    ```
    (`-k 1` is WPA2-PSK; use `-k 0` and no `-p` for an open network.) The
    device associates within a few seconds and acquires an address via DHCP —
-   `wifi status` shows the link.
+   `wifi status` shows the link. The store holds two networks; if `add`
+   reports "no space left", use `iotc wifi "<ssid>" "<passphrase>"`,
+   which replaces the oldest stored network.
 2. Generate the device identity on the device. Choose a DUID (Device Unique ID) for the board — you invent this
    yourself: up to 10 characters, letters and digits only, and it must
    start with a letter (e.g. `rw612a`). Then:
