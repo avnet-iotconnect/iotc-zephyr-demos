@@ -131,6 +131,22 @@ Open the MCU-Link console at 115200 8N1:
   and push; `sys.fw` reports the new version after the MCUboot swap.
   Full flow: [DEVELOPER_GUIDE — FOTA](../../DEVELOPER_GUIDE.md#firmware-updates-over-the-air-fota).
 
+### Driving the EasyEVSE board (TWR-KM35)
+
+The EasyEVSE firmware synthesizes its measurements, so no mains
+connection is needed:
+
+- **R21 potentiometer** sets the simulated charge current (0-32 A);
+  the voltage and power scale with it. Turn it and watch
+  `meter.ia`, `meter.va`, and `meter.ptot` move.
+- **SW1** steps the J1772 charge state A -> B -> C -> D
+  (`meter.state` 1-4). The board LEDs and the control-pilot PWM
+  follow; state C (3) is "charging".
+- **SW2** injects faults: first press STATE E (`meter.state` 5),
+  second press STATE F (6), third press clears.
+- The on-board LCD shows the live values. The host UART can also
+  force a state by sending `A`..`F`.
+
 **Quota note:** telemetry stops after 500 messages per boot (console
 says so); `iotc limit <n>` changes it, reboot resets the counter.
 
