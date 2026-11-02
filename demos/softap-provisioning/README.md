@@ -71,8 +71,9 @@ west flash -d build/softap_prov
 ```
 
 1. Power the board unprovisioned; the console prints the AP name.
-2. Connect a phone to Wi-Fi `IOTC-RW612-XXXX` and browse to
-   **http://192.168.4.1** (tap "stay connected" if asked).
+2. Connect a phone to Wi-Fi `IOTC-RW612-XXXX`. The phone detects a
+   captive network and opens the setup page in its sign-in prompt
+   (or browse to **http://192.168.4.1** manually).
 3. Follow the four steps on the page; the device reboots and connects.
    Telemetry appears under the device (template
    [`zephyr-telemetry-template.json`](../../templates/zephyr-telemetry-template.json)).
@@ -81,14 +82,18 @@ west flash -d build/softap_prov
 |---|---|
 | FRDM-RW612 (`frdm_rw612`) | portal + Wi-Fi change hardware-verified |
 
-### If the page does not load
+### How the captive portal works
 
-The setup AP has no internet, and Android keeps routing browser
-traffic over mobile data on such networks, so the portal address never
-reaches the device. Turn off mobile data before joining the AP, and
-enter the address as `http://192.168.4.1` (browsers upgrade typed
-addresses to HTTPS, which the portal does not serve). iOS routes
-local addresses over Wi-Fi and is not affected.
+The device answers every DNS query on the setup network with its own
+address and redirects every unknown URL to the setup page, so the
+phone's captive-network sign-in prompt opens the portal directly. The
+sign-in view is bound to the AP network, which also sidesteps Android
+routing browser traffic over mobile data on internet-less networks.
+
+If the prompt is dismissed, browse to `http://192.168.4.1` by hand --
+with `http://` spelled out, since browsers upgrade typed addresses to
+HTTPS, which the portal does not serve. On Android, turn off mobile
+data first.
 
 ## Security notes
 
