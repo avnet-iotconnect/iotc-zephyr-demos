@@ -90,10 +90,15 @@ phone's captive-network sign-in prompt opens the portal directly. The
 sign-in view is bound to the AP network, which also sidesteps Android
 routing browser traffic over mobile data on internet-less networks.
 
+The prompt appears as a sign-in sheet or notification, depending on
+the OS. Phones remember a per-network "use without internet" choice:
+if this network was joined before that answer was given, the prompt
+stays suppressed until the network is forgotten and rejoined.
+
 If the prompt is dismissed, browse to `http://192.168.4.1` by hand --
 with `http://` spelled out, since browsers upgrade typed addresses to
-HTTPS, which the portal does not serve. On Android, turn off mobile
-data first.
+HTTPS, which the portal does not serve. Any other `http://` address
+entered while on the setup network also lands on the portal.
 
 ## Security notes
 

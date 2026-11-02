@@ -82,7 +82,8 @@ Then onboard either way:
 ### Option A: phone (Soft-AP portal, no console needed)
 
 1. Power the board. It raises Wi-Fi network `IOTC-RW612-XXXX`.
-2. Phone -> join that network -> browse **http://192.168.4.1**.
+2. Join that network; the setup page opens in the phone's sign-in
+   prompt (or browse to **http://192.168.4.1**).
 3. Follow the portal: home Wi-Fi, generate identity, create the device
    in /IOTCONNECT (template: **Kinetis-M Meter**), paste the
    config JSON, Finish.
