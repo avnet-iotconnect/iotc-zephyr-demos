@@ -81,6 +81,15 @@ west flash -d build/softap_prov
 |---|---|
 | FRDM-RW612 (`frdm_rw612`) | portal + Wi-Fi change hardware-verified |
 
+### If the page does not load
+
+The setup AP has no internet, and Android keeps routing browser
+traffic over mobile data on such networks, so the portal address never
+reaches the device. Turn off mobile data before joining the AP, and
+enter the address as `http://192.168.4.1` (browsers upgrade typed
+addresses to HTTPS, which the portal does not serve). iOS routes
+local addresses over Wi-Fi and is not affected.
+
 ## Security notes
 
 - The setup AP is open and exists only while the device is unprovisioned
